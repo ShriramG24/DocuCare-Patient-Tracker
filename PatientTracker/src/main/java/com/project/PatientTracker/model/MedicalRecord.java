@@ -3,7 +3,7 @@ package com.project.PatientTracker.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "MedicalRecord")
+@Table(name = "MedicalRecords")
 public class MedicalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

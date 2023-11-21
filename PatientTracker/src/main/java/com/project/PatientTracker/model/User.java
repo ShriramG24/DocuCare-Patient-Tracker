@@ -6,7 +6,8 @@ import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

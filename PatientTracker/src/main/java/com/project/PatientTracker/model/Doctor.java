@@ -5,7 +5,8 @@ import java.util.Set;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Doctor")
+@Table(name = "Doctors")
+@PrimaryKeyJoinColumn(name = "userId")
 public class Doctor extends User {
     @Column(name="specialty", nullable=true)
     private String specialty;

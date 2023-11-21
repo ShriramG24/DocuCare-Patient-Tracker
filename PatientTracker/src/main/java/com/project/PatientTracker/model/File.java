@@ -5,7 +5,7 @@ import java.util.Date;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "File")
+@Table(name = "Files")
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
