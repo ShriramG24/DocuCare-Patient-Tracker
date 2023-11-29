@@ -1,13 +1,10 @@
 package com.project.PatientTracker.model;
 
 import java.util.Date;
-import java.util.Set;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "Users")
-@Inheritance(strategy=InheritanceType.JOINED)
+@MappedSuperclass
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +28,6 @@ public class User {
     @Column(name="phone", nullable=true, unique=true)
     private String phone;
 
-    @Column(name="role", nullable=false)
-    private String role;
-
-    @OneToMany(mappedBy = "owner")
-    private Set<File> files;
-
     public Long getId() { return this.id; }
     public User setId(Long id) { this.id = id; return this; }
 
@@ -57,11 +48,4 @@ public class User {
 
     public String getPhone() { return this.phone; }
     public User setPhone(String phone) { this.phone = phone; return this; }
-
-    public String getRole() { return this.role; }
-    public User setRole(String role) { this.role = role; return this; }
-
-    public Set<File> getFiles() { return this.files; }
-    public User addFile(File file) { this.files.add(file); return this; }
-    public User removeFile(File file) { this.files.remove(file); return this; }
 }

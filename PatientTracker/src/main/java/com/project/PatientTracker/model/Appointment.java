@@ -28,7 +28,7 @@ public class Appointment {
     @Column(name="purpose", nullable=false)
     private String purpose;
     
-    @Column(name="firstName", nullable=true)
+    @Column(name="notes", nullable=true)
     private String notes;
 
     public Doctor getDoctor() { return this.doctor; }

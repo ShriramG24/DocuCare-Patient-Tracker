@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Doctors")
-@PrimaryKeyJoinColumn(name = "userId")
 public class Doctor extends User {
     @Column(name="specialty", nullable=true)
     private String specialty;
@@ -16,6 +15,12 @@ public class Doctor extends User {
 
     @OneToMany(mappedBy = "doctor")
     private Set<Appointment> appointments;
+    
+    @OneToMany(mappedBy = "owner")
+    private Set<File> files;
+
+    @OneToMany(mappedBy = "doctor")
+    private Set<MedicalRecord> records;
 
     public String getSpecialty() { return this.specialty; }
     public Doctor setSpecialty(String specialty) { this.specialty = specialty; return this; }
@@ -27,5 +32,12 @@ public class Doctor extends User {
     public Set<Appointment> getAppointments() { return this.appointments; }
     public Doctor addAppointment(Appointment appointment) { this.appointments.add(appointment); return this; }
     public Doctor removeAppointment(Appointment appointment) { this.appointments.remove(appointment); return this; }
-}
 
+    public Set<File> getFiles() { return this.files; }
+    public User addFile(File file) { this.files.add(file); return this; }
+    public User removeFile(File file) { this.files.remove(file); return this; }
+
+    public Set<MedicalRecord> getRecords() { return this.records; }
+    public Doctor addRecord(MedicalRecord record) { this.records.add(record); return this; }
+    public Doctor removeRecord(MedicalRecord record) { this.records.remove(record); return this; }
+}

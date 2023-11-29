@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Patients")
-@PrimaryKeyJoinColumn(name = "userId")
 public class Patient extends User {
     @Column(name="address", nullable=false, unique=true)
     private String address;

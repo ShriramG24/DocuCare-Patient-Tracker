@@ -12,8 +12,8 @@ public class File {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
-    private User owner;
+    @JoinColumn(name = "ownerId")
+    private Doctor owner;
 
     @OneToOne
     @PrimaryKeyJoinColumn(name="recordId")
@@ -28,8 +28,8 @@ public class File {
     @Column(name="lastUpdated", nullable=false)
     private Date lastUpdated;
 
-    public User getOwner() { return this.owner; }
-    public File setOwner(User owner) { this.owner = owner; return this; }
+    public User getDoctor() { return this.owner; }
+    public File setDoctor(Doctor owner) { this.owner = owner; return this; }
 
     public String getName() { return this.name; }
     public File setName(String name) { this.name = name; return this; }
