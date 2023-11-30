@@ -91,7 +91,7 @@ public class DoctorController {
             .setEmail(doctorRequest.getEmail())
             .setPhone(doctorRequest.getPhone());
 
-            return ResponseEntity.ok(doctorRepository.save(doctor));
+        return ResponseEntity.ok(doctorRepository.save(doctor));
 	}
 
     // Update Doctor Profile
@@ -121,19 +121,7 @@ public class DoctorController {
         Patient patient = patientRepository.findById(patientId)
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + patientId));
 
-        doctor.addPatient(patient);
-        		
-		Doctor updatedDoctor = doctorRepository.save(doctor);
-		return ResponseEntity.ok(updatedDoctor);
-	}
-    
-    // Add File to Doctor's View
-    @PutMapping("/doctors/{id}/add-file")
-	public ResponseEntity<Doctor> addFile(@PathVariable Long id, @RequestBody File fileDetails){
-		Doctor doctor = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
-		
-		doctor.addFile(fileDetails);
+        patient.setDoctor(doctor);
         		
 		Doctor updatedDoctor = doctorRepository.save(doctor);
 		return ResponseEntity.ok(updatedDoctor);

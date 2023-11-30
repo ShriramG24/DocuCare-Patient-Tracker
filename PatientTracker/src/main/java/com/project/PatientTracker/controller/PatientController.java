@@ -5,7 +5,6 @@ import com.project.PatientTracker.model.Appointment;
 import com.project.PatientTracker.model.MedicalRecord;
 import com.project.PatientTracker.model.Patient;
 import com.project.PatientTracker.payload.request.PatientRequest;
-import com.project.PatientTracker.repository.MedicalRecordRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 
 import java.util.HashMap;
@@ -33,9 +32,6 @@ public class PatientController {
     @Autowired
     private PatientRepository patientRepository;
 
-    @Autowired
-    private MedicalRecordRepository medicalRecordRepository;
-
     // Get All Patients
     @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getPatients() {
@@ -58,6 +54,15 @@ public class PatientController {
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id))
             .getAppointments();
         return ResponseEntity.ok(appointments);
+    }
+
+    // Get All Medical Records by Patient
+    @GetMapping("/patients/{id}/records")
+    public ResponseEntity<Set<MedicalRecord>> getRecordsByDoctor(@PathVariable Long id) {
+        Set<MedicalRecord> records = patientRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id))
+            .getRecords();
+        return ResponseEntity.ok(records);
     }
 
     // Create Patient
@@ -88,32 +93,6 @@ public class PatientController {
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());
 		
-		Patient updatedPatient = patientRepository.save(patient);
-		return ResponseEntity.ok(updatedPatient);
-	}
-
-    // Add Medical Record to Patient's View
-    @PutMapping("/patients/{id}/add-record")
-	public ResponseEntity<Patient> addRecord(@PathVariable Long id, @RequestBody MedicalRecord recordDetails){
-		Patient patient = patientRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id));
-		
-		patient.addRecord(recordDetails);
-        medicalRecordRepository.save(recordDetails);
-        		
-		Patient updatedPatient = patientRepository.save(patient);
-		return ResponseEntity.ok(updatedPatient);
-	}
-
-    // Remove Medical Record from Patient's View
-    @PutMapping("/patients/{id}/remove-record")
-	public ResponseEntity<Patient> removeRecord(@PathVariable Long id, @RequestBody MedicalRecord recordDetails){
-		Patient patient = patientRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id));
-		
-		patient.removeRecord(recordDetails);
-        medicalRecordRepository.delete(recordDetails);
-        		
 		Patient updatedPatient = patientRepository.save(patient);
 		return ResponseEntity.ok(updatedPatient);
 	}
