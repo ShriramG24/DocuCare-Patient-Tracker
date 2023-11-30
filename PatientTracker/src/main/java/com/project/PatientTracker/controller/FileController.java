@@ -19,6 +19,7 @@ import com.project.PatientTracker.exception.ResourceNotFoundException;
 import com.project.PatientTracker.model.Doctor;
 import com.project.PatientTracker.model.File;
 import com.project.PatientTracker.payload.request.FileRequest;
+import com.project.PatientTracker.payload.response.FileResponse;
 import com.project.PatientTracker.repository.DoctorRepository;
 import com.project.PatientTracker.repository.FileRepository;
 
@@ -35,17 +36,21 @@ public class FileController {
 
     // Get All Files by Doctor ID
     @GetMapping("/files/{doctorId}")
-    public ResponseEntity<List<File>> getFiles(@PathVariable Long doctorId) {
+    public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long doctorId) {
         Doctor doctor = doctorRepository.findById(doctorId)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
 
         List<File> files = fileRepository.findByOwner(doctor);
-        return ResponseEntity.ok(files);
+
+        List<FileResponse> response = files.stream().map(f -> {
+            return new FileResponse().build(f);
+        }).toList();
+        return ResponseEntity.ok(response);
     }
 
     // Save File to Database
     @PostMapping("/files/{doctorId}")
-	public ResponseEntity<File> saveFile(@PathVariable Long doctorId, @RequestBody FileRequest fileRequest) {
+	public ResponseEntity<FileResponse> saveFile(@PathVariable Long doctorId, @RequestBody FileRequest fileRequest) {
         Doctor doctor = doctorRepository.findById(doctorId)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
 
@@ -54,7 +59,8 @@ public class FileController {
             .setOwner(doctor)
             .setLastUpdated(fileRequest.getLastUpdated());
 
-        return ResponseEntity.ok(fileRepository.save(file));
+        FileResponse response = new FileResponse().build(fileRepository.save(file));
+        return ResponseEntity.ok(response);
 	}
 
     // Remove File from Database

@@ -14,6 +14,7 @@ import com.project.PatientTracker.exception.ResourceNotFoundException;
 
 import com.project.PatientTracker.model.MedicalRecord;
 import com.project.PatientTracker.model.Patient;
+import com.project.PatientTracker.payload.response.MedicalRecordResponse;
 import com.project.PatientTracker.repository.MedicalRecordRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 
@@ -30,11 +31,15 @@ public class MedicalRecordController {
 
     // Get All MedicalRecords by Patient ID
     @GetMapping("/medicalRecords/{patientId}")
-    public ResponseEntity<List<MedicalRecord>> getFiles(@PathVariable Long patientId) {
+    public ResponseEntity<List<MedicalRecordResponse>> getFiles(@PathVariable Long patientId) {
         Patient patient = patientRepository.findById(patientId)
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + patientId));
 
         List<MedicalRecord> records = medicalRecordRepository.findByPatient(patient);
-        return ResponseEntity.ok(records);
+
+        List<MedicalRecordResponse> response = records.stream().map(mr -> {
+            return new MedicalRecordResponse().build(mr);
+        }).toList();
+        return ResponseEntity.ok(response);
     }
 }

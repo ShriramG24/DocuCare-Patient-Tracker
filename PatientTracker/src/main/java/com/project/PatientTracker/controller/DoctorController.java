@@ -6,6 +6,10 @@ import com.project.PatientTracker.model.Doctor;
 import com.project.PatientTracker.model.File;
 import com.project.PatientTracker.model.Patient;
 import com.project.PatientTracker.payload.request.DoctorRequest;
+import com.project.PatientTracker.payload.response.AppointmentResponse;
+import com.project.PatientTracker.payload.response.DoctorResponse;
+import com.project.PatientTracker.payload.response.FileResponse;
+import com.project.PatientTracker.payload.response.PatientResponse;
 import com.project.PatientTracker.repository.DoctorRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 
@@ -39,49 +43,67 @@ public class DoctorController {
 
     // Get All Doctors
     @GetMapping("/doctors")
-    public ResponseEntity<List<Doctor>> getDoctors() {
+    public ResponseEntity<List<DoctorResponse>> getDoctors() {
         List<Doctor> doctors = doctorRepository.findAll();
-        return ResponseEntity.ok(doctors);
+
+        List<DoctorResponse> response = doctors.stream().map(d -> {
+            return new DoctorResponse().build(d);
+        }).toList();
+        return ResponseEntity.ok(response);
     }
 
     // Get Doctor by ID
     @GetMapping("/doctors/{id}")
-    public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
+    public ResponseEntity<DoctorResponse> getDoctorById(@PathVariable Long id) {
         Doctor doctor = doctorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
-        return ResponseEntity.ok(doctor);
+
+        DoctorResponse response = new DoctorResponse().build(doctor);
+        return ResponseEntity.ok(response);
     }
 
     // Get All Patients by Doctor
     @GetMapping("/doctors/{id}/patients")
-    public ResponseEntity<Set<Patient>> getPatientsByDoctor(@PathVariable Long id) {
+    public ResponseEntity<List<PatientResponse>> getPatientsByDoctor(@PathVariable Long id) {
         Set<Patient> patients = doctorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
             .getPatients();
-        return ResponseEntity.ok(patients);
+
+        List<PatientResponse> response = patients.stream().map(p -> {
+            return new PatientResponse().build(p);
+        }).toList();
+        return ResponseEntity.ok(response);
     }
 
     // Get All Appointments by Doctor
     @GetMapping("/doctors/{id}/appointments")
-    public ResponseEntity<Set<Appointment>> getAppointmentsByDoctor(@PathVariable Long id) {
+    public ResponseEntity<List<AppointmentResponse>> getAppointmentsByDoctor(@PathVariable Long id) {
         Set<Appointment> appointments = doctorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
             .getAppointments();
-        return ResponseEntity.ok(appointments);
+
+        List<AppointmentResponse> response = appointments.stream().map(a -> {
+            return new AppointmentResponse().build(a);
+        }).toList();
+        return ResponseEntity.ok(response);
     }
 
     // Get All Files by Doctor
     @GetMapping("/doctors/{id}/files")
-    public ResponseEntity<Set<File>> getFilesByDoctor(@PathVariable Long id) {
+    public ResponseEntity<List<FileResponse>> getFilesByDoctor(@PathVariable Long id) {
         Set<File> files = doctorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
             .getFiles();
-        return ResponseEntity.ok(files);
+
+        List<FileResponse> response = files.stream().map(f -> {
+            return new FileResponse().build(f);
+        }).toList();
+        return ResponseEntity.ok(response);
     }
 
     // Create Doctor
     @PostMapping("/doctors")
-	public ResponseEntity<Doctor> createDoctor(@RequestBody DoctorRequest doctorRequest) {
+	public ResponseEntity<DoctorResponse> createDoctor(@RequestBody DoctorRequest doctorRequest) {
         Doctor doctor = (Doctor) new Doctor()
             .setSpecialty(doctorRequest.getSpecialty())
             .setFirstName(doctorRequest.getFirstName())
@@ -91,12 +113,13 @@ public class DoctorController {
             .setEmail(doctorRequest.getEmail())
             .setPhone(doctorRequest.getPhone());
 
-        return ResponseEntity.ok(doctorRepository.save(doctor));
+        DoctorResponse response = new DoctorResponse().build(doctorRepository.save(doctor));
+        return ResponseEntity.ok(response);
 	}
 
     // Update Doctor Profile
     @PutMapping("/doctors/{id}")
-	public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody DoctorRequest doctorRequest){
+	public ResponseEntity<DoctorResponse> updateDoctor(@PathVariable Long id, @RequestBody DoctorRequest doctorRequest){
 		Doctor doctor = doctorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
 		
@@ -108,13 +131,13 @@ public class DoctorController {
             .setEmail(doctorRequest.getEmail())
             .setPhone(doctorRequest.getPhone());
 
-		Doctor updatedDoctor = doctorRepository.save(doctor);
-		return ResponseEntity.ok(updatedDoctor);
+		DoctorResponse response = new DoctorResponse().build(doctorRepository.save(doctor));
+		return ResponseEntity.ok(response);
 	}
 
     // Assign Patient to Doctor
     @PutMapping("/doctors/{doctorId}/assign-patient/{patientId}")
-	public ResponseEntity<Doctor> assignPatient(@PathVariable Long doctorId, @PathVariable Long patientId){
+	public ResponseEntity<DoctorResponse> assignPatient(@PathVariable Long doctorId, @PathVariable Long patientId){
 		Doctor doctor = doctorRepository.findById(doctorId)
             .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
             
@@ -123,8 +146,8 @@ public class DoctorController {
 
         patient.setDoctor(doctor);
         		
-		Doctor updatedDoctor = doctorRepository.save(doctor);
-		return ResponseEntity.ok(updatedDoctor);
+		DoctorResponse response = new DoctorResponse().build(doctorRepository.save(doctor));
+		return ResponseEntity.ok(response);
 	}
 
     // Delete Doctor

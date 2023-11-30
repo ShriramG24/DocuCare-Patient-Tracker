@@ -3,6 +3,7 @@ package com.project.PatientTracker.controller;
 import com.project.PatientTracker.exception.ResourceNotFoundException;
 import com.project.PatientTracker.model.Appointment;
 import com.project.PatientTracker.payload.request.AppointmentRequest;
+import com.project.PatientTracker.payload.response.AppointmentResponse;
 import com.project.PatientTracker.repository.AppointmentRepository;
 import com.project.PatientTracker.repository.DoctorRepository;
 import com.project.PatientTracker.repository.PatientRepository;
@@ -38,15 +39,17 @@ public class AppointmentController {
 
     // Get Appointment by ID
     @GetMapping("/appointments/{id}")
-    public ResponseEntity<Appointment> getPatientById(@PathVariable Long id) {
+    public ResponseEntity<AppointmentResponse> getAppointmentById(@PathVariable Long id) {
         Appointment appointment = appointmentRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Appointment with ID not found: " + id));
-        return ResponseEntity.ok(appointment);
+
+        AppointmentResponse response = new AppointmentResponse().build(appointment);
+        return ResponseEntity.ok(response);
     }
 
     // Create Appointment
     @PostMapping("/appointments")
-    public Appointment createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
+    public ResponseEntity<AppointmentResponse> createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
         Appointment appointment = new Appointment().setTime(appointmentRequest.getTime())
             .setPurpose(appointmentRequest.getPurpose())
             .setStatus(appointmentRequest.getStatus())
@@ -56,12 +59,13 @@ public class AppointmentController {
             .setPatient(patientRepository.findById(appointmentRequest.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.getPatientId())));
 
-        return appointmentRepository.save(appointment);
+        AppointmentResponse response = new AppointmentResponse().build(appointmentRepository.save(appointment));
+        return ResponseEntity.ok(response);
     }
 
     // Update Appointment
     @PutMapping("/appointments/{id}")
-    public Appointment updateAppointment(@PathVariable Long id, @RequestBody AppointmentRequest appointmentRequest) {
+    public ResponseEntity<AppointmentResponse> updateAppointment(@PathVariable Long id, @RequestBody AppointmentRequest appointmentRequest) {
         Appointment appointment = appointmentRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Appointment with ID not found: " + id));
         
@@ -74,7 +78,8 @@ public class AppointmentController {
             .setPatient(patientRepository.findById(appointmentRequest.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.getPatientId())));
 
-        return appointmentRepository.save(appointment);
+        AppointmentResponse response = new AppointmentResponse().build(appointmentRepository.save(appointment));
+        return ResponseEntity.ok(response);
     }
 
     // Delete Appointment
