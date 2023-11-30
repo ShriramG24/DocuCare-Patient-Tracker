@@ -1,0 +1,70 @@
+package com.project.PatientTracker.payload.response;
+
+import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.PatientTracker.model.Doctor;
+
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+@Accessors(chain = true)
+public class DoctorResponse {
+    @NotBlank
+    @Getter @Setter
+    private Long id;
+
+    @NotBlank
+    @Getter @Setter
+    private String firstName;
+
+    @NotBlank
+    @Getter @Setter
+    private String lastName;
+
+    @NotBlank
+    @Getter @Setter
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date dateOfBirth;
+
+    @NotBlank
+    @Getter @Setter
+    private int age;
+
+    @Getter @NotBlank
+    @Setter
+    private String email;
+
+    @NotBlank
+    @Getter @Setter
+    private String phone;
+
+    @Getter @Setter
+    private String specialty;
+
+    @Getter @Setter
+    private List<Long> patientIds;
+
+    @Getter @Setter
+    private List<Long> appointmentIds;
+
+    @Getter @Setter
+    private List<Long> fileIds;
+
+    public DoctorResponse build(Doctor doctor) {
+        return this.setId(doctor.getId())
+            .setFirstName(doctor.getFirstName())
+            .setLastName(doctor.getLastName())
+            .setDateOfBirth(doctor.getDateOfBirth())
+            .setAge(doctor.getAge())
+            .setEmail(doctor.getEmail())
+            .setPhone(doctor.getPhone())
+            .setSpecialty(doctor.getSpecialty())
+            .setPatientIds(doctor.getPatients().stream().map(p -> p.getId()).toList())
+            .setAppointmentIds(doctor.getAppointments().stream().map(a -> a.getId()).toList())
+            .setFileIds(doctor.getFiles().stream().map(f -> f.getId()).toList());
+    }
+}
