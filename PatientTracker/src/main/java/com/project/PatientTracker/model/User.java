@@ -38,7 +38,7 @@ public class User {
     @Getter @Setter
     private String email;
 
-    @Column(name="phone", nullable=true, unique=true)
+    @Column(name="phone", nullable=false, unique=true)
     @Getter @Setter
     private String phone;
 }
