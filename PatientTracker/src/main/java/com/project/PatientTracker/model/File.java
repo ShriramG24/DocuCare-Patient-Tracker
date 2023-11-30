@@ -3,6 +3,8 @@ package com.project.PatientTracker.model;
 import java.util.Date;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "Files")
@@ -13,30 +15,23 @@ public class File {
 
     @ManyToOne
     @JoinColumn(name = "ownerId")
+    @Getter @Setter
     private Doctor owner;
 
     @OneToOne
     @PrimaryKeyJoinColumn(name="recordId")
+    @Getter @Setter
     private MedicalRecord medicalRecord;
     
     @Column(name="name", nullable=false)
+    @Getter @Setter
     private String name;
 
     @Column(name="location", nullable=false, unique=true)
+    @Getter @Setter
     private String location;
 
     @Column(name="lastUpdated", nullable=false)
+    @Getter @Setter
     private Date lastUpdated;
-
-    public User getDoctor() { return this.owner; }
-    public File setDoctor(Doctor owner) { this.owner = owner; return this; }
-
-    public String getName() { return this.name; }
-    public File setName(String name) { this.name = name; return this; }
-
-    public String getLocation() { return this.location; }
-    public File setLocation(String location) { this.location = location; return this; }
-
-    public Date getLastUpdated() { return this.lastUpdated; }
-    public File setLastUpdated(Date lastUpdated) { this.lastUpdated = lastUpdated; return this; }
 }
