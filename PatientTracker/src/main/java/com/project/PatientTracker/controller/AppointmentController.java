@@ -47,14 +47,14 @@ public class AppointmentController {
     // Create Appointment
     @PostMapping("/appointments")
     public Appointment createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
-        Appointment appointment = new Appointment().time(appointmentRequest.time())
-            .purpose(appointmentRequest.purpose())
-            .status(appointmentRequest.status())
-            .notes(appointmentRequest.notes())
-            .doctor(doctorRepository.findById(appointmentRequest.doctorId())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + appointmentRequest.doctorId())))
-            .patient(patientRepository.findById(appointmentRequest.patientId())
-                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.patientId())));
+        Appointment appointment = new Appointment().setTime(appointmentRequest.getTime())
+            .setPurpose(appointmentRequest.getPurpose())
+            .setStatus(appointmentRequest.getStatus())
+            .setNotes(appointmentRequest.getNotes())
+            .setDoctor(doctorRepository.findById(appointmentRequest.getDoctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + appointmentRequest.getDoctorId())))
+            .setPatient(patientRepository.findById(appointmentRequest.getPatientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.getPatientId())));
 
         return appointmentRepository.save(appointment);
     }
@@ -65,14 +65,14 @@ public class AppointmentController {
         Appointment appointment = appointmentRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Appointment with ID not found: " + id));
         
-        appointment.time(appointmentRequest.time())
-            .purpose(appointmentRequest.purpose())
-            .status(appointmentRequest.status())
-            .notes(appointmentRequest.notes())
-            .doctor(doctorRepository.findById(appointmentRequest.doctorId())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + appointmentRequest.doctorId())))
-            .patient(patientRepository.findById(appointmentRequest.patientId())
-                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.patientId())));
+        appointment.setTime(appointmentRequest.getTime())
+            .setPurpose(appointmentRequest.getPurpose())
+            .setStatus(appointmentRequest.getStatus())
+            .setNotes(appointmentRequest.getNotes())
+            .setDoctor(doctorRepository.findById(appointmentRequest.getDoctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + appointmentRequest.getDoctorId())))
+            .setPatient(patientRepository.findById(appointmentRequest.getPatientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.getPatientId())));
 
         return appointmentRepository.save(appointment);
     }

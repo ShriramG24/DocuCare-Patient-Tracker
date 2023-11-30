@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "MedicalRecords")
-@Accessors(fluent = true)
+@Accessors(chain = true)
 public class MedicalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

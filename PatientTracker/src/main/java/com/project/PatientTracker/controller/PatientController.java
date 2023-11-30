@@ -5,7 +5,6 @@ import com.project.PatientTracker.model.Appointment;
 import com.project.PatientTracker.model.MedicalRecord;
 import com.project.PatientTracker.model.Patient;
 import com.project.PatientTracker.payload.request.PatientRequest;
-import com.project.PatientTracker.repository.DoctorRepository;
 import com.project.PatientTracker.repository.MedicalRecordRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 
@@ -35,9 +34,6 @@ public class PatientController {
     private PatientRepository patientRepository;
 
     @Autowired
-    private DoctorRepository doctorRepository;
-
-    @Autowired
     private MedicalRecordRepository medicalRecordRepository;
 
     // Get All Patients
@@ -60,26 +56,20 @@ public class PatientController {
     public ResponseEntity<Set<Appointment>> getAppointmentsByDoctor(@PathVariable Long id) {
         Set<Appointment> appointments = patientRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id))
-            .appointments();
+            .getAppointments();
         return ResponseEntity.ok(appointments);
     }
 
     // Create Patient
     @PostMapping("/patients")
 	public ResponseEntity<Patient> createPatient(@RequestBody PatientRequest patientRequest) {
-		Patient patient = new Patient();
-        
-        patient.firstName(patientRequest.firstName())
-            .lastName(patientRequest.lastName())
-            .dateOfBirth(patientRequest.dateOfBirth())
-            .age(patientRequest.age())
-            .email(patientRequest.email())
-            .phone(patientRequest.phone());
-
-        patient.address(patientRequest.address())
-            .doctor(doctorRepository.findById(patientRequest.doctorId())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + patientRequest.doctorId()))
-            );
+		Patient patient = (Patient) new Patient().setAddress(patientRequest.getAddress())
+            .setFirstName(patientRequest.getFirstName())
+            .setLastName(patientRequest.getLastName())
+            .setDateOfBirth(patientRequest.getDateOfBirth())
+            .setAge(patientRequest.getAge())
+            .setEmail(patientRequest.getEmail())
+            .setPhone(patientRequest.getPhone());
             
         return ResponseEntity.ok(patientRepository.save(patient));
 	}
@@ -90,17 +80,13 @@ public class PatientController {
 		Patient patient = patientRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id));
 		
-		patient.firstName(patientRequest.firstName())
-            .lastName(patientRequest.lastName())
-            .dateOfBirth(patientRequest.dateOfBirth())
-            .age(patientRequest.age())
-            .email(patientRequest.email())
-            .phone(patientRequest.phone());
-
-        patient.address(patientRequest.address())
-            .doctor(doctorRepository.findById(patientRequest.doctorId())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + patientRequest.doctorId()))
-            );
+		patient.setAddress(patientRequest.getAddress())
+            .setFirstName(patientRequest.getFirstName())
+            .setLastName(patientRequest.getLastName())
+            .setDateOfBirth(patientRequest.getDateOfBirth())
+            .setAge(patientRequest.getAge())
+            .setEmail(patientRequest.getEmail())
+            .setPhone(patientRequest.getPhone());
 		
 		Patient updatedPatient = patientRepository.save(patient);
 		return ResponseEntity.ok(updatedPatient);
@@ -112,7 +98,6 @@ public class PatientController {
 		Patient patient = patientRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id));
 		
-        recordDetails.patient(patient);
 		patient.addRecord(recordDetails);
         medicalRecordRepository.save(recordDetails);
         		

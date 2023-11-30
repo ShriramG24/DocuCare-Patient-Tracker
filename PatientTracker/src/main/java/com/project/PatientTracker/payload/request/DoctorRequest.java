@@ -2,11 +2,13 @@ package com.project.PatientTracker.payload.request;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
-@Accessors(fluent = true)
+@Accessors(chain = true)
 public class DoctorRequest {
 
     @NotBlank
@@ -19,6 +21,7 @@ public class DoctorRequest {
 
     @NotBlank
     @Getter
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateOfBirth;
 
     @NotBlank

@@ -2,13 +2,15 @@ package com.project.PatientTracker.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @MappedSuperclass
-@Accessors(fluent = true)
+@Accessors(chain = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +27,7 @@ public class User {
 
     @Column(name="dateOfBirth", nullable=false)
     @Getter @Setter
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateOfBirth;
 
     @Column(name="age", nullable=false)

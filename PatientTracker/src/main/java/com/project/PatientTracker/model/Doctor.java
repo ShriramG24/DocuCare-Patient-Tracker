@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "Doctors")
-@Accessors(fluent = true)
+@Accessors(chain = true)
 public class Doctor extends User {
     @Column(name="specialty", nullable=true)
     @Getter @Setter

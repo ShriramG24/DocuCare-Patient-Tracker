@@ -2,6 +2,8 @@ package com.project.PatientTracker.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +11,7 @@ import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "Appointments")
-@Accessors(fluent = true)
+@Accessors(chain = true)
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,7 @@ public class Appointment {
     
     @Column(name="time", nullable=false)
     @Getter @Setter
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     @Column(name="status", nullable=false)

@@ -2,11 +2,13 @@ package com.project.PatientTracker.payload.request;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
-@Accessors(fluent = true)
+@Accessors(chain = true)
 public class AppointmentRequest {
     
     @NotBlank
@@ -19,6 +21,7 @@ public class AppointmentRequest {
 
     @NotBlank
     @Getter
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     @NotBlank
