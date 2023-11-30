@@ -5,9 +5,11 @@ import java.util.Date;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "Files")
+@Accessors(chain = true)
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
