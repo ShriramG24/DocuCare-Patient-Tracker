@@ -2,6 +2,8 @@ package com.project.PatientTracker.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import lombok.experimental.Accessors;
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
 
     @ManyToOne
@@ -35,5 +38,6 @@ public class File {
 
     @Column(name="lastUpdated", nullable=false)
     @Getter @Setter
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lastUpdated;
 }

@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
 
     @ManyToOne

@@ -11,11 +11,12 @@ import lombok.experimental.Accessors;
 public class MedicalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
 
     @ManyToOne
-    @Getter @Setter
     @JoinColumn(name = "doctorId")
+    @Getter @Setter
     private Doctor doctor;
 
     @ManyToOne
