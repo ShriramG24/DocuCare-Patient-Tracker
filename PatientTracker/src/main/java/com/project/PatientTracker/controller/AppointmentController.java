@@ -1,7 +1,11 @@
 package com.project.PatientTracker.controller;
 
+import com.project.PatientTracker.exception.ResourceNotFoundException;
 import com.project.PatientTracker.model.Appointment;
+import com.project.PatientTracker.payload.request.AppointmentRequest;
 import com.project.PatientTracker.repository.AppointmentRepository;
+import com.project.PatientTracker.repository.DoctorRepository;
+import com.project.PatientTracker.repository.PatientRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,23 +30,58 @@ public class AppointmentController {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    @Autowired
+    private DoctorRepository doctorRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
+
     // Get Appointment by ID
     @GetMapping("/appointments/{id}")
     public ResponseEntity<Appointment> getPatientById(@PathVariable Long id) {
-        Appointment appointment = appointmentRepository.getReferenceById(id);
+        Appointment appointment = appointmentRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Appointment with ID not found: " + id));
         return ResponseEntity.ok(appointment);
     }
 
-    // Create Appointment by ID
+    // Create Appointment
     @PostMapping("/appointments")
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
+    public Appointment createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
+        Appointment appointment = new Appointment().time(appointmentRequest.time())
+            .purpose(appointmentRequest.purpose())
+            .status(appointmentRequest.status())
+            .notes(appointmentRequest.notes())
+            .doctor(doctorRepository.findById(appointmentRequest.doctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + appointmentRequest.doctorId())))
+            .patient(patientRepository.findById(appointmentRequest.patientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.patientId())));
+
+        return appointmentRepository.save(appointment);
+    }
+
+    // Update Appointment
+    @PutMapping("/appointments/{id}")
+    public Appointment updateAppointment(@PathVariable Long id, @RequestBody AppointmentRequest appointmentRequest) {
+        Appointment appointment = appointmentRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Appointment with ID not found: " + id));
+        
+        appointment.time(appointmentRequest.time())
+            .purpose(appointmentRequest.purpose())
+            .status(appointmentRequest.status())
+            .notes(appointmentRequest.notes())
+            .doctor(doctorRepository.findById(appointmentRequest.doctorId())
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + appointmentRequest.doctorId())))
+            .patient(patientRepository.findById(appointmentRequest.patientId())
+                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + appointmentRequest.patientId())));
+
         return appointmentRepository.save(appointment);
     }
 
     // Delete Appointment
     @DeleteMapping("/appointments/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteAppointment(@PathVariable Long id) {
-        Appointment appointment = appointmentRepository.getReferenceById(id);
+        Appointment appointment = appointmentRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Appointment with ID not found: " + id));
 		
 		appointmentRepository.delete(appointment);
 		Map<String, Boolean> response = new HashMap<>();
