@@ -32,6 +32,7 @@ public class DoctorRequest {
     @Getter
     private String email;
 
+    @NotBlank
     @Getter
     private String phone;
 
