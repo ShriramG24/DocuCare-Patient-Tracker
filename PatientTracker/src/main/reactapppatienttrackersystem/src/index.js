@@ -4,11 +4,25 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//components
+import Admin from "./layouts/Admin.js"
+import RTL from "./layouts/RTL.js"
+import {AccountBox} from './views/Login/accountBox';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <GlobalProvider>
+  <Router history={hist}>
+    
+      <Route path="/user" component={Admin} />
+      <Route path="/rtl" component={RTL} />
+      <Route path="/" component={AccountBox} />
+      {/* <Redirect from="/" to="/user/dashboard" /> */}
+   
+  </Router>
+  </GlobalProvider>
+  ,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
