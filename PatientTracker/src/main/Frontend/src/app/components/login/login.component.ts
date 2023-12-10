@@ -28,8 +28,16 @@ export class LoginComponent {
 
 
   });
+  LoginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+  });
   onSignup() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.SignUpForm.value.age);
+    console.log(this.SignUpForm.value.age);
+  }
+  onLogin() {
+    // TODO: Use EventEmitter with form value
+    console.log(this.LoginForm.value);
   }
 }
