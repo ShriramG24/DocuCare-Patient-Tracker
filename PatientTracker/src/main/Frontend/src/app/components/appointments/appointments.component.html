@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <title>Book Appointment</title>
+  </head>
+  <style>
+   
+
+  
+    .sidebar p {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.1em;
+      font-weight: 300;
+      line-height: 1.7em;
+      background-color: #343a40;
+    }
+    #sidebar {
+      min-width: 270px;
+      max-width: 280px;
+      min-height: 100vh;
+    }
+
+    
+
+    a,
+    a:hover,
+    a:focus {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    #sidebar {
+      /* don't forget to add all the previously mentioned styles here too */
+     
+      color: black;
+      
+    }
+
+    #sidebar .sidebar-header {
+     
+      text-align: start;
+    }
+    #sidebar ul li a {
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+    }
+    #sidebar ul li a:hover {
+      background: black;
+      color: #fff;
+    }
+
+    #sidebar ul li.active > a,
+    a[aria-expanded="true"] {
+      color: #fff;
+      background: black;
+    }
+    #consult {
+      height: 400px;
+      width: 700px;
+    }
+    
+    .card-img-top {
+    width: 100%;
+    height: 8vw;
+    object-fit: cover;
+}
+
+  </style>
+  <body>
+    <div class="row">
+      <div class="wrapper px-4">
+        <!-- Sidebar -->
+        <nav id="sidebar"class="bg-light">
+          <div class="sidebar-header text-center">
+            <h6 class="display-4">
+              <b class="mt-8"
+                ><span style="color: black">Docu</span
+                ><span style="color: green">Care</span></b
+              >
+            </h6>
+          </div>
+
+          <br />
+          <ul class="list-unstyled components mt-2 ml-3">
+            <li class="mb-2">
+              <a href="/home" aria-expanded="false">Home</a>
+            </li>
+            <!-- <%if(currentUser.type=="patient"){
+              %>
+              <li class="active">
+              <a href="/bookappointment">Book An Appointment</a>
+            </li>
+              <%
+            }%> -->
+            <li class="mb-2">
+              <a href="#">Book Lab tests</a>
+            </li>
+            <li class="mb-2">
+              <a href="/medicalstores" aria-expanded="false">Buy Medicines</a>
+            </li>
+            <!-- <%if(currentUser.type=="patient"){
+              %>
+              <li class="mb-2">
+              <a href="/tpz">My Prescriptions</a>
+            </li>
+              <%
+            }%> -->
+            <li class="mb-2">
+              <a href="#">About Us</a>
+            </li>
+            <li class="mb-2" id="logout">
+              <a href="/logout">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    
+      
+      <div class="col-lg-9 mt-4 ml-3">
+        <div class="row mb-4">
+            <h2 style="color: rgb(21, 21, 148);">
+         Find Doctors of Every Specialization</h2> 
+       
+       </div>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let card of cards">
+                <div class="card mb-4">
+                <!-- Card content goes here -->
+                <div class="card-body">
+                    <img src="../../../assets/images/Consultant_Physician_v2.jpg" class="card-img-top" alt="Card Image">
+                    <!-- Display dynamic data from the card object -->
+                    <h5 class="card-title">{{ card.title }}</h5>
+                    <p class="card-text">{{ card.text }}</p>
+                    <button class="btn btn-dark w-100">Click Me</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+
+
+      
+        
+
+
+
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script> -->
+  </body>
+</html>

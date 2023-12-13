@@ -34,7 +34,7 @@ export class LoginComponent {
   });
   onSignup() {
     // TODO: Use EventEmitter with form value
-    console.log(this.SignUpForm.value.age);
+    console.log(this.SignUpForm.value);
   }
   onLogin() {
     // TODO: Use EventEmitter with form value

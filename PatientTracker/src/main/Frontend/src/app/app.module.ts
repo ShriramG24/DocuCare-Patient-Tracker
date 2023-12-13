@@ -7,11 +7,13 @@ import { LoginComponent } from './components/login/login.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AppointmentsComponent } from './components/appointments/appointments.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    AppointmentsComponent,
   ],
   imports: [
     BrowserModule,
