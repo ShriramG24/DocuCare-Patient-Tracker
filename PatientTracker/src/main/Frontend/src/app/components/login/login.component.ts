@@ -16,7 +16,6 @@ export class LoginComponent {
       console.log(data);
     });
 
-    // Example: Send data to the backend
     // const postData = { name: 'John', age: 25 };
     // this.signupLoginService.postData(postData).subscribe(response => {
     //   console.log(response);
