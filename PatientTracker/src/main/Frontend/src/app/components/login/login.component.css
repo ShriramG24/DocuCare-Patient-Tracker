@@ -1,0 +1,20 @@
+body {
+    padding: 20px;
+    margin: 30px;
+    font-family: 'Lato', sans-serif;
+  }
+
+  select{
+    color: black;
+    border-radius: 5px;
+    background-color: white;
+   height: 30px;
+  }
+  #signupcont{
+    position: relative;
+animation: mymove 3s;
+  }
+  @keyframes mymove {
+from {left: 300px;}
+to {left: 0px;}
+}        
