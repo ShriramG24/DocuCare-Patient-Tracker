@@ -1,11 +1,27 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SignupLoginService } from 'app/controller/signup-login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  constructor(private signupLoginService: SignupLoginService) { 
+
+  }
+  ngOnInit(): void {
+    // Example: Fetch data from the backend
+    this.signupLoginService.getData().subscribe(data => {
+      console.log(data);
+    });
+
+    // Example: Send data to the backend
+    // const postData = { name: 'John', age: 25 };
+    // this.signupLoginService.postData(postData).subscribe(response => {
+    //   console.log(response);
+    // });
+  }
   method = 'signup';
 
   setMethod(method_change: string)
