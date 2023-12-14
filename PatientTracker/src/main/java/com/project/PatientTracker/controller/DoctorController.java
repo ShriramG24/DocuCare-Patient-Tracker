@@ -39,6 +39,14 @@ public class DoctorController {
     }
 
     // Get All Patients by Doctor
+    @GetMapping("/doctors/specialty/{specialty}")
+    public ResponseEntity<List<Doctor>> getDoctorBySpecialty(@PathVariable String specialty) {
+        List<Doctor> doctors = doctorRepository.findBySpecialty(specialty);
+
+        return ResponseEntity.ok(doctors);
+    }
+
+    // Get All Patients by Doctor
     @GetMapping("/doctors/{id}/patients")
     public ResponseEntity<List<Patient>> getPatientsByDoctor(@PathVariable Long id) {
         Set<Patient> patients = doctorRepository.findById(id)
@@ -109,7 +117,7 @@ public class DoctorController {
         Patient patient = patientRepository.findById(patientId)
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + patientId));
 
-        patient.setDoctor(doctor);
+        patient.addDoctor(doctor);
         doctor.addPatient(patient);
         		
 		return ResponseEntity.ok(doctorRepository.save(doctor));

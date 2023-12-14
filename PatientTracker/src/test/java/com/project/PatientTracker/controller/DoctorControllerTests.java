@@ -71,6 +71,15 @@ public class DoctorControllerTests extends TestUtils {
     }
 
     @Test
+    public void testGetDoctorsBySpecialty() throws Exception {
+        Doctor doctor = insertTestDoctor();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/doctors/specialty/{specialty}", "Nutritionist"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(doctor.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("alicebarber@gmail.com"));
+    }
+
+    @Test
     public void testPostDoctor() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -107,7 +116,7 @@ public class DoctorControllerTests extends TestUtils {
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         Assert.assertFalse(getDoctors().get(0).getPatients().isEmpty());
-        Assert.assertEquals(doctor.getId(), getPatients().get(0).getDoctor().getId());
+        Assert.assertTrue(getPatients().get(0).getDoctors().contains(doctor));
     }
 
     @Test

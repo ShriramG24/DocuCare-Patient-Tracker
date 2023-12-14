@@ -23,7 +23,7 @@ public class Doctor extends User {
     private String specialty;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "doctor")
+    @ManyToMany(mappedBy = "doctors")
     @Getter
     private Set<Patient> patients = new HashSet<Patient>();
 
