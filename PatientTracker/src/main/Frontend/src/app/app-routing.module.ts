@@ -22,11 +22,11 @@ const routes: Routes = [
     path: 'book-appointment/:docid',
     component: BookappointmentComponent,
   },
-=======
+  {
     path:'dashboard',
     component:DashboardComponent,
   }
->>>>>>> Stashed changes
+
 ];
 
 @NgModule({
