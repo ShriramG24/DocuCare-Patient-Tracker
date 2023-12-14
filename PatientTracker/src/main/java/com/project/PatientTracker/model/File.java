@@ -19,14 +19,18 @@ public class File {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "ownerId")
+    @JoinColumn(name = "doctorId")
     @Getter @Setter
-    private Doctor owner;
+    private Doctor doctor;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn(name="recordId")
+    @ManyToOne
+    @JoinColumn(name = "patientId")
     @Getter @Setter
-    private MedicalRecord medicalRecord;
+    private Patient patient;
+
+    @Column(name="type", nullable=false)
+    @Getter @Setter
+    private String type;
     
     @Column(name="name", nullable=false)
     @Getter @Setter

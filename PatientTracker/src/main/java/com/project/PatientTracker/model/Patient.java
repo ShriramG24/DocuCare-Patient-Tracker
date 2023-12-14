@@ -43,12 +43,12 @@ public class Patient extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "patient")
     @Getter
-    private Set<MedicalRecord> records = new HashSet<MedicalRecord>();
+    private Set<File> files = new HashSet<File>();
 
     public Patient addAppointment(Appointment appointment) { this.appointments.add(appointment); return this; }
     public Patient removeAppointment(Appointment appointment) { this.appointments.remove(appointment); return this; }
 
-    public Patient addRecord(MedicalRecord record) { this.records.add(record); return this; }
-    public Patient removeRecord(MedicalRecord record) { this.records.remove(record); return this; }
+    public Patient addRecord(File file) { this.files.add(file); return this; }
+    public Patient removeRecord(File file) { this.files.remove(file); return this; }
 }
 
