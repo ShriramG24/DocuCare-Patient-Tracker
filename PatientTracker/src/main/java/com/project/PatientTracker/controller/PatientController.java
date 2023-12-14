@@ -69,7 +69,7 @@ public class PatientController {
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());
         
-        return ResponseEntity.ok(patient);
+        return ResponseEntity.ok(patientRepository.save(patient));
 	}
 
     // Update Patient Profile
@@ -89,7 +89,7 @@ public class PatientController {
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());
 		
-        return ResponseEntity.ok(patient);
+        return ResponseEntity.ok(patientRepository.save(patient));
 	}
 
     // Delete Patient
