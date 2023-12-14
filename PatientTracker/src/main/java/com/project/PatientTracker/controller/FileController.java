@@ -21,7 +21,7 @@ import com.project.PatientTracker.repository.DoctorRepository;
 import com.project.PatientTracker.repository.FileRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
 public class FileController {
