@@ -100,7 +100,7 @@ public class DoctorController {
         Doctor doctor = (Doctor) new Doctor()
                 .setSpecialty(doctorRequest.getSpecialty())
                 .setDegree(doctorRequest.getDegree())
-                .setRating(0)
+                .setRating(0.0)
                 .setFirstName(doctorRequest.getFirstName())
                 .setLastName(doctorRequest.getLastName())
                 .setAge(doctorRequest.getAge())

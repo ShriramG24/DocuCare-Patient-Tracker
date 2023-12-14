@@ -141,13 +141,13 @@
        
        </div>
         <div class="row">
-            <div class="col-md-3" *ngFor="let card of cards">
+            <div class="col-md-3" *ngFor="let card of specializations">
                 <div class="card mb-4">
                 <!-- Card content goes here -->
                 <div class="card-body">
                     <img src="../../../assets/images/Consultant_Physician_v2.jpg" class="card-img-top" alt="Card Image">
                     <!-- Display dynamic data from the card object -->
-                    <h5 class="card-title">{{ card.title }}</h5>
+                    <h5 class="card-title">{{ card }}</h5>
                     <p class="card-text">{{ card.text }}</p>
                     <button class="btn btn-dark w-100">Click Me</button>
                 </div>

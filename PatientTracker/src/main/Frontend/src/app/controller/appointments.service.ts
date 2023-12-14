@@ -11,12 +11,17 @@ export class AppointmentsService {
 
   constructor(private http: HttpClient) { }
 
+  getAllSpecialization(): Observable<any> {
+    
+    return this.http.get(`${this.apiUrl}/api/doctors/specialties`);
+  }
+
   getDoctorsofSpecialization(specialization:string): Observable<any> {
     
     return this.http.get(`${this.apiUrl}/api/doctors/specialty/${specialization}`);
   }
 
-  postData(data: any): Observable<any> {
+  bookAppointment(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/data`, data);
   }
 }

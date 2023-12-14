@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentsService } from 'app/controller/appointments.service';
+import { Doctor } from '../../models/doctor.model';
+
 @Component({
   selector: 'app-find-doctor',
   templateUrl: './find-doctor.component.html',
@@ -12,6 +14,7 @@ export class FindDoctorComponent {
 
   }
   allDoctors:any;
+  doctors : Doctor[]= [];
   ngOnInit(): void {
     // Example: Fetch data from the backend
     
@@ -22,6 +25,7 @@ export class FindDoctorComponent {
     });
     this.appointmentService.getDoctorsofSpecialization(this.speciality).subscribe((data) => {
       console.log(data);
+      this.doctors = data;
       this.allDoctors = data;
     }, (error) => {
       console.error('Error fetching doctor data', error);
