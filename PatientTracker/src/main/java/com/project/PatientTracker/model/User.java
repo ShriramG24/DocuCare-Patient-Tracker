@@ -21,6 +21,10 @@ public class User {
     @Getter @Setter
     private String lastName;
 
+    @Column(name="gender", nullable=false)
+    @Getter @Setter
+    private String gender;
+
     @Column(name="age", nullable=false)
     @Getter @Setter
     private int age;

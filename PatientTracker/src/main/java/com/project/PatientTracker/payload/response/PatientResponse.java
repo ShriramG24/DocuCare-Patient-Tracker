@@ -30,6 +30,10 @@ public class PatientResponse {
 
     @NotBlank
     @Getter @Setter
+    private String gender;
+
+    @NotBlank
+    @Getter @Setter
     private String email;
 
     @NotBlank
@@ -38,6 +42,15 @@ public class PatientResponse {
 
     @Getter @Setter
     private String address;
+
+    @Getter @Setter
+    private String allergies;
+
+    @Getter @Setter    
+    private String medications;
+
+    @Getter @Setter
+    private String diagnoses;
 
     @Getter @Setter
     private Long doctorId;
@@ -53,9 +66,13 @@ public class PatientResponse {
             .setFirstName(patient.getFirstName())
             .setLastName(patient.getLastName())
             .setAge(patient.getAge())
+            .setGender(patient.getGender())
             .setEmail(patient.getEmail())
             .setPhone(patient.getPhone())
             .setAddress(patient.getAddress())
+            .setDiagnoses(patient.getDiagnoses())
+            .setMedications(patient.getMedications())
+            .setAllergies(patient.getAllergies())
             .setDoctorId(patient.getDoctor() == null ? -1 : patient.getDoctor().getId())
             .setAppointmentIds(patient.getAppointments().stream().map(a -> a.getId()).toList())
             .setRecordIds(patient.getRecords().stream().map(r -> r.getId()).toList());

@@ -18,6 +18,18 @@ public class Patient extends User {
     @Getter @Setter
     private String address;
 
+    @Column(name="allergies", nullable=true)
+    @Getter @Setter
+    private String allergies;
+
+    @Column(name="medications", nullable=true)
+    @Getter @Setter
+    private String medications;
+
+    @Column(name="diagnoses", nullable=true)
+    @Getter @Setter
+    private String diagnoses;
+
     @ManyToOne
     @JoinColumn(name = "doctorId")
     @Getter @Setter

@@ -4,8 +4,10 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 @Accessors(chain = true)
@@ -21,12 +23,11 @@ public class DoctorRequest {
 
     @NotBlank
     @Getter
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date dateOfBirth;
+    private int age;
 
     @NotBlank
     @Getter
-    private int age;
+    private String gender;
 
     @NotBlank
     @Getter

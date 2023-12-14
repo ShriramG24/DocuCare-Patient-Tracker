@@ -27,6 +27,10 @@ public class DoctorResponse {
     @Getter @Setter
     private int age;
 
+    @NotBlank
+    @Getter @Setter
+    private String gender;
+
     @Getter @NotBlank
     @Setter
     private String email;
@@ -55,6 +59,7 @@ public class DoctorResponse {
             .setFirstName(doctor.getFirstName())
             .setLastName(doctor.getLastName())
             .setAge(doctor.getAge())
+            .setGender(doctor.getGender())
             .setEmail(doctor.getEmail())
             .setPhone(doctor.getPhone())
             .setDegree(doctor.getDegree())
