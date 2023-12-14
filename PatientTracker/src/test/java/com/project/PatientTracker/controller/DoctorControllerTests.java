@@ -80,6 +80,15 @@ public class DoctorControllerTests extends TestUtils {
     }
 
     @Test
+    public void testGetDoctorsByRating() throws Exception {
+        Doctor doctor = insertTestDoctor();
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/doctors/rating/{rating}", 1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(doctor.getId()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("alicebarber@gmail.com"));
+    }
+
+    @Test
     public void testPostDoctor() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
 

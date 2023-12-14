@@ -56,6 +56,14 @@ public class DoctorController {
         return ResponseEntity.ok(doctors);
     }
 
+    // Get All Doctors by Rating
+    @GetMapping("/doctors/rating/{rating}")
+    public ResponseEntity<List<Doctor>> getDoctorBySpecialty(@PathVariable double rating) {
+        List<Doctor> doctors = doctorRepository.findByRatingGreaterThanEqual(rating);
+
+        return ResponseEntity.ok(doctors);
+    }
+
     // Get All Patients by Doctor
     @GetMapping("/doctors/{id}/patients")
     public ResponseEntity<List<Patient>> getPatientsByDoctor(@PathVariable Long id) {
@@ -91,6 +99,8 @@ public class DoctorController {
     public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
         Doctor doctor = (Doctor) new Doctor()
                 .setSpecialty(doctorRequest.getSpecialty())
+                .setDegree(doctorRequest.getDegree())
+                .setRating(0)
                 .setFirstName(doctorRequest.getFirstName())
                 .setLastName(doctorRequest.getLastName())
                 .setAge(doctorRequest.getAge())
@@ -108,12 +118,14 @@ public class DoctorController {
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
 
         doctor.setSpecialty(doctorRequest.getSpecialty())
-                .setFirstName(doctorRequest.getFirstName())
-                .setLastName(doctorRequest.getLastName())
-                .setAge(doctorRequest.getAge())
-                .setGender(doctorRequest.getGender())
-                .setEmail(doctorRequest.getEmail())
-                .setPhone(doctorRequest.getPhone());
+            .setDegree(doctorRequest.getDegree())
+            .setRating(doctorRequest.getRating())
+            .setFirstName(doctorRequest.getFirstName())
+            .setLastName(doctorRequest.getLastName())
+            .setAge(doctorRequest.getAge())
+            .setGender(doctorRequest.getGender())
+            .setEmail(doctorRequest.getEmail())
+            .setPhone(doctorRequest.getPhone());
 
         return ResponseEntity.ok(doctorRepository.save(doctor));
     }
