@@ -95,7 +95,7 @@ public class DoctorControllerTests extends TestUtils {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/doctors")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(getTestDoctor()))
-                .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
 
         Assert.assertEquals("alicebarber@gmail.com", getDoctors().get(0).getEmail());
     }
