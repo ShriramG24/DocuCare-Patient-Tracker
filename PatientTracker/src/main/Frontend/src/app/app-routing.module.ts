@@ -14,11 +14,11 @@ const routes: Routes = [
     component: AppointmentsComponent,
   },
   {
-    path: 'find-doctor',
+    path: 'find-doctor/:speciality',
     component: FindDoctorComponent,
   },
   {
-    path: 'book-appointment',
+    path: 'book-appointment/:docid',
     component: BookappointmentComponent,
   },
 ];

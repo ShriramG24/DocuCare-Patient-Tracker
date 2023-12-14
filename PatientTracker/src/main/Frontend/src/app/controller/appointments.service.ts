@@ -5,13 +5,15 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SignupLoginService {
+export class AppointmentsService {
+
   private apiUrl = 'http://localhost:8080'; // Replace with your backend API URL
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/data`);
+  getDoctorsofSpecialization(specialization:string): Observable<any> {
+    
+    return this.http.get(`${this.apiUrl}/api/doctors/specialty/${specialization}`);
   }
 
   postData(data: any): Observable<any> {

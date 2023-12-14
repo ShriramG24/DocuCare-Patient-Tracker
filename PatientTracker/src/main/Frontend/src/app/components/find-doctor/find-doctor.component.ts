@@ -1,16 +1,37 @@
 import { Component } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
+import { AppointmentsService } from 'app/controller/appointments.service';
 @Component({
   selector: 'app-find-doctor',
   templateUrl: './find-doctor.component.html',
   styleUrls: ['./find-doctor.component.css']
 })
 export class FindDoctorComponent {
-  allDoctors = [
-    { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
-    { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
-    { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
-    { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
-    // ... other doctors
-  ]
+  speciality: any;
+  constructor(private route: ActivatedRoute, private appointmentService: AppointmentsService) { 
+
+  }
+  allDoctors:any;
+  ngOnInit(): void {
+    // Example: Fetch data from the backend
+    
+    this.route.params.subscribe(params => {
+      this.speciality = params['speciality'];
+      console.log(this.speciality)
+      // Use this.variableName as needed
+    });
+    this.appointmentService.getDoctorsofSpecialization(this.speciality).subscribe((data) => {
+      console.log(data);
+      this.allDoctors = data;
+    }, (error) => {
+      console.error('Error fetching doctor data', error);
+    });
+}
+// allDoctors = [
+//   { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
+//   { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
+//   { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
+//   { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
+//   // ... other doctors
+// ]
 }
