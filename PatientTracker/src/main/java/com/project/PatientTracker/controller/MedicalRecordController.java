@@ -20,7 +20,7 @@ import com.project.PatientTracker.repository.PatientRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class MedicalRecordController {
     
     @Autowired

@@ -25,7 +25,7 @@ import com.project.PatientTracker.repository.FileRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class FileController {
 
     @Autowired

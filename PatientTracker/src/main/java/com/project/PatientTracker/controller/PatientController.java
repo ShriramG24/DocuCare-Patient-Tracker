@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class PatientController {
 
     @Autowired
@@ -71,9 +71,13 @@ public class PatientController {
     @PostMapping("/patients")
 	public ResponseEntity<PatientResponse> createPatient(@RequestBody PatientRequest patientRequest) {
 		Patient patient = (Patient) new Patient().setAddress(patientRequest.getAddress())
+            .setDiagnoses(patientRequest.getDiagnoses())
+            .setMedications(patientRequest.getMedications())
+            .setAllergies(patientRequest.getAllergies())
             .setFirstName(patientRequest.getFirstName())
             .setLastName(patientRequest.getLastName())
             .setAge(patientRequest.getAge())
+            .setGender(patientRequest.getGender())
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());
         
@@ -88,9 +92,13 @@ public class PatientController {
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + id));
 		
 		patient.setAddress(patientRequest.getAddress())
+            .setDiagnoses(patientRequest.getDiagnoses())
+            .setMedications(patientRequest.getMedications())
+            .setAllergies(patientRequest.getAllergies())
             .setFirstName(patientRequest.getFirstName())
             .setLastName(patientRequest.getLastName())
             .setAge(patientRequest.getAge())
+            .setGender(patientRequest.getGender())
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());
 		

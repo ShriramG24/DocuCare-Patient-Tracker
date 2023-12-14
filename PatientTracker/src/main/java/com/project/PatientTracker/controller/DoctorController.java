@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/")
 public class DoctorController {
     
     @Autowired
@@ -91,6 +91,7 @@ public class DoctorController {
             .setFirstName(doctorRequest.getFirstName())
             .setLastName(doctorRequest.getLastName())
             .setAge(doctorRequest.getAge())
+            .setGender(doctorRequest.getGender())
             .setEmail(doctorRequest.getEmail())
             .setPhone(doctorRequest.getPhone());
 
@@ -108,6 +109,7 @@ public class DoctorController {
             .setFirstName(doctorRequest.getFirstName())
             .setLastName(doctorRequest.getLastName())
             .setAge(doctorRequest.getAge())
+            .setGender(doctorRequest.getGender())
             .setEmail(doctorRequest.getEmail())
             .setPhone(doctorRequest.getPhone());
 
