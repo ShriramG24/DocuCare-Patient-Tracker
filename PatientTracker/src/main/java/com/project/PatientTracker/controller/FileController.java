@@ -67,6 +67,7 @@ public class FileController {
         }
 
         file.setName(fileRequest.getName())
+            .setType(fileRequest.getType())
             .setLocation(fileRequest.getLocation())
             .setLastUpdated(fileRequest.getLastUpdated());
 

@@ -110,6 +110,7 @@ public class DoctorController {
             .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + patientId));
 
         patient.setDoctor(doctor);
+        doctor.addPatient(patient);
         		
 		return ResponseEntity.ok(doctorRepository.save(doctor));
 	}
