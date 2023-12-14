@@ -30,10 +30,14 @@ public class Patient extends User {
     @Getter @Setter
     private String diagnoses;
 
-    @ManyToOne
-    @JoinColumn(name = "doctorId")
-    @Getter @Setter
-    private Doctor doctor;
+    @ManyToMany
+    @JoinTable(
+        name = "doctors_patients", 
+        joinColumns = { @JoinColumn(name = "doctorId") }, 
+        inverseJoinColumns = { @JoinColumn(name = "patientId") }
+    )
+    @Getter
+    private Set<Doctor> doctors = new HashSet<Doctor>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "patient")
@@ -45,10 +49,13 @@ public class Patient extends User {
     @Getter
     private Set<File> files = new HashSet<File>();
 
+    public Patient addDoctor(Doctor doctor) { this.doctors.add(doctor); return this; }
+    public Patient removeDoctor(Doctor doctor) { this.doctors.remove(doctor); return this; }
+
     public Patient addAppointment(Appointment appointment) { this.appointments.add(appointment); return this; }
     public Patient removeAppointment(Appointment appointment) { this.appointments.remove(appointment); return this; }
 
-    public Patient addRecord(File file) { this.files.add(file); return this; }
-    public Patient removeRecord(File file) { this.files.remove(file); return this; }
+    public Patient addFile(File file) { this.files.add(file); return this; }
+    public Patient removeFile(File file) { this.files.remove(file); return this; }
 }
 
