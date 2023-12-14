@@ -1,8 +1,6 @@
 package com.project.PatientTracker.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.PatientTracker.exception.ResourceNotFoundException;
 import com.project.PatientTracker.model.Doctor;
 import com.project.PatientTracker.model.File;
-import com.project.PatientTracker.payload.request.FileRequest;
-import com.project.PatientTracker.payload.response.FileResponse;
+import com.project.PatientTracker.model.Patient;
 import com.project.PatientTracker.repository.DoctorRepository;
 import com.project.PatientTracker.repository.FileRepository;
+import com.project.PatientTracker.repository.PatientRepository;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -34,44 +32,54 @@ public class FileController {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    // Get All Files by Doctor ID
-    @GetMapping("/files/{doctorId}")
-    public ResponseEntity<List<FileResponse>> getFiles(@PathVariable Long doctorId) {
-        Doctor doctor = doctorRepository.findById(doctorId)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
+    @Autowired
+    private PatientRepository patientRepository;
 
-        List<File> files = fileRepository.findByOwner(doctor);
+    // Get All Files by User ID
+    @GetMapping("/files/{userId}")
+    public ResponseEntity<List<File>> getFiles(@PathVariable Long userId) {
+        List<File> files;
+        if (doctorRepository.findById(userId).isEmpty()) {
+            Patient patient = patientRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID not found: " + userId));
+            files = fileRepository.findByPatient(patient);
+        } else {
+            Doctor doctor = doctorRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID not found: " + userId));
+            files = fileRepository.findByDoctor(doctor);
+        }
 
-        List<FileResponse> response = files.stream().map(f -> {
-            return new FileResponse().build(f);
-        }).toList();
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(files);
     }
 
     // Save File to Database
-    @PostMapping("/files/{doctorId}")
-	public ResponseEntity<FileResponse> saveFile(@PathVariable Long doctorId, @RequestBody FileRequest fileRequest) {
-        Doctor doctor = doctorRepository.findById(doctorId)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
+    @PostMapping("/files/{userId}")
+	public ResponseEntity<File> saveFile(@PathVariable Long userId, @RequestBody File fileRequest) {
+        File file = new File();
+        if (doctorRepository.findById(userId).isEmpty()) {
+            Patient patient = patientRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID not found: " + userId));
+            file.setDoctor(null).setPatient(patient);
+        } else {
+            Doctor doctor = doctorRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with ID not found: " + userId));
+            file.setDoctor(doctor).setPatient(null);
+        }
 
-        File file = new File().setName(fileRequest.getName())
+        file.setName(fileRequest.getName())
             .setLocation(fileRequest.getLocation())
-            .setOwner(doctor)
             .setLastUpdated(fileRequest.getLastUpdated());
 
-        FileResponse response = new FileResponse().build(fileRepository.save(file));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(fileRepository.save(file));
 	}
 
     // Remove File from Database
 	@DeleteMapping("/files/{id}")
-	public ResponseEntity<Map<String, Boolean>> removeFile(@PathVariable Long id){
+	public ResponseEntity<File> removeFile(@PathVariable Long id){
 		File file = fileRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("File with ID not found: " + id));
 		
-		fileRepository.delete(file);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return ResponseEntity.ok(response);
+        fileRepository.delete(file);
+		return ResponseEntity.ok(file);
 	}
 }
