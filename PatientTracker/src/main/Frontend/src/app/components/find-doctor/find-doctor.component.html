@@ -17,26 +17,34 @@
       crossorigin="anonymous"
     />
     <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-    <title>Book Appointment</title>
+    <title>View Doctors</title>
   </head>
   <style>
-   
+    body {
+      overflow-x: hidden;
+    }
 
-  
+    .wrapper {
+      display: flex;
+      align-items: stretch;
+    }
     .sidebar p {
       font-family: "Poppins", sans-serif;
       font-size: 1.1em;
       font-weight: 300;
       line-height: 1.7em;
-      background-color: #343a40;
+      color: white;
     }
     #sidebar {
+    
       min-width: 270px;
       max-width: 280px;
       min-height: 100vh;
     }
 
-    
+    #sidebar.active {
+      margin-left: -250px;
+    }
 
     a,
     a:hover,
@@ -45,12 +53,9 @@
       text-decoration: none;
       transition: all 0.3s;
     }
-
     #sidebar {
-      /* don't forget to add all the previously mentioned styles here too */
-     
       color: black;
-      
+      transition: all 0.3s;
     }
 
     #sidebar .sidebar-header {
@@ -63,20 +68,22 @@
       display: block;
     }
     #sidebar ul li a:hover {
-      background: black;
+      background: rgb(29, 151, 29);
       color: #fff;
     }
 
     #sidebar ul li.active > a,
     a[aria-expanded="true"] {
       color: #fff;
-      background: black;
+      background: green;
     }
     #consult {
       height: 400px;
       width: 700px;
     }
-    
+    .card{
+        width:400px;
+    }
     .card-img-top {
     width: 100%;
     height: 8vw;
@@ -86,14 +93,14 @@
   </style>
   <body>
     <div class="row">
-      <div class="wrapper px-4">
+      <div class="wrapper px-2">
         <!-- Sidebar -->
         <nav id="sidebar"class="bg-light">
           <div class="sidebar-header text-center">
             <h6 class="display-4">
-              <b class="mt-8"
+              <b
                 ><span style="color: black">Docu</span
-                ><span style="color: green">Care</span></b
+                ><span style="color: rgb(19, 99, 19)">Care</span></b
               >
             </h6>
           </div>
@@ -132,52 +139,41 @@
           </ul>
         </nav>
       </div>
-    
       
-      <div class="col-lg-9 mt-4 ml-3">
-        <div class="row mb-4 mt-4">
-            <h2 style="color: rgb(21, 21, 148);">
-         Find Doctors of Every Specialization</h2> 
-       
-       </div>
+      
+      <div class="col-lg-9">
         <div class="row">
-            <div class="col-md-3" *ngFor="let card of cards">
-                <div class="card mb-4">
-                <!-- Card content goes here -->
-                <div class="card-body">
-                    <img src="../../../assets/images/Consultant_Physician_v2.jpg" class="card-img-top" alt="Card Image">
-                    <!-- Display dynamic data from the card object -->
-                    <h5 class="card-title">{{ card.title }}</h5>
-                    <p class="card-text">{{ card.text }}</p>
-                    <button class="btn btn-dark w-100">Click Me</button>
+          <h4 style="color: rgb(21, 21, 148);"><b>Find your Doctor</b> </h4>
+      </div>
+        <div class="container">
+          <div class="row">
+            <div *ngFor="let doctor of allDoctors" class="col-md-4 mr-6 ">
+                <div class="px-4">
+                  <img src="../../../assets/images/doctoravatar.png" alt="">
+                  <div class="col">
+                    <h4 style="color: rgb(21, 21, 148);">Dr. {{ doctor.username }}</h4>
+                    <h5>{{ doctor.field }}</h5>
+                    <h6>MBBS</h6>
+                    <h6 style="color: grey">RATING: <span style="color: black;">{{ doctor.finalRating }}</span> <svg style="color:rgb(248, 248, 51)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg></h6>
+                  </div>
                 </div>
+                <div class="card-body mb-4">
+                  <div>Next Available: 9am Tomorrow</div>
+                  <hr>
+                  <div class="text-center">
+                    <a href="" class="btn btn-dark w-100" style="text-decoration: #fff;">CHECKOUT</a>
                 </div>
-            </div>
-        </div>
+              </div>
+                  
+                        
+       
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
     
-    </div>
-    </div>
-
-
-      
-        
-
-
-
-    <!-- <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script> -->
   </body>
 </html>
