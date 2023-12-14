@@ -22,6 +22,10 @@ public class Doctor extends User {
     @Getter @Setter
     private String specialty;
 
+    @Column(name="rating", nullable=true)
+    @Getter @Setter
+    private double rating;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "doctors")
     @Getter

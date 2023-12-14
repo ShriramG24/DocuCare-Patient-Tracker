@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/")
 public class DoctorController {
-    
+
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -33,15 +33,33 @@ public class DoctorController {
     @GetMapping("/doctors/{id}")
     public ResponseEntity<Doctor> getDoctorById(@PathVariable Long id) {
         Doctor doctor = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
 
         return ResponseEntity.ok(doctor);
     }
 
-    // Get All Patients by Doctor
+    // Get All Specialties
+    @GetMapping("/doctors/specialties")
+    public ResponseEntity<List<String>> getSpecialties() {
+        return ResponseEntity.ok(Arrays.asList(
+            "Cardiologist", "Dermatologist", "Endocrinologist", "Gastroenterologist",
+            "Gynecologist", "Hematologist", "Neurologist", "Oncologist", "Ophthalmologist", "Pediatrician",
+            "Psychiatrist", "Pulmonologist", "Radiologist", "Rheumatologist", "Urologist"
+        ));
+    }
+
+    // Get All Doctors by Specialty
     @GetMapping("/doctors/specialty/{specialty}")
     public ResponseEntity<List<Doctor>> getDoctorBySpecialty(@PathVariable String specialty) {
         List<Doctor> doctors = doctorRepository.findBySpecialty(specialty);
+
+        return ResponseEntity.ok(doctors);
+    }
+
+    // Get All Doctors by Rating
+    @GetMapping("/doctors/rating/{rating}")
+    public ResponseEntity<List<Doctor>> getDoctorBySpecialty(@PathVariable double rating) {
+        List<Doctor> doctors = doctorRepository.findByRatingGreaterThanEqual(rating);
 
         return ResponseEntity.ok(doctors);
     }
@@ -50,8 +68,8 @@ public class DoctorController {
     @GetMapping("/doctors/{id}/patients")
     public ResponseEntity<List<Patient>> getPatientsByDoctor(@PathVariable Long id) {
         Set<Patient> patients = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
-            .getPatients();
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
+                .getPatients();
 
         return ResponseEntity.ok(new ArrayList<Patient>(patients));
     }
@@ -60,8 +78,8 @@ public class DoctorController {
     @GetMapping("/doctors/{id}/appointments")
     public ResponseEntity<List<Appointment>> getAppointmentsByDoctor(@PathVariable Long id) {
         Set<Appointment> appointments = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
-            .getAppointments();
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
+                .getAppointments();
 
         return ResponseEntity.ok(new ArrayList<Appointment>(appointments));
     }
@@ -70,17 +88,38 @@ public class DoctorController {
     @GetMapping("/doctors/{id}/files")
     public ResponseEntity<List<File>> getFilesByDoctor(@PathVariable Long id) {
         Set<File> files = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
-            .getFiles();
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id))
+                .getFiles();
 
         return ResponseEntity.ok(new ArrayList<File>(files));
     }
 
     // Create Doctor
     @PostMapping("/doctors")
-	public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
+    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
         Doctor doctor = (Doctor) new Doctor()
-            .setSpecialty(doctorRequest.getSpecialty())
+                .setSpecialty(doctorRequest.getSpecialty())
+                .setDegree(doctorRequest.getDegree())
+                .setRating(0)
+                .setFirstName(doctorRequest.getFirstName())
+                .setLastName(doctorRequest.getLastName())
+                .setAge(doctorRequest.getAge())
+                .setGender(doctorRequest.getGender())
+                .setEmail(doctorRequest.getEmail())
+                .setPhone(doctorRequest.getPhone());
+
+        return ResponseEntity.ok(doctorRepository.save(doctor));
+    }
+
+    // Update Doctor Profile
+    @PutMapping("/doctors/{id}")
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctorRequest) {
+        Doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
+
+        doctor.setSpecialty(doctorRequest.getSpecialty())
+            .setDegree(doctorRequest.getDegree())
+            .setRating(doctorRequest.getRating())
             .setFirstName(doctorRequest.getFirstName())
             .setLastName(doctorRequest.getLastName())
             .setAge(doctorRequest.getAge())
@@ -89,47 +128,30 @@ public class DoctorController {
             .setPhone(doctorRequest.getPhone());
 
         return ResponseEntity.ok(doctorRepository.save(doctor));
-	}
-
-    // Update Doctor Profile
-    @PutMapping("/doctors/{id}")
-	public ResponseEntity<Doctor> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctorRequest){
-		Doctor doctor = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
-		
-		doctor.setSpecialty(doctorRequest.getSpecialty())
-            .setFirstName(doctorRequest.getFirstName())
-            .setLastName(doctorRequest.getLastName())
-            .setAge(doctorRequest.getAge())
-            .setGender(doctorRequest.getGender())
-            .setEmail(doctorRequest.getEmail())
-            .setPhone(doctorRequest.getPhone());
-
-		return ResponseEntity.ok(doctorRepository.save(doctor));
-	}
+    }
 
     // Assign Patient to Doctor
     @PutMapping("/doctors/{doctorId}/assign-patient/{patientId}")
-	public ResponseEntity<Doctor> assignPatient(@PathVariable Long doctorId, @PathVariable Long patientId){
-		Doctor doctor = doctorRepository.findById(doctorId)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
-            
+    public ResponseEntity<Doctor> assignPatient(@PathVariable Long doctorId, @PathVariable Long patientId) {
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + doctorId));
+
         Patient patient = patientRepository.findById(patientId)
-            .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + patientId));
+                .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + patientId));
 
         patient.addDoctor(doctor);
         doctor.addPatient(patient);
-        		
-		return ResponseEntity.ok(doctorRepository.save(doctor));
-	}
+
+        return ResponseEntity.ok(doctorRepository.save(doctor));
+    }
 
     // Delete Doctor
-	@DeleteMapping("/doctors/{id}")
-	public ResponseEntity<Doctor> deleteDoctor(@PathVariable Long id){
-		Doctor doctor = doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
-		
-		doctorRepository.delete(doctor);
-		return ResponseEntity.ok(doctor);
-	}
+    @DeleteMapping("/doctors/{id}")
+    public ResponseEntity<Doctor> deleteDoctor(@PathVariable Long id) {
+        Doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + id));
+
+        doctorRepository.delete(doctor);
+        return ResponseEntity.ok(doctor);
+    }
 }
