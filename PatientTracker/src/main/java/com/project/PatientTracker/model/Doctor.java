@@ -1,5 +1,6 @@
 package com.project.PatientTracker.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,6 +14,10 @@ import lombok.experimental.Accessors;
 @Table(name = "Doctors")
 @Accessors(chain = true)
 public class Doctor extends User {
+    @Column(name="degree", nullable=true)
+    @Getter @Setter
+    private String degree;
+
     @Column(name="specialty", nullable=true)
     @Getter @Setter
     private String specialty;
@@ -20,22 +25,22 @@ public class Doctor extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "doctor")
     @Getter
-    private Set<Patient> patients;
+    private Set<Patient> patients = new HashSet<Patient>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "doctor")
     @Getter
-    private Set<Appointment> appointments;
+    private Set<Appointment> appointments = new HashSet<Appointment>();
     
     @JsonIgnore
     @OneToMany(mappedBy = "owner")
     @Getter
-    private Set<File> files;
+    private Set<File> files = new HashSet<File>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "doctor")
     @Getter
-    private Set<MedicalRecord> records;
+    private Set<MedicalRecord> records = new HashSet<MedicalRecord>();
 
     public Doctor addPatient(Patient patient) { this.patients.add(patient); return this; }
     public Doctor removePatient(Patient patient) { this.patients.remove(patient); return this; }

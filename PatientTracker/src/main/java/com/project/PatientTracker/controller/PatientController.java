@@ -1,31 +1,16 @@
 package com.project.PatientTracker.controller;
 
 import com.project.PatientTracker.exception.ResourceNotFoundException;
-import com.project.PatientTracker.model.Appointment;
-import com.project.PatientTracker.model.MedicalRecord;
-import com.project.PatientTracker.model.Patient;
-import com.project.PatientTracker.payload.request.PatientRequest;
-import com.project.PatientTracker.payload.response.AppointmentResponse;
-import com.project.PatientTracker.payload.response.MedicalRecordResponse;
-import com.project.PatientTracker.payload.response.PatientResponse;
+import com.project.PatientTracker.model.*;
+import com.project.PatientTracker.payload.request.*;
+import com.project.PatientTracker.payload.response.*;
 import com.project.PatientTracker.repository.PatientRepository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -88,7 +73,6 @@ public class PatientController {
 		Patient patient = (Patient) new Patient().setAddress(patientRequest.getAddress())
             .setFirstName(patientRequest.getFirstName())
             .setLastName(patientRequest.getLastName())
-            .setDateOfBirth(patientRequest.getDateOfBirth())
             .setAge(patientRequest.getAge())
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());
@@ -106,7 +90,6 @@ public class PatientController {
 		patient.setAddress(patientRequest.getAddress())
             .setFirstName(patientRequest.getFirstName())
             .setLastName(patientRequest.getLastName())
-            .setDateOfBirth(patientRequest.getDateOfBirth())
             .setAge(patientRequest.getAge())
             .setEmail(patientRequest.getEmail())
             .setPhone(patientRequest.getPhone());

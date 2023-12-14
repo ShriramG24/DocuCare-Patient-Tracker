@@ -1,9 +1,7 @@
 package com.project.PatientTracker.payload.response;
 
-import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.PatientTracker.model.Doctor;
 
 import jakarta.validation.constraints.NotBlank;
@@ -27,11 +25,6 @@ public class DoctorResponse {
 
     @NotBlank
     @Getter @Setter
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date dateOfBirth;
-
-    @NotBlank
-    @Getter @Setter
     private int age;
 
     @Getter @NotBlank
@@ -46,6 +39,9 @@ public class DoctorResponse {
     private String specialty;
 
     @Getter @Setter
+    private String degree;
+
+    @Getter @Setter
     private List<Long> patientIds;
 
     @Getter @Setter
@@ -58,10 +54,10 @@ public class DoctorResponse {
         return this.setId(doctor.getId())
             .setFirstName(doctor.getFirstName())
             .setLastName(doctor.getLastName())
-            .setDateOfBirth(doctor.getDateOfBirth())
             .setAge(doctor.getAge())
             .setEmail(doctor.getEmail())
             .setPhone(doctor.getPhone())
+            .setDegree(doctor.getDegree())
             .setSpecialty(doctor.getSpecialty())
             .setPatientIds(doctor.getPatients().stream().map(p -> p.getId()).toList())
             .setAppointmentIds(doctor.getAppointments().stream().map(a -> a.getId()).toList())

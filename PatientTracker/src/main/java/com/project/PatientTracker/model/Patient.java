@@ -1,5 +1,6 @@
 package com.project.PatientTracker.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,12 +26,12 @@ public class Patient extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "patient")
     @Getter
-    private Set<Appointment> appointments;
+    private Set<Appointment> appointments = new HashSet<Appointment>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "patient")
     @Getter
-    private Set<MedicalRecord> records;
+    private Set<MedicalRecord> records = new HashSet<MedicalRecord>();
 
     public Patient addAppointment(Appointment appointment) { this.appointments.add(appointment); return this; }
     public Patient removeAppointment(Appointment appointment) { this.appointments.remove(appointment); return this; }
