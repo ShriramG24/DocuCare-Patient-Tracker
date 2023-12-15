@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.PatientTracker.PatientTrackerApplication;
-import com.project.PatientTracker.TestUtils;
 import com.project.PatientTracker.model.*;
+import com.project.PatientTracker.utils.TestUtils;
 
 import org.junit.Assert;
 

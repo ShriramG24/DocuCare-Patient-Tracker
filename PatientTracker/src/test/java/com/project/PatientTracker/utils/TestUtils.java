@@ -1,4 +1,4 @@
-package com.project.PatientTracker;
+package com.project.PatientTracker.utils;
 
 import java.util.Date;
 import java.util.List;
@@ -66,10 +66,11 @@ public class TestUtils {
             .setDegree("MBBS")
             .setRating(5.0)
             .setExperience(10)
+            .setClinicAddr("123 ABC Road")
             .setFirstName("Alice")
             .setLastName("Barber")
             .setAge(40)
-            .setGender("Female")
+            .setGender("female")
             .setEmail("alicebarber@gmail.com")
             .setPhone("1234567890");
     }
