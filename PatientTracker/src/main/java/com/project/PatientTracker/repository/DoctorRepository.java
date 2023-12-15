@@ -9,5 +9,5 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long>{
     
     public List<Doctor> findBySpecialty(String specialty);
 
-    public List<Doctor> findByRatingGreaterThanEqual(double rating);
+    public List<Doctor> findByRatingGreaterThanEqual(Double rating);
 }

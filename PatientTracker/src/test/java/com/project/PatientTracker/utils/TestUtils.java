@@ -1,4 +1,4 @@
-package com.project.PatientTracker;
+package com.project.PatientTracker.utils;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +23,9 @@ public class TestUtils {
     @Autowired
     private FileRepository fileRepository;
 
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
+
     public List<Patient> getPatients() {
         return patientRepository.findAll();
     }
@@ -37,6 +40,10 @@ public class TestUtils {
 
     public List<File> getFiles() {
         return fileRepository.findAll();
+    }
+
+    public List<Prescription> getPrescriptions() {
+        return prescriptionRepository.findAll();
     }
 
     public Patient getTestPatient() {
@@ -56,10 +63,14 @@ public class TestUtils {
     public Doctor getTestDoctor() {
         return (Doctor) new Doctor()
             .setSpecialty("Nutritionist")
+            .setDegree("MBBS")
+            .setRating(5.0)
+            .setExperience(10)
+            .setClinicAddr("123 ABC Road")
             .setFirstName("Alice")
             .setLastName("Barber")
             .setAge(40)
-            .setGender("Female")
+            .setGender("female")
             .setEmail("alicebarber@gmail.com")
             .setPhone("1234567890");
     }
@@ -84,6 +95,15 @@ public class TestUtils {
             .setLastUpdated(new Date());
     }
 
+    public Prescription getTestPrescription(Patient patient, Doctor doctor) {
+        return new Prescription()
+            .setDoctor(doctor)
+            .setPatient(patient)
+            .setMedicines("Tylenol")
+            .setReports("Blood Test")
+            .setInstructions("Take 1 tablet every 4 hours");
+    }
+
     public Patient insertTestPatient() {
         return patientRepository.save(getTestPatient());
     }
@@ -98,6 +118,10 @@ public class TestUtils {
 
     public File insertTestFile(Patient patient, Doctor doctor) {
         return fileRepository.save(getTestFile(patient, doctor));
+    }
+
+    public Prescription insertTestPrescription(Patient patient, Doctor doctor) {
+        return prescriptionRepository.save(getTestPrescription(patient, doctor));
     }
 
     public void clearAll() {

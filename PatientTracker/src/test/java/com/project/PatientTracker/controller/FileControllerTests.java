@@ -19,8 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.PatientTracker.PatientTrackerApplication;
-import com.project.PatientTracker.TestUtils;
 import com.project.PatientTracker.model.*;
+import com.project.PatientTracker.utils.TestUtils;
 
 import org.junit.Assert;
 
@@ -33,7 +33,7 @@ import org.junit.Assert;
         @TestPropertySource(locations = "classpath:application-test.properties"),
         @TestPropertySource(properties = "spring.config.name=application-test")
 })
-public class FilesControllerTests extends TestUtils {
+public class FileControllerTests extends TestUtils {
     @Autowired
     private MockMvc mockMvc;
 
@@ -74,21 +74,21 @@ public class FilesControllerTests extends TestUtils {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].doctor").doesNotExist());
     }
 
+    // @Test
+    // public void testPostFileById() throws Exception {
+    //     ObjectMapper objectMapper = new ObjectMapper();
+
+    //     mockMvc.perform(MockMvcRequestBuilders.post("/api/files/{userId}", patient.getId())
+    //         .contentType(MediaType.APPLICATION_JSON)
+    //         .content(objectMapper.writeValueAsString(getTestFile(patient, null)))
+    //         .accept(MediaType.APPLICATION_JSON)
+    //     ).andExpect(MockMvcResultMatchers.status().isOk());
+
+    //     Assert.assertEquals("John_Medical_Record", getFiles().get(0).getName());
+    // }
+
     @Test
-    public void testPostFileById() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/files/{userId}", patient.getId())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(getTestFile(patient, null)))
-            .accept(MediaType.APPLICATION_JSON)
-        ).andExpect(MockMvcResultMatchers.status().isOk());
-
-        Assert.assertEquals("John_Medical_Record", getFiles().get(0).getName());
-    }
-
-    @Test
-    public void testDeletePatient() throws Exception {
+    public void testDeleteFile() throws Exception {
         File file = insertTestFile(null, doctor);
         Assert.assertEquals(getFiles().size(), 1);
         

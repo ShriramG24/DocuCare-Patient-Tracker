@@ -24,6 +24,7 @@ import com.project.PatientTracker.utils.TestUtils;
 
 import org.junit.Assert;
 
+
 @Transactional
 @Rollback
 @AutoConfigureMockMvc
@@ -33,7 +34,7 @@ import org.junit.Assert;
         @TestPropertySource(locations = "classpath:application-test.properties"),
         @TestPropertySource(properties = "spring.config.name=application-test")
 })
-public class AppointmentControllerTests extends TestUtils {
+public class PrescriptionControllerTests extends TestUtils {
     @Autowired
     private MockMvc mockMvc;
 
@@ -58,50 +59,32 @@ public class AppointmentControllerTests extends TestUtils {
     }
 
     @Test
-    public void testGetAppointmentById() throws Exception {
-        Appointment appointment = insertTestAppointment(patient, doctor);
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/appointments/{id}", appointment.getId()))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(appointment.getId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.doctor.email").value("alicebarber@gmail.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.patient.email").value("johndoe@gmail.com"));
+    public void testGetPrescriptionsByPatientId() throws Exception {
+        insertTestPrescription(patient, doctor);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/prescriptions/patients/{patientId}", patient.getId()))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.jsonPath("$[0].patient.id").value(patient.getId()))
+            .andExpect(MockMvcResultMatchers.jsonPath("$[0].medicines").value("Tylenol"));
     }
 
     @Test
-    public void testPostAppointment() throws Exception {
+    public void testPostPrescription() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/appointments")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(getTestAppointment(patient, doctor)))
-            .accept(MediaType.APPLICATION_JSON)
-        ).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
-        Assert.assertEquals("Scheduled", getAppointments().get(0).getStatus());
-    }
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/prescriptions")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(getTestPrescription(patient, doctor)))
+                .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
 
-    @Test
-    public void testPutAppointment() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        
-        Appointment appointment = insertTestAppointment(patient, doctor);
-        Assert.assertEquals("Scheduled", appointment.getStatus());
-
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/appointments/{id}", appointment.getId())
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(objectMapper.writeValueAsString(appointment.setStatus("Completed")))
-            .accept(MediaType.APPLICATION_JSON)
-        ).andExpect(MockMvcResultMatchers.status().isOk());
-
-        Assert.assertEquals("Completed", getAppointments().get(0).getStatus());
+        Assert.assertEquals("Tylenol", getPrescriptions().get(0).getMedicines());
     }
 
     @Test
     public void testDeleteAppointment() throws Exception {
-        Appointment appointment = insertTestAppointment(patient, doctor);
-        Assert.assertEquals(getAppointments().size(), 1);
+        insertTestPrescription(patient, doctor);
+        Assert.assertEquals(getPrescriptions().size(), 1);
         
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/appointments/{id}", appointment.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/prescriptions/patients/{patientId}", patient.getId()))
             .andExpect(MockMvcResultMatchers.status().isOk());
         Assert.assertTrue(getAppointments().isEmpty());
     }

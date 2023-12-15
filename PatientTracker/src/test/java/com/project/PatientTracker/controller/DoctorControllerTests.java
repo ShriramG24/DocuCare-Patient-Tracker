@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.PatientTracker.PatientTrackerApplication;
-import com.project.PatientTracker.TestUtils;
 import com.project.PatientTracker.model.Doctor;
 import com.project.PatientTracker.model.Patient;
+import com.project.PatientTracker.utils.TestUtils;
 
 import org.junit.Assert;
 
@@ -95,7 +95,7 @@ public class DoctorControllerTests extends TestUtils {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/doctors")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(getTestDoctor()))
-                .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+                .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
 
         Assert.assertEquals("alicebarber@gmail.com", getDoctors().get(0).getEmail());
     }
