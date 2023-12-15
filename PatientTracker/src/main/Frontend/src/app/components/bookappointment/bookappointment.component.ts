@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from 'app/controller/appointments.service';
 import { Patient } from 'app/models/patient.model';
 import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.service';
 import { Doctor } from 'app/models/doctor.model';
 import { Appointment } from 'app/models/appointment.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-bookappointment',
   templateUrl: './bookappointment.component.html',
   styleUrls: ['./bookappointment.component.css']
 })
 export class BookappointmentComponent {
-  constructor(private route: ActivatedRoute, private appointmentService: AppointmentsService, private getPatientDoctor: GetPatientDoctorsService) { 
+  constructor(private router: Router,private formBuilder: FormBuilder,private route: ActivatedRoute, private appointmentService: AppointmentsService, private getPatientDoctor: GetPatientDoctorsService) { 
 
   }
   docid:any;
@@ -20,6 +21,8 @@ export class BookappointmentComponent {
   doctor = new Doctor();
 
   appointment = new Appointment();
+  appointmentForm!: FormGroup;
+
   
   ngOnInit(): void {
     // Example: Fetch data from the backend
@@ -39,6 +42,12 @@ export class BookappointmentComponent {
     }, (error) => {
       console.error('Error fetching patient data', error);
     });
+    this.appointmentForm = this.formBuilder.group({
+      reason: ['', Validators.required],
+      notes: [''],
+      date: ['', Validators.required],
+      time: ['', Validators.required]
+    });
    
     
 }
@@ -47,6 +56,23 @@ BookAppointmentForm = new FormGroup({
 
 
 });
+submitForm()
+{
+   const date = this.appointmentForm.get('date')?.value;
+      const time = this.appointmentForm.get('time')?.value;
+      const reason = this.appointmentForm.get('reason')?.value;
+      const notes = this.appointmentForm.get('notes')?.value;
+      this.appointment.doctor = this.doctor;
+  this.appointment.patient = this.patient;
+  this.appointment.status = "Scheduled";
+  this.appointment.purpose = reason;
+  const dateTimeString = `${date} ${time}`;
+  this.appointment.time = new Date(dateTimeString).toISOString().slice(0, 19).replace("T", " ");
+  this.appointmentService.bookAppointment(this.appointment).subscribe();
+  this.router.navigateByUrl('/dashboard');
+      // Combine date and time to create a DateTime object
+      
+}
 bookAppointment()
 {
   
@@ -56,6 +82,8 @@ bookAppointment()
   this.appointment.purpose = "SICK";
   this.appointment.time = new Date().toISOString().slice(0, 19).replace("T", " ");
   this.appointmentService.bookAppointment(this.appointment).subscribe();
+  
+  
     
 }
   

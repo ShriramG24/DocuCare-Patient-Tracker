@@ -42,7 +42,7 @@ export class ProfileComponent {
 
   ngOnInit(): void {
     // Fetch medical news data from News API
-    const apiKey = 'c8de7b9db39d597005ce18c7409b7d55';
+    const apiKey = '';
     const url = `https://gnews.io/api/v4/top-headlines?lang=en&token=${apiKey}&topic=health`;
     this.http.get<any>(url).subscribe(
       (response) => {

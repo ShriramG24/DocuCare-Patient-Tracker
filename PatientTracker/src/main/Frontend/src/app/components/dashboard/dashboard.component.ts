@@ -89,5 +89,16 @@ prevSlide() {
 news={
 
 }
+notificationMessage: string | null = null;
+
+// Method to set the notification message
+setNotificationMessage(message: string) {
+  this.notificationMessage = message;
+
+  // Clear the notification after a certain duration if needed
+  setTimeout(() => {
+    this.notificationMessage = null;
+  }, 5000); // Adjust the duration as needed (here, it clears after 5 seconds)
+}
 
 }
