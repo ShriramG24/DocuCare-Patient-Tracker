@@ -1,1 +1,111 @@
-<p>prescriptions works!</p>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Checkout</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+   body{
+       padding: 50px;
+   }
+   .alert {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1200px;
+    }
+</style>
+<body>
+    <div class="bg-light" style="border-radius: 10px;">
+        <h4 class="text-center">
+            Docu<span style="color: green">Care</span>
+          </h4>
+         
+          <div class="row">
+            <div class="col">
+                <div class="px-2"><h5>Date: {{date}}</h5></div>
+               <div class="px-2" ><h5>Doctor: {{patient.firstName}} {{patient.lastName}}</h5> </div>
+            </div>
+            <h3 style="padding-right: 39%;"> <span style="color: green">Prescription</span> for {{patient.firstName}} {{patient.lastName}}</h3>
+             
+          </div>  
+    <hr> 
+    <form action="/checkoutdoctor" method="POST">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+              <form [formGroup]="combinedForms">
+                <div formArrayName="medications">
+                  <div *ngFor="let medication of medicationsControls; let i = index">
+                    <div class="input-group mb-1">
+                      <input type="text" [formControl]="medication" class="form-control m-input" placeholder="Medication" autocomplete="off">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-danger" (click)="removeMedicationField(i)">-</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="mb-1">
+                  <button type="button" class="btn btn-info" (click)="addMedicationField()">Add Medication</button>
+                </div>
+              </form>
+            </div>
+          
+            <div class="col-lg-4 mb-4">
+              <form [formGroup]="combinedForms">
+                <div formArrayName="reports">
+                  <div *ngFor="let report of reportsControls; let i = index">
+                    <div class="input-group mb-1">
+                      <input type="text" [formControl]="report" class="form-control m-input" placeholder="Report" autocomplete="off">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-danger" (click)="removeReportField(i)">-</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="mb-1">
+                  <button type="button" class="btn btn-info" (click)="addReportField()">Add Report</button>
+                </div>
+              </form>
+            </div>
+          
+            <div class="col-lg-4 mb-4">
+              <form [formGroup]="combinedForms">
+                <div formArrayName="instructions">
+                  <div *ngFor="let instruction of instructionsControls; let i = index">
+                    <div class="input-group mb-1">
+                      <input type="text" [formControl]="instruction" class="form-control m-input" placeholder="Instruction" autocomplete="off">
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-danger" (click)="removeInstructionField(i)">-</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="mb-1">
+                  <button type="button" class="btn btn-info" (click)="addInstructionField()">Add Instruction</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success" [disabled]="!combinedForms.valid" (click)="prescribe()">Prescribe</button>
+        </div>
+    </form>
+  
+   
+    </div>
+    <div class="alert alert-dark text-center" role="alert">
+        ⓘ I hereby take complete responsibility of the drugs I prescribe<br>
+      </div>
+   
+        
+    
+</body>
+</html>

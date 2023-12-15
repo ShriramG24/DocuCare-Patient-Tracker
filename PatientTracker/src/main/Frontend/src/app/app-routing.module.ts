@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
 import { FindDoctorComponent } from './components/find-doctor/find-doctor.component';
 import { BookappointmentComponent } from './components/bookappointment/bookappointment.component';
+import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path:'dashboard',
     component:DashboardComponent,
+  },
+  {
+    path:'prescriptions',
+    component:PrescriptionsComponent,
   }
 
 ];
