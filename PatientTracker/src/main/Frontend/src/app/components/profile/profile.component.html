@@ -229,25 +229,25 @@
             <h1>Doctor Profile</h1>
             
           </div>
-        <form (ngSubmit)="onSubmit()">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
           <div>
             <label for="firstName">First Name:</label>
-            <input id="firstName" type="text" value={{user.firstName}} disabled>
+            <input id="firstName" type="text"  value={{user.firstName}} disabled>
           </div>
 
           <div>
             <label for="lastName">Last Name:</label>
-            <input id="lastName" type="text" value={{user.lastName}} disabled>
+            <input id="lastName" type="text" [value]="user.lastName" disabled>
           </div>
 
           <div>
             <label for="age">Age:</label>
-            <input id="age" type="number" value={{user.age}}>
+            <input id="age" type="number" formControlName="age" value={{user.age}}>
           </div>
 
           <div>
             <label for="gender">Gender:</label>
-            <select id="gender" >
+            <select id="gender" formControlName="gender" >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -258,17 +258,17 @@
             <div *ngIf="user.type === 'Patient'">
               <div>
                 <label for="medications">Medications:</label>
-                <textarea id="medications" ></textarea>
+                <textarea id="medications" formControlName="medications"></textarea>
               </div>
 
               <div>
                 <label for="allergies">Allergies:</label>
-                <textarea id="allergies" ></textarea>
+                <textarea id="allergies" formControlName="allergies"></textarea>
               </div>
 
               <div>
                 <label for="fileUpload">Upload Documents:</label>
-                <input id="fileUpload" type="file" (change)="onFileSelected($event)">
+                <input id="fileUpload" type="file" formControlName="fileUpload" (change)="onFileSelected($event)">
               </div>
             
           </div>
@@ -276,17 +276,17 @@
           <!-- <div [ngClass]="{'hidden':user.type==='Patient'}"> -->
             <div *ngIf="user.type === 'Doctor'">
               <label for="clinic address">Clinic Address</label>
-              <textarea id="clinicAdress" ></textarea>
+              <textarea id="clinicAdress" formControlName="clinicAddress" ></textarea>
             
 
             <div>
               <label for="Specialization">Speciality:</label>
-              <input id="Specialization"  disabled>
+              <input id="Specialization"   disabled>
             </div>
 
             <div>
               <label for="Degree">Qualification</label>
-              <input id="qualification"  disabled>
+              <input id="qualification" formControlName="qualification" valuedisabled>
             </div>
         </div>
 

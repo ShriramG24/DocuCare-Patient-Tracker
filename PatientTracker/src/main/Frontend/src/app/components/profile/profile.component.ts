@@ -1,6 +1,9 @@
 import { Component,OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -23,12 +26,42 @@ export class ProfileComponent {
     // Other properties...
   };
   medicalNews: any[] = [];
+  userForm: FormGroup;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private fb: FormBuilder, private userDoctorService: GetPatientDoctorsService) {
     this.user.type = 'Patient';
+    // Initialize the form with default values and validators
+    this.userForm = this.fb.group({
+      firstName: '',
+      lastName: [''],
+      age: [null],
+      gender: [null],
+      medications: [null], // No validation for medications
+      allergies: [null], // No validation for allergies
+      fileUpload: [null], // No validation for file upload
+      clinicAddress: [null], // No validation for clinic address
+      specialization: [null], // No validation for specialization
+      qualification: [null], // No validation for qualification
+    });
   }
+ 
   onSubmit() {
+    const file = this.userForm.get('fileUpload')?.value;
     // Handle form submission here
+   // this.userDoctorService.uploadFile(1,data).subscribe((data) => {console.log("file uploaded");console.log(data)});
+   
+      var fd = new FormData();
+      fd.append('file', file);
+      const headers = new HttpHeaders();
+    headers.append('Content-Type', 'undefined');
+      this.http.post(`http://localhost:8080/api/files/1`, fd, 
+      { headers }
+      )
+      .subscribe((response) => {
+        console.log(response)
+      });
+    
+  
     console.log('Form submitted:', this.user);
     // You can add logic here to send the data to a server or perform other actions
   }
@@ -41,6 +74,7 @@ export class ProfileComponent {
 
 
   ngOnInit(): void {
+    
     // Fetch medical news data from News API
     const apiKey = '';
     const url = `https://gnews.io/api/v4/top-headlines?lang=en&token=${apiKey}&topic=health`;

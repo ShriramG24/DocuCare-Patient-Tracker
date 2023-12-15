@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,6 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GetPatientDoctorsService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
   private apiUrl = 'http://localhost:8080'; // Replace with your backend API URL
 
   constructor(private http: HttpClient) { }
@@ -17,6 +22,11 @@ export class GetPatientDoctorsService {
   getDoctors(docid:any): Observable<any> {
     
     return this.http.get(`${this.apiUrl}/api/doctors/${docid}`);
+  }
+
+  uploadFile(id : any,data :any): Observable<any> {
+    
+    return this.http.post(`${this.apiUrl}/api/files/${id}`,data, this.httpOptions);
   }
  
 }

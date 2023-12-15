@@ -245,7 +245,7 @@
                     <ng-container>
                       <ng-container *ngIf="user.type === 'Doctor'; else patientConsult">
                         <a>
-                          <button type="button" class="btn btn-outline-danger"> Consult </button>
+                          <button type="button" class="btn btn-outline-danger"> Prescribe </button>
                         </a>
                       </ng-container>
                       <ng-template #patientConsult>
@@ -365,24 +365,70 @@
           </div>
         </div>
       </div>
-      <div *ngIf="user.type !=='Patient' ">
-        <div class="container alert alert-warning " style="border-radius: 50%;  height: 100px; width: 100px;  font-size: 60px;">3.5</div>
-        <!--<%=currentUser.finalRating%>-->
-        <div>
-          <div class="container py-2" style="border-bottom: solid 1px black;">
-            <h5 class="text-center" style="color: black; height: 25px;">Appointments Done</h5>
+    </div>
+    
+    <div class="col-lg-1" *ngIf="user.type === 'Doctor'" style="margin-left: 10px;margin-top: 20px;">
+      <div class=" px-4">
+        <div class="container text-center py-2" style="margin-right: 30px;background-color: green; color: white; width: 260px; height: 40px;">
+          <b>
+            <h5>OVERVIEW</h5>
+          </b>
+        </div>
+        <div class="">
+          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Done </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <div *ngFor="let medicine of user.medicine">
+                  <!-- currentUser?.medicines-->
+                  <div class="container text-center" style="border-bottom:1px solid black;">
+                    <!-- {{ user.medicine }} -->
+                    <br>
+                    <!-- currentUser.medicines[i] -->
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="py-2"></div>
-          <div class="container alert alert-info " style="border-radius: 50%;  height: 100px; width: 100px;  font-size: 60px;">5</div>
-          <!--<%=currentUser.numberOfAppointments%>-->
         </div>
-        <div class="container py-2" style="border-bottom: solid 1px black;">
-          <h5 class="text-center" style="color: black; height: 25px;">Appointments Missed</h5>
+        <div class="">
+          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Test to be taken </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <div *ngFor="let medicine of user.tests">
+                  <!-- currentUser?.medicines-->
+                  <div class="container text-center" style="border-bottom:1px solid black;">
+                    <!-- {{ medicine }} -->
+                    <br>
+                    <!-- currentUser.medicines[i] -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="py-2"></div>
-        <div class="container alert alert-danger" style="border-radius: 50%;  height: 100px; width: 100px; font-size: 60px;">6</div>
+        <div class="">
+          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Instructions </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <div *ngFor="let medicine of user.instructions">
+                  <!-- currentUser?.medicines-->
+                  <div class="container text-center" style="border-bottom:1px solid black;">
+                    <!-- {{ medicine }} -->
+                    <br>
+                    <!-- currentUser.medicines[i] -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     </div>
+   
+    
   </body>
 </html>

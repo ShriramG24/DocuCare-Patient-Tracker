@@ -17,7 +17,7 @@ export class DashboardComponent {
   constructor( private http: HttpClient, private getPatientDoctor: GetPatientDoctorsService , private appointmentService: AppointmentsService) {
     
   }
-  user ={type: "Patient",
+  user ={type: "Doctor",
        firstName:"Allah",
        lastName:"Allah",
        consultation: [ 1 ],
@@ -54,9 +54,22 @@ show_vc: [1]}
       }, (error) => {
         console.error('Error fetching appointments data', error);
       });
-
+      
     }
     else{
+      this.appointmentService.getDoctorAppointments(1).subscribe((data) => {
+        console.log("hello")
+        console.log(data);
+        this.appointments = data;
+        
+        for (let i = 0; i < this.appointments.length; i++) {
+          console.log("hello")
+          console.log(this.appointments[i]); // Accessing each element in the array
+        }
+      
+      }, (error) => {
+        console.error('Error fetching appointments data', error);
+      });
 
     }
 
@@ -89,16 +102,6 @@ prevSlide() {
 news={
 
 }
-notificationMessage: string | null = null;
 
-// Method to set the notification message
-setNotificationMessage(message: string) {
-  this.notificationMessage = message;
-
-  // Clear the notification after a certain duration if needed
-  setTimeout(() => {
-    this.notificationMessage = null;
-  }, 5000); // Adjust the duration as needed (here, it clears after 5 seconds)
-}
 
 }

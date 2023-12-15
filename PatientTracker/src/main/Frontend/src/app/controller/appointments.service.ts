@@ -36,4 +36,8 @@ export class AppointmentsService {
     
     return this.http.get(`${this.apiUrl}/api/patients/${id}/appointments`);
   }
+  getDoctorAppointments(id : any): Observable<any> {
+    
+    return this.http.get(`${this.apiUrl}/api/doctors/${id}/appointments`);
+  }
 }
