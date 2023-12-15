@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import com.project.PatientTracker.model.Myuser;
 
 @Data
 @Builder
@@ -13,4 +14,5 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 
   private String token;
+  private Myuser user; 
 }
