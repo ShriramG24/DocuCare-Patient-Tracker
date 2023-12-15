@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-user ={type: "Doctor",
+user ={type: "Patient",
        username:"Allah",
        consultation: [ 1 ],
       medicine: "0",
