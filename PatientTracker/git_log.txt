@@ -1,0 +1,553 @@
+commit 3c7eed716eb1308ca2e68305bd7d78dc28f46f73
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Thu Dec 14 23:27:22 2023 -0500
+
+    modified dashboard
+
+commit 43a11c5c1b7e0e02fadde0105b8227c5efb77c25
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Thu Dec 14 23:24:37 2023 -0500
+
+    Revert "dashboard in progress"
+    
+    This reverts commit 03095a42d4155a0c9d8793780a2e8466e3fd5406.
+
+commit c014705f1a2109f0ac9a07d29607a4181457139e
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Thu Dec 14 23:21:51 2023 -0500
+
+    dashboard in progress
+
+commit 036ea252d4fdf81682a384fd2357bc6d299898e3
+Merge: 12f5bc2 4ab257b
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 23:18:15 2023 -0500
+
+    Merge branch 'frontend' of https://github.com/ShriramG24/patient-tracker-app-520 into frontend
+    Merged userprofile commit and prescription commit
+
+commit 12f5bc25479b2b5129d7ce443047a2d8db057519
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 23:18:09 2023 -0500
+
+    added prescriptions ui page
+
+commit 4ab257b541df3b98b1846f13a7ce89ffea4a43ac
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Thu Dec 14 22:35:35 2023 -0500
+
+    added user profile page
+
+commit 6f955502f943d9cf06afef067d743a5784290f4e
+Merge: 653f7fd 3434d02
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 21:58:57 2023 -0500
+
+    Merge remote-tracking branch 'origin/backend' into frontend
+
+commit 653f7fd785da517c3c9801251cd13f3992a44280
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 21:57:13 2023 -0500
+
+    added book appointment functionality
+
+commit 3434d022db0007be13577192b1626781e743e09b
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:11:51 2023 -0500
+
+    Minor change
+
+commit 740bcc7e76e5dab8c16e9f0e15c9087095d95167
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:11:30 2023 -0500
+
+    Ignore application-local.properties
+
+commit c913625c5502a9817cdb8538a00fa01b1dbb37ab
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:10:40 2023 -0500
+
+    Handle file uploads to S3
+
+commit fbb3ad18163389d53218028e35809377ab7c16d7
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:09:42 2023 -0500
+
+    Add AWS dependencies
+
+commit 46aee799c1a059b044a7c2301b19b8ebddf454b7
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:09:17 2023 -0500
+
+    Define file handling exceptions
+
+commit 956b5fa46540d4f4ac81f1b76ab56851809f6740
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:08:04 2023 -0500
+
+    Move TestUtils.java into utils folder
+
+commit 6b69800322b75fea293c94dadc7760a14fd70e62
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 20:06:50 2023 -0500
+
+    Add clinic address attribute
+
+commit 59f9b98cbe5e65c949480c94937f3a44acdcd0db
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 18:40:47 2023 -0500
+
+    added functionalties for all the appointments page
+
+commit a9883f50733fc92a77f4ecc6c6dcfad876f17c51
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 18:01:24 2023 -0500
+
+    Commit change to DoctorRepository
+
+commit 963ff748cf8899b3f3dd770c058888f663d69cb9
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 18:00:09 2023 -0500
+
+    Add controller for prescriptions and tests
+
+commit 8bb425dd2be33bef385ee39961b0c8ea4d9e41b2
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 17:59:41 2023 -0500
+
+    Introduce prescription model and repo
+
+commit 7053e0d2c07da5cf0e437a78d3633116766dc131
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 17:58:55 2023 -0500
+
+    Update doctor rating and experience fields
+
+commit 90735372ce8b7616dfde6c18c93f237629717b23
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 17:51:55 2023 -0500
+
+    Remove payload entities
+
+commit 1de322536f645a323dc2fdd97846d6ccd8cb282a
+Merge: e971aa0 b3fae57
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 15:50:29 2023 -0500
+
+    Merge remote-tracking branch 'origin/backend' into frontend
+    Megred frontend with backend to get rating and some features
+
+commit e971aa0583e71a5c2890f5a348853fe61884e641
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 15:50:11 2023 -0500
+
+    rectified error in dashboard
+
+commit 2081ad36b45b83b10724cf6dd4e6544657b4f7d4
+Merge: 27720f5 9cdadcb
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 15:48:23 2023 -0500
+
+    Merge branch 'frontend' of https://github.com/ShriramG24/patient-tracker-app-520 into frontend
+
+commit 27720f58f53f3289e543caff53ea16bc541cfc8c
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 15:45:42 2023 -0500
+
+    added backend functionality of doctor by specialization
+
+commit b3fae579953a0d938bc6ff4f24e87e792f7ceb6a
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 15:39:24 2023 -0500
+
+    Add rating and getDoctorsByRating
+
+commit 9cdadcb910222b9a32743cea59c84c0817028079
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Thu Dec 14 15:23:56 2023 -0500
+
+    dashboard initiated
+
+commit d4c268c4eddf37c5192bb00666c6bd4c1a788d18
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 15:19:10 2023 -0500
+
+    Add getSpecialties route
+
+commit 02663711431c2424360f8fc7a1f68b7b0220ea71
+Merge: 30c2e60 beec12a
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 14:27:49 2023 -0500
+
+    Merge remote-tracking branch 'origin/backend' into frontend
+    merged backend into frontend for specialization
+
+commit 30c2e60975e0f0dc2e7150192023027560980a91
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 14:24:16 2023 -0500
+
+    deleted payload and added prescriptions page
+
+commit beec12a0b5b77cf8ab35ca3c4643b7ab56e7fdab
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 13:25:00 2023 -0500
+
+    Many-to-Many for doctors and patients + getDoctorsBySpecialty
+
+commit 0c9fcf0813028dc96eec769789a712847eaefcb9
+Merge: b0c3400 1731298
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 05:42:11 2023 -0500
+
+    Merge branch 'backend' into merge-1.0
+
+commit 17312986baab1ab8e7e320f0625910f0945faaec
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 05:40:55 2023 -0500
+
+    Complete writing integration tests for v1 API
+
+commit 28c3b36f38dfdd77131a0258817528cee2f28b97
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 05:40:00 2023 -0500
+
+    Fix bugs in controllers
+
+commit b0c3400f381e03d246f0f585d5ca1a77cb331176
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 03:19:22 2023 -0500
+
+    Enable CORS for front-end client
+
+commit acb2caf9d117aed45ffbc3fb604d0eddf810e7c1
+Merge: b45b737 39c249e
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 03:09:34 2023 -0500
+
+    Merge branch 'frontend' into merge-1.0
+
+commit 39c249ee86d1b2b87206e6591fab3c7b631da2e7
+Merge: 03c9acc 9569ae7
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 03:02:13 2023 -0500
+
+    Merge branch 'frontend' of github.com:ShriramG24/patient-tracker-app-520 into frontend
+
+commit b45b737ecf83935ff2b28f4eefdf1e4470ac5fa3
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 03:00:31 2023 -0500
+
+    Add get methods to FileRepository
+
+commit a493c1c3d29cf8fd676a90052b551a21f34113fd
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 02:59:48 2023 -0500
+
+    Update models
+
+commit 773e9bb5639e77ece8a56a483ca1c289512b0e74
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 02:59:05 2023 -0500
+
+    Remove MedicalRecord entity
+
+commit 50ea5428d6588178f10593eb0a95214681cc0842
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Dec 14 02:57:59 2023 -0500
+
+    Set all controllers to use models
+
+commit 9569ae7b41f4777dbb50854221827134cd510a0d
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 02:52:49 2023 -0500
+
+    first backend api call added
+
+commit 1f413bf9569a036588cfb8ea00769e01a9bae370
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Thu Dec 14 02:23:02 2023 -0500
+
+    Added find doctor and book appointment pages
+
+commit 400eb265a426d0eb4e1efed8362900f839754118
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Dec 13 22:03:36 2023 -0500
+
+    Update controller with new model fields
+
+commit 57066b45dd230501c6ad38d132c89eff21e002fb
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Dec 13 22:03:05 2023 -0500
+
+    Add missing fields to doctor and patient
+
+commit 03c9acc53d8bec6e4c5b9958e7e95675d8ad5664
+Merge: f61607e 2f5ceeb
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Dec 13 20:16:34 2023 -0500
+
+    Merge branch 'frontend' of github.com:ShriramG24/patient-tracker-app-520 into frontend
+
+commit f61607e33d2e9594c4ddd4bda413dd02d96bfa14
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Dec 13 20:09:28 2023 -0500
+
+    Remove DOB and add new fields to doctor
+
+commit 2f5ceebbf4b994ff0deaefab51ac7aa8e6b02b1c
+Merge: 36d7cd5 02239db
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Wed Dec 13 17:27:46 2023 -0500
+
+    gerge branch 'frontend' of https://github.com/ShriramG24/patient-tracker-app-520 into frontend
+    merged dashboard and specialization page
+
+commit 36d7cd5db27a10ba531f99833bfb816ca1a385a2
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Wed Dec 13 17:27:26 2023 -0500
+
+    added doctor specialization page
+
+commit 02239db907a43f691f64dda76818d354d04e4579
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Wed Dec 13 14:14:30 2023 -0500
+
+    dashboard in progress
+
+commit 8d7df849684165bd95f28f9bac6898e3844aaaeb
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Sat Dec 9 20:25:31 2023 -0500
+
+    added login functionality in UI
+
+commit 7cd0fc17e08cdef0648e91d4662e036401eccb59
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Sat Dec 9 20:04:46 2023 -0500
+
+    tweaked login ui and added dashboard
+
+commit 68ce90970be787a95b69ee4c550664a64a6495dd
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Sat Dec 9 19:05:53 2023 -0500
+
+    built angular login/signup page
+
+commit 9923f1de1bc802d9f8bf052a9099609c17a07c8a
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Sat Dec 9 16:21:49 2023 -0500
+
+    shifted to angular
+
+commit c05d9ab2722c83b7c4ff5bd40a83022309ea4fd1
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Sat Dec 9 02:15:34 2023 -0500
+
+    setting up login- yet not complete
+
+commit f56e491d8d7d13cf53c1e18d8b1778b383d4489e
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Sat Dec 9 01:30:17 2023 -0500
+
+    updated index.html
+
+commit 746a883e1544403cb9d702b1e28d3cfc8a0073eb
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 18:33:43 2023 -0500
+
+    Update controller to use appropriate response schemas
+
+commit f65935994285557d20076b8e6528b98df59bd5ea
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 18:33:15 2023 -0500
+
+    Define response schemas for all models
+
+commit 3affa63bcb23ec69d92c82a087824e47417bdce4
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 18:33:03 2023 -0500
+
+    Force phone to not be null in request
+
+commit 70de80a602de8b212741313fcb36feaf60122c28
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 18:25:50 2023 -0500
+
+    Add getters for all fields
+
+commit 31a130e857b89a5bd0c0b5651106f6f18c9c1f4b
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 18:25:06 2023 -0500
+
+    Make phone number non-nullable
+
+commit 4048a5be4ded0ca7b3ab174bafdfe4b1dcffe96b
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 17:30:17 2023 -0500
+
+    Create skeleton for File and MedicalRecord controllers
+
+commit c7a9a7e65511929e39ff953f54c7c2a269a4e94d
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 17:29:47 2023 -0500
+
+    Minor changes
+
+commit 8412677e46d0588e131000f85a318c85519e7e88
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 16:49:59 2023 -0500
+
+    Change accessor type from fluent to chain and add JSON date formatting
+
+commit 2ca695e4b871996d2fa79a0f0b1dd407948bb1dc
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 15:38:33 2023 -0500
+
+    Define separate schemas for request payloads
+
+commit 6ceda1d1e934797476591777b1b26f1daabff4d8
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 15:37:46 2023 -0500
+
+    Add lombok for getter annotations
+
+commit b33c7415be4cb89239453d67ebac6a6b6ea2374b
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 15:37:01 2023 -0500
+
+    Define ResourceNotFound exception
+
+commit 51489475bcc1359b2655047008f38702dcc89af3
+Merge: 2caf025 bbfceb4
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 13:33:32 2023 -0500
+
+    Merge branch 'backend' of github.com:ShriramG24/patient-tracker-app-520 into backend
+
+commit 2caf025399a71b895ff81a91c90e1cb2fe3549a3
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 13:33:23 2023 -0500
+
+    Add repository interfaces for File and MedicalRecord
+
+commit 3cacc6603f33b153283845170b513ac16ec060f7
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 30 13:32:56 2023 -0500
+
+    Remove unused dependencies
+
+commit bbfceb48fdb6dad0c84bbd6012f7412e729e40ed
+Author: ShriramG24 <86893721+ShriramG24@users.noreply.github.com>
+Date:   Thu Nov 30 10:50:26 2023 -0500
+
+    Update Title
+
+commit a5dd79f0c05cc507e50be82b3a5615f8ce24da9d
+Author: ShriramG24 <86893721+ShriramG24@users.noreply.github.com>
+Date:   Thu Nov 30 10:19:10 2023 -0500
+
+    Add prerequisites section
+
+commit a44370ab1c9edbd51fd9faad0eaf4d819110f83b
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 29 21:24:59 2023 -0500
+
+    Define controllers for patient, doctor, and appointments
+
+commit a88a5d4e601592667e173b2e1c1cd5123ac5ea72
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 29 21:24:48 2023 -0500
+
+    Define repositories for patient, doctor, and appointments
+
+commit 7134299b36eaa6168e0222f55d680b885933c261
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 29 18:43:38 2023 -0500
+
+    Update models to match new schema
+
+commit b81879a1e9b35ade617dac0c1f4c345a869d4f78
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 29 18:43:12 2023 -0500
+
+    Add dependencies and set db properties
+
+commit c7f39716cbc15a54fa5ec0bce9df3223219d78c7
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Mon Nov 20 21:12:35 2023 -0500
+
+    Update hibernate config
+
+commit 55c2eb39125d3660ba850d93ce37f6016786bcab
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Mon Nov 20 21:12:06 2023 -0500
+
+    Update table names to be plural
+
+commit 58885fc1326cf9ec3367a6762c493bf2717ccf58
+Merge: 07f0e38 dd31fff
+Author: ShriramG24 <86893721+ShriramG24@users.noreply.github.com>
+Date:   Fri Nov 3 00:11:32 2023 -0400
+
+    Merge pull request #1 from ShriramG24/setup-model
+    
+    Add entity definitions with hibernate
+
+commit dd31fffd9f37462ba3d69ed0e638915bc409db94
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Fri Nov 3 00:09:24 2023 -0400
+
+    Add entity definitions with hibernate
+
+commit e578d377d9bc1989375dfdf22b223b964f2a935d
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Thu Nov 2 23:55:56 2023 -0400
+
+    Move React app to root directory
+
+commit 5c17754892e74268e51ff587f21f9d80f5244b26
+Author: SchrOdinger11 <sudhanshu.kulkarni2105@gmail.com>
+Date:   Thu Nov 2 23:18:32 2023 -0400
+
+    created react app
+
+commit 3e8c0795c4f919f97bbcd3cea25ca3ed00c3c3ef
+Author: ShriramG24 <86893721+ShriramG24@users.noreply.github.com>
+Date:   Thu Nov 2 20:15:23 2023 -0400
+
+    Update README.md
+
+commit 07f0e38e7b6323204c882885c345619c9b50763b
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 1 22:30:07 2023 -0400
+
+    Add entity class skeletons
+
+commit 8d015fd68e6c5bfc603a18243e1c18f3464a651a
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 1 22:27:00 2023 -0400
+
+    Add instructions to run the server
+
+commit 81309fd8c9fab29679acb1e348038805ad8ee91a
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 1 22:20:07 2023 -0400
+
+    Add database init script
+
+commit a9b2ae7f804009588780440dfe2cb78e9ddab9e2
+Author: ShriramG24 <shrirambhavin@gmail.com>
+Date:   Wed Nov 1 22:05:00 2023 -0400
+
+    Initialize project directory setup
+
+commit 481fbe9c0945c3df1196dc493593e28fdbbc5214
+Author: dhruvin5 <dhruvingandhi5@gmail.com>
+Date:   Wed Oct 18 21:54:59 2023 -0400
+
+    defined functional requirements
+
+commit 432241bc627206f43e78d56e703136b1e348f52b
+Author: ShriramG24 <86893721+ShriramG24@users.noreply.github.com>
+Date:   Tue Oct 3 21:59:20 2023 -0400
+
+    Initial commit

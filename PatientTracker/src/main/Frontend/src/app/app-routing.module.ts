@@ -6,6 +6,7 @@ import { AppointmentsComponent } from './components/appointments/appointments.co
 import { FindDoctorComponent } from './components/find-doctor/find-doctor.component';
 import { BookappointmentComponent } from './components/bookappointment/bookappointment.component';
 import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
+import { ProfileComponent } from './components/profile/profile.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path:'prescriptions',
     component:PrescriptionsComponent,
+  },
+  {
+    path:'profile',
+    component: ProfileComponent,
   }
 
 ];
