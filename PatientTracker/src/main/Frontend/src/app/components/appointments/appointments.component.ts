@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointmentsService } from 'app/controller/appointments.service';
 @Component({
   selector: 'app-appointments',
@@ -6,7 +7,7 @@ import { AppointmentsService } from 'app/controller/appointments.service';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent {
-  constructor(private appointmentService: AppointmentsService) { 
+  constructor(private router: Router,private appointmentService: AppointmentsService) { 
 
   }
   specializations:any;
@@ -20,6 +21,10 @@ export class AppointmentsComponent {
     }, (error) => {
       console.error('Error fetching doctor data', error);
     });
+  }
+  navigateToSpecificUrl(id:any) {
+    const specificUrl = `/find-doctor/${id}`; // Replace this with your actual URL
+    this.router.navigateByUrl(specificUrl);
   }
   cards = [
     { title: 'Card 1', text: 'Some text for Card 1.' },
