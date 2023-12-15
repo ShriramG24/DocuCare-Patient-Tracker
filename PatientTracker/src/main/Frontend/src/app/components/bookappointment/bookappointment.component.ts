@@ -5,6 +5,7 @@ import { Patient } from 'app/models/patient.model';
 import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.service';
 import { Doctor } from 'app/models/doctor.model';
 import { Appointment } from 'app/models/appointment.model';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-bookappointment',
   templateUrl: './bookappointment.component.html',
@@ -17,7 +18,7 @@ export class BookappointmentComponent {
   docid:any;
   patient = new Patient();
   doctor = new Doctor();
-  //appointment:Appointment;
+
   appointment = new Appointment();
   
   ngOnInit(): void {
@@ -38,8 +39,14 @@ export class BookappointmentComponent {
     }, (error) => {
       console.error('Error fetching patient data', error);
     });
+   
     
 }
+BookAppointmentForm = new FormGroup({
+  
+
+
+});
 bookAppointment()
 {
   
@@ -47,7 +54,8 @@ bookAppointment()
   this.appointment.patient = this.patient;
   this.appointment.status = "Scheduled";
   this.appointment.purpose = "SICK";
-  this.appointment.time = new Date(Date.now());
+  this.appointment.time = new Date().toISOString().slice(0, 19).replace("T", " ");
+  this.appointmentService.bookAppointment(this.appointment).subscribe();
     
 }
   

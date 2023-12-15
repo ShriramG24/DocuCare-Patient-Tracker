@@ -4,7 +4,7 @@ export class Appointment {
     id!: number;
     doctor!: Doctor; // Assuming you have a Doctor model
     patient!: Patient; // Assuming you have a Patient model
-    time!: Date;
+    time!: String;
     status!: string;
     purpose!: string;
     notes?: string; // Optional property
