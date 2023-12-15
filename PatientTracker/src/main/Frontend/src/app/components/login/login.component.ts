@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { SignupLoginService } from 'app/controller/signup-login.service';
 @Component({
   selector: 'app-login',
@@ -7,7 +8,7 @@ import { SignupLoginService } from 'app/controller/signup-login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private signupLoginService: SignupLoginService) { 
+  constructor(private route:Router,private signupLoginService: SignupLoginService) { 
 
   }
   ngOnInit(): void {
@@ -50,9 +51,16 @@ export class LoginComponent {
   onSignup() {
     // TODO: Use EventEmitter with form value
     console.log(this.SignUpForm.value);
+    this.go();
   }
+  go()
+  {
+    this.route.navigateByUrl('/dashboard');
+  }
+
   onLogin() {
     // TODO: Use EventEmitter with form value
     console.log(this.LoginForm.value);
+    this.go();
   }
 }

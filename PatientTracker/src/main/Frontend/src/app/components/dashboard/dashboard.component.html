@@ -141,19 +141,19 @@
             <ng-container *ngIf="user.type === 'Patient';else noPatient">
               <!-- Patient-specific menu items -->
               <li>
-                <a routerLink="/bookappointment" routerLinkActive="active"> Book an Appointment </a>
+                <a routerLink="/appointments" routerLinkActive="active"> Book an Appointment </a>
               </li>
               <li>
-                <a href="#"> Book Lab tests </a>
+                <a href="https://www.ultalabtests.com/"> Book Lab tests </a>
               </li>
               <li>
-                <a routerLink="/medicalstores" routerLinkActive="active"> Buy Medicines </a>
+                <a routerLink="https://pharmacy.amazon.com/" routerLinkActive="active"> Buy Medicines </a>
               </li>
               <li>
-                <a href="/tpz"> My Prescriptions </a>
+                <a href="/dashboard"> My Prescriptions </a>
               </li>
               <li>
-                <a href="#"> About Us </a>
+                <a href="/dashboard"> About Us </a>
               </li>
               <li id="logout">
                 <a routerLink="/logout"> Logout </a>
@@ -278,7 +278,7 @@
         <div class="row">
           
         
-          <div class="col-lg-7">
+          <div class="col-lg-7 mt-5">
             <h3>Latest Medical News</h3>
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
@@ -375,52 +375,31 @@
           </b>
         </div>
         <div class="">
-          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+          <div class="card mb-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
             <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Done </h5>
             <div class="card-title px-2">
               <div class="alert alert-primary" role="alert">
-                <div *ngFor="let medicine of user.medicine">
-                  <!-- currentUser?.medicines-->
-                  <div class="container text-center" style="border-bottom:1px solid black;">
-                    <!-- {{ user.medicine }} -->
-                    <br>
-                    <!-- currentUser.medicines[i] -->
-                  </div>
-                </div>
+                <h5> You have helped 15 patients so far!</h5>
               </div>
             </div>
           </div>
         </div>
-        <div class="">
-          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
-            <h5 class="card-top text-center" style="color:black;height: 25px;"> Test to be taken </h5>
+        <div class="mb-5">
+          <div class="card mb-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Missed </h5>
             <div class="card-title px-2">
               <div class="alert alert-primary" role="alert">
-                <div *ngFor="let medicine of user.tests">
-                  <!-- currentUser?.medicines-->
-                  <div class="container text-center" style="border-bottom:1px solid black;">
-                    <!-- {{ medicine }} -->
-                    <br>
-                    <!-- currentUser.medicines[i] -->
-                  </div>
-                </div>
+                <h5>You have missed 6 appointments until now!</h5>
               </div>
             </div>
           </div>
         </div>
-        <div class="">
-          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
-            <h5 class="card-top text-center" style="color:black;height: 25px;"> Instructions </h5>
+        <div class="mt-5">
+          <div class="card mt-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Clinic Address </h5>
             <div class="card-title px-2">
               <div class="alert alert-primary" role="alert">
-                <div *ngFor="let medicine of user.instructions">
-                  <!-- currentUser?.medicines-->
-                  <div class="container text-center" style="border-bottom:1px solid black;">
-                    <!-- {{ medicine }} -->
-                    <br>
-                    <!-- currentUser.medicines[i] -->
-                  </div>
-                </div>
+                <h5>248 Amherst Road, Sunderland Amherst</h5>
               </div>
             </div>
           </div>

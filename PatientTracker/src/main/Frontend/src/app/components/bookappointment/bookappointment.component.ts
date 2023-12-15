@@ -69,9 +69,13 @@ submitForm()
   const dateTimeString = `${date} ${time}`;
   this.appointment.time = new Date(dateTimeString).toISOString().slice(0, 19).replace("T", " ");
   this.appointmentService.bookAppointment(this.appointment).subscribe();
-  this.router.navigateByUrl('/dashboard');
+  this.go();
       // Combine date and time to create a DateTime object
       
+}
+go()
+{
+  this.router.navigateByUrl('/dashboard');
 }
 bookAppointment()
 {
