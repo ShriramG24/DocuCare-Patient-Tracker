@@ -72,7 +72,7 @@ public class PatientController {
         return ResponseEntity.ok(patientRepository.save(patient));
 	}
 
-    // Update Patient Profile
+    // Update Patient P>rofile
     @PutMapping("/patients/{id}")
 	public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientRequest){
 		Patient patient = patientRepository.findById(id)
