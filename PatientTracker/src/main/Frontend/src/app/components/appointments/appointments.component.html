@@ -21,56 +21,146 @@
   </head>
   <style>
    
-
-  
-    .sidebar p {
-      font-family: "Poppins", sans-serif;
-      font-size: 1.1em;
-      font-weight: 300;
-      line-height: 1.7em;
-      background-color: #343a40;
+   body {
+      overflow-x: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-family: 'Raleway', sans-serif;
+      background-color: #f8f9fa;
     }
+
+    .row {
+      display: flex;
+      margin: 0;
+    }
+
     #sidebar {
-      min-width: 270px;
-      max-width: 280px;
+      min-width: 250px;
+      max-width: 250px;
       min-height: 100vh;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333; /* Choose your preferred color */
+}
+    .navbar {
+      background-color: #28a745;
+      padding: 10px;
+      text-align: center;
     }
 
-    
-
-    a,
-    a:hover,
-    a:focus {
-      color: inherit;
-      text-decoration: none;
-      transition: all 0.3s;
+    .navbar a {
+      color: white;
     }
 
-    #sidebar {
-      /* don't forget to add all the previously mentioned styles here too */
-     
-      color: black;
-      
-    }
-
-    #sidebar .sidebar-header {
-     
+    .sidebar-header {
       text-align: start;
+      padding: 15px;
     }
-    #sidebar ul li a {
+
+    .list-unstyled {
+      padding-left: 15px;
+    }
+
+    .list-unstyled li a {
       padding: 10px;
       font-size: 1.1em;
       display: block;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
     }
-    #sidebar ul li a:hover {
-      background: black;
+    /* CSS for the scrolling news feed */
+.news-feed {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 100vh; /* Set a maximum height for the scrollable area */
+  border: 1px solid #ccc; /* Optional: Add border for clarity */
+}
+.article-image{
+    height: 40px;
+    width:  40px
+}
+
+.news-feed li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee; /* Optional: Add separation between articles */
+}
+
+.news-feed a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 5px;
+}
+
+.news-feed a:hover {
+  background-color: #f4f4f4; /* Optional: Add hover effect */
+}
+
+    .list-unstyled li a:hover {
+      background: #28a745;
       color: #fff;
     }
 
-    #sidebar ul li.active > a,
-    a[aria-expanded="true"] {
+    .col-lg-7 {
+      padding: 20px;
+    }
+
+    .profile-section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile-heading {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.profile-heading h1 {
+  margin-right: 10px; /* Adjust space between icon and text */
+}
+
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #28a745;
       color: #fff;
-      background: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .hidden {
+      display: none;
     }
     #consult {
       height: 400px;
@@ -88,49 +178,42 @@
     <div class="row">
       <div class="wrapper px-4">
         <!-- Sidebar -->
-        <nav id="sidebar"class="bg-light">
+        
+        <nav id="sidebar">
           <div class="sidebar-header text-center">
             <h6 class="display-4">
-              <b class="mt-8"
-                ><span style="color: black">Docu</span
-                ><span style="color: green">Care</span></b
-              >
+              <b>
+                <span style="color: black">Doct</span>
+                <span style="color: #28a745">Aid</span>
+              </b>
             </h6>
           </div>
-
           <br />
-          <ul class="list-unstyled components mt-2 ml-3">
-            <li class="mb-2">
-              <a href="/home" aria-expanded="false">Home</a>
+          
+          <ul class="list-unstyled components" >
+            <li class="active">
+              <a routerLink="/home" routerLinkActive="active" >Home</a>
             </li>
-            <!-- <%if(currentUser.type=="patient"){
-              %>
-              <li class="active">
-              <a href="/bookappointment">Book An Appointment</a>
-            </li>
-              <%
-            }%> -->
-            <li class="mb-2">
-              <a href="#">Book Lab tests</a>
-            </li>
-            <li class="mb-2">
-              <a href="/medicalstores" aria-expanded="false">Buy Medicines</a>
-            </li>
-            <!-- <%if(currentUser.type=="patient"){
-              %>
-              <li class="mb-2">
-              <a href="/tpz">My Prescriptions</a>
-            </li>
-              <%
-            }%> -->
-            <li class="mb-2">
-              <a href="#">About Us</a>
-            </li>
-            <li class="mb-2" id="logout">
-              <a href="/logout">Logout</a>
-            </li>
+           
+           
+            <div >
+              <li>
+                <a href="#">Book Lab tests</a>
+              </li>
+              <li>
+                <a routerLink="/medicalstores" routerLinkActive="active">Buy Medicines</a>
+              </li>
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a routerLink="/logout">Logout</a>
+              </li>
+            </div>
           </ul>
         </nav>
+
+
       </div>
     
       
