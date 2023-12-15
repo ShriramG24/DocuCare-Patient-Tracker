@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +12,7 @@ import { AppointmentsComponent } from './components/appointments/appointments.co
 import { FindDoctorComponent } from './components/find-doctor/find-doctor.component';
 import { BookappointmentComponent } from './components/bookappointment/bookappointment.component';
 import { PrescriptionsComponent } from './components/prescriptions/prescriptions.component';
+import { ProfileComponent } from './components/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,8 +22,10 @@ import { PrescriptionsComponent } from './components/prescriptions/prescriptions
     FindDoctorComponent,
     BookappointmentComponent,
     PrescriptionsComponent,
+    ProfileComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

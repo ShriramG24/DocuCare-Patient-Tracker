@@ -167,12 +167,14 @@
         </h6>
       </div>
       <br />
-      <ul class="list-unstyled components">
+      
+      <ul class="list-unstyled components" *ngIf="user?.type === 'Patient'">
         <li class="active">
-          <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+          <a routerLink="/home" routerLinkActive="active" >Home</a>
         </li>
-        <ng-container *ngIf="user.type === 'Patient';else noPatient">
-          <li>
+       
+        <div *ngIf="user?.type === 'Patient'">
+          <li *ngIf="user?.type === 'Patient'">
             <a routerLink="/bookappointment" routerLinkActive="active">Book an Appointment</a>
           </li>
           <li>
@@ -190,8 +192,8 @@
           <li id="logout">
             <a routerLink="/logout">Logout</a>
           </li>
-        </ng-container>
-        <ng-template #noPatient>
+        </div>
+        <div *ngIf="user.type === 'Doctor'">
           <li>
             <a href="#">Book Lab tests</a>
           </li>
@@ -204,14 +206,14 @@
           <li>
             <a routerLink="/logout">Logout</a>
           </li>
-        </ng-template>
+        </div>
       </ul>
     </nav>
     <div class="col-lg-7">
       <div class="profile-section">
         
         <div *ngIf="user.type === 'Patient'" class="profile-heading">
-            
+          
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <!-- SVG icon for doctor -->
                 <path d="M21.654 18.849l-4.872-2.435c-.435-.218-.799-.199-1.01.026l-4.4 4.15V15h-2v7.1l-4.4-4.15c-.211-.225-.575-.245-1.01-.026l-4.872 2.435-.652-1.304 4.798-2.399v-2.502l-3.034 1.517-.654-1.305 3.688-1.844V7.596l-3.688-1.844.654-1.305 3.034 1.517v-2.503l4.798 2.399.652-1.304 4.872 2.435c.435.217.799.199 1.01-.026l4.4-4.15V9h2V1.9l4.4 4.15c.211.225.575.245 1.01.026l4.872-2.435.652 1.304-4.798 2.399v2.503l3.034-1.517.654 1.305-3.688 1.844v4.201l3.688 1.844-.654 1.305-3.034-1.517v2.503l-4.798-2.399z"/>
@@ -245,7 +247,7 @@
 
           <div>
             <label for="gender">Gender:</label>
-            <select id="gender" [(ngModel)]="user.gender">
+            <select id="gender" >
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -256,12 +258,12 @@
             <div *ngIf="user.type === 'Patient'">
               <div>
                 <label for="medications">Medications:</label>
-                <textarea id="medications" [(ngModel)]="user.medications"></textarea>
+                <textarea id="medications" ></textarea>
               </div>
 
               <div>
                 <label for="allergies">Allergies:</label>
-                <textarea id="allergies" [(ngModel)]="user.allergies"></textarea>
+                <textarea id="allergies" ></textarea>
               </div>
 
               <div>
@@ -274,17 +276,17 @@
           <!-- <div [ngClass]="{'hidden':user.type==='Patient'}"> -->
             <div *ngIf="user.type === 'Doctor'">
               <label for="clinic address">Clinic Address</label>
-              <textarea id="clinicAdress" [(ngModel)]="user.address"></textarea>
+              <textarea id="clinicAdress" ></textarea>
             
 
             <div>
               <label for="Specialization">Speciality:</label>
-              <input id="Specialization" [(ngModel)]="user.Specialization" disabled>
+              <input id="Specialization"  disabled>
             </div>
 
             <div>
               <label for="Degree">Qualification</label>
-              <input id="qualification" [(ngModel)]="user.qualification" disabled>
+              <input id="qualification"  disabled>
             </div>
         </div>
 

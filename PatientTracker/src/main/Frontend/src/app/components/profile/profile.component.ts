@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import axios from 'axios';
+
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-profile',
@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProfileComponent {
   user = {
-    type: 'Doctor', // Or 'Doctor' based on your user type
+    type: 'Patient', // Or 'Doctor' based on your user type
     username: 'Allah',
     firstName:'hello',
     lastName:'check',
@@ -24,7 +24,9 @@ export class ProfileComponent {
   };
   medicalNews: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    this.user.type = 'Patient';
+  }
   onSubmit() {
     // Handle form submission here
     console.log('Form submitted:', this.user);
