@@ -15,10 +15,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Patient extends User {
 
-    @Column(name="address", nullable=false, unique=true)
-    @Getter @Setter
-    private String address;
-
     @Column(name="allergies", nullable=true)
     @Getter @Setter
     private String allergies;
