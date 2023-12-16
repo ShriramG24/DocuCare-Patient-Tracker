@@ -4,6 +4,7 @@ import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.ser
 import { Appointment } from 'app/models/appointment.model';
 import { Patient } from 'app/models/patient.model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,10 +15,12 @@ export class DashboardComponent {
   appointments : Appointment[]=[];
   medicalNews: any[] = [];
   activeSlideIndex = 0;
-  constructor( private http: HttpClient, private getPatientDoctor: GetPatientDoctorsService , private appointmentService: AppointmentsService) {
+  constructor( private route : Router, private http: HttpClient, private getPatientDoctor: GetPatientDoctorsService , private appointmentService: AppointmentsService) {
     
   }
-  user ={type: "Doctor",
+  user ={
+    id:1,
+    type: "Doctor",
        firstName:"Allah",
        lastName:"Allah",
        consultation: [ 1 ],
@@ -90,6 +93,9 @@ show_vc: [1]}
       this.nextSlide();
     }, 30000); 
     
+}
+go(id : any){
+  this.route.navigateByUrl(`prescriptions/${id}`)
 }
 nextSlide() {
   this.activeSlideIndex = (this.activeSlideIndex + 1) % this.medicalNews.length;

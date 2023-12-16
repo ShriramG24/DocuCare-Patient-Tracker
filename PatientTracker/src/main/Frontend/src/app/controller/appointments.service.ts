@@ -32,9 +32,13 @@ export class AppointmentsService {
    // return this.http.post<Appointment>(`${this.apiUrl}/api/appointments`, data,{responseType:'text' as 'json'}).pipe();
     return this.http.post(`${this.apiUrl}/api/appointments`,data, this.httpOptions);
   }
+  prescribe(data: any): Observable<any> {
+    // return this.http.post<Appointment>(`${this.apiUrl}/api/appointments`, data,{responseType:'text' as 'json'}).pipe();
+     return this.http.post(`${this.apiUrl}/api/prescriptionss`,data, this.httpOptions);
+   }
   getPatientsAppointments(id : any): Observable<any> {
     
-    return this.http.get(`${this.apiUrl}/api/patients/${id}/appointments`);
+    return this.http.get(`${this.apiUrl}/prescriptions`);
   }
   getDoctorAppointments(id : any): Observable<any> {
     

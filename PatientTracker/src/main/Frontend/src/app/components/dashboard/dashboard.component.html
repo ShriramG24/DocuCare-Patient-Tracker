@@ -245,7 +245,7 @@
                     <ng-container>
                       <ng-container *ngIf="user.type === 'Doctor'; else patientConsult">
                         <a>
-                          <button type="button" class="btn btn-outline-danger"> Prescribe </button>
+                          <button type="button" class="btn btn-outline-danger" (click)="go(user.id)"> Prescribe </button>
                         </a>
                       </ng-container>
                       <ng-template #patientConsult>

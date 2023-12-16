@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PatientTracker.model.Prescription;
 import com.project.PatientTracker.repository.PrescriptionRepository;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/")
 public class PrescriptionController {

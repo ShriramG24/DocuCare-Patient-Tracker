@@ -3,7 +3,9 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentsService } from 'app/controller/appointments.service';
 import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.service';
+import { Doctor } from 'app/models/doctor.model';
 import { Patient } from 'app/models/patient.model';
+import { Prescription } from 'app/models/prescriptions.model';
 
 @Component({
   selector: 'app-prescriptions',
@@ -13,6 +15,8 @@ import { Patient } from 'app/models/patient.model';
 export class PrescriptionsComponent {
   combinedForms!: FormGroup;
   patient = new Patient();
+  doctor = new Doctor();
+  prescription = new Prescription();
   date = new Date().toLocaleDateString();
   constructor(private fb: FormBuilder,private route: ActivatedRoute, private appointmentService: AppointmentsService, private getPatientDoctor: GetPatientDoctorsService ) {
     this.initializeForm();
@@ -20,6 +24,13 @@ export class PrescriptionsComponent {
   ngOnInit(): void {
     // Example: Fetch data from the backend
     this.getPatientDoctor.getPatient(1).subscribe((data) => {
+      console.log(data);
+      this.patient = data;
+    }, (error) => {
+      console.error('Error fetching patient data', error);
+    });
+
+    this.getPatientDoctor.getDoctors(1).subscribe((data) => {
       console.log(data);
       this.patient = data;
     }, (error) => {
@@ -97,8 +108,14 @@ export class PrescriptionsComponent {
     return medications || reports || instructions ? null : { noEntries: true };
   }
   prescribe() {
-    // Handle the form submission logic here
+    this.prescription.doctor = this.doctor;
+    this.prescription.patient = this.patient;
+    this.prescription.medicines = this.combinedForms.get('medications')?.value[0];
+    this.prescription.instructions = this.combinedForms.get('instructions')?.value[0];
+    this.prescription.reports = this.combinedForms.get('reports')?.value[0];
+    this.appointmentService.prescribe(this.prescription).subscribe();
+    
     console.log('Prescription submitted:', this.combinedForms.value);
-    // You can send the form data to your backend API or perform any other necessary actions
+    
   }
 }
