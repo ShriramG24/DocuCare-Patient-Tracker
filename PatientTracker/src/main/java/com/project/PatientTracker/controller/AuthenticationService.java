@@ -50,7 +50,7 @@ public class AuthenticationService {
     var savedUser = repository.save(user);
 
     if (type == "Doctor") {
-    
+
 
       Doctor doctor = (Doctor) new Doctor().setSpecialty(request.getSpecialty())
                   .setDegree(request.getDegree())
@@ -65,30 +65,35 @@ public class AuthenticationService {
                   .setPhone(request.getPhone());
 
       var saveddoctorUser = doctorRepository.save(doctor);
-      var jwtToken = jwtService.generateToken(saveddoctorUser);
+      var jwtToken = jwtService.generateToken(user);
       return AuthenticationResponse.builder().token(jwtToken).doctor(saveddoctorUser).build();
     }else{
 
-      Patient patient = (Patient) new Patient().setAddress(request.getAddress())
-      .setDiagnoses(request.getDiagnoses())
-      .setMedications(request.getMedications())
-      .setAllergies(request.getAllergies())
+      // Patient patient = (Patient) new Patient().setAddress(request.getAddress())
+      // .setDiagnoses(request.getDiagnoses())
+      // .setMedications(request.getMedications())
+      // .setAllergies(request.getAllergies())
+      // .setFirstName(request.getFirstname())
+      // .setLastName(request.getLastname())
+      // .setAge(request.getAge())
+      // .setGender(request.getGender())
+      // .setEmail(request.getEmail())
+      // .setPhone(request.getPhone());
+
+
+      Patient patient = (Patient) new Patient()
       .setFirstName(request.getFirstname())
       .setLastName(request.getLastname())
-    
       .setGender(request.getGender())
       .setEmail(request.getEmail())
       .setPhone(request.getPhone());
 
       var savedpatientUser = patientRepository.save(patient);
 
-      var jwtToken = jwtService.generateToken(savedpatientUser);
+      var jwtToken = jwtService.generateToken(user);
       return AuthenticationResponse.builder().token(jwtToken).patient(savedpatientUser).build();
 
     }
-
-
-    
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
