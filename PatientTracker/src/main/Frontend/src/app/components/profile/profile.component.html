@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      overflow-x: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-family: 'Raleway', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .row {
+      display: flex;
+      margin: 0;
+    }
+
+    #sidebar {
+      min-width: 250px;
+      max-width: 250px;
+      min-height: 100vh;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333; /* Choose your preferred color */
+}
+    .navbar {
+      background-color: #28a745;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: white;
+    }
+
+    .sidebar-header {
+      text-align: start;
+      padding: 15px;
+    }
+
+    .list-unstyled {
+      padding-left: 15px;
+    }
+
+    .list-unstyled li a {
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    /* CSS for the scrolling news feed */
+.news-feed {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 100vh; /* Set a maximum height for the scrollable area */
+  border: 1px solid #ccc; /* Optional: Add border for clarity */
+}
+.article-image{
+    height: 40px;
+    width:  40px
+}
+
+.news-feed li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee; /* Optional: Add separation between articles */
+}
+
+.news-feed a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 5px;
+}
+
+.news-feed a:hover {
+  background-color: #f4f4f4; /* Optional: Add hover effect */
+}
+
+    .list-unstyled li a:hover {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .col-lg-7 {
+      padding: 20px;
+    }
+
+    .profile-section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile-heading {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.profile-heading h1 {
+  margin-right: 10px; /* Adjust space between icon and text */
+}
+
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <nav id="sidebar">
+      <div class="sidebar-header text-center">
+        <h6 class="display-4">
+          <b>
+            <span style="color: black">Doct</span>
+            <span style="color: #28a745">Aid</span>
+          </b>
+        </h6>
+      </div>
+      <br />
+      
+      <ul class="list-unstyled components" *ngIf="user?.type === 'Patient'">
+        <li class="active">
+          <a routerLink="/home" routerLinkActive="active" >Home</a>
+        </li>
+       
+        <div *ngIf="user?.type === 'Patient'">
+          <li *ngIf="user?.type === 'Patient'">
+            <a routerLink="/bookappointment" routerLinkActive="active">Book an Appointment</a>
+          </li>
+          <li>
+            <a href="#">Book Lab tests</a>
+          </li>
+          <li>
+            <a routerLink="/medicalstores" routerLinkActive="active">Buy Medicines</a>
+          </li>
+          <li>
+            <a routerLink="/tpz">My Prescriptions</a>
+          </li>
+          <li>
+            <a href="#">About Us</a>
+          </li>
+          <li id="logout">
+            <a routerLink="/logout">Logout</a>
+          </li>
+          <li id="profile">
+            <a routerLink="/profile">Profile</a>
+          </li>
+        </div>
+        <div *ngIf="user.type === 'Doctor'">
+          <li>
+            <a href="#">Book Lab tests</a>
+          </li>
+          <li>
+            <a routerLink="/medicalstores" routerLinkActive="active">Buy Medicines</a>
+          </li>
+          <li>
+            <a href="#">About Us</a>
+          </li>
+          <li>
+            <a routerLink="/logout">Logout</a>
+          </li>
+          <li id="profile">
+            <a routerLink="/profile">Profile</a>
+          </li>
+        </div>
+      </ul>
+    </nav>
+    <div class="col-lg-7">
+      <div class="profile-section">
+        
+        <div *ngIf="user.type === 'Patient'" class="profile-heading">
+          
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <!-- SVG icon for doctor -->
+                <path d="M21.654 18.849l-4.872-2.435c-.435-.218-.799-.199-1.01.026l-4.4 4.15V15h-2v7.1l-4.4-4.15c-.211-.225-.575-.245-1.01-.026l-4.872 2.435-.652-1.304 4.798-2.399v-2.502l-3.034 1.517-.654-1.305 3.688-1.844V7.596l-3.688-1.844.654-1.305 3.034 1.517v-2.503l4.798 2.399.652-1.304 4.872 2.435c.435.217.799.199 1.01-.026l4.4-4.15V9h2V1.9l4.4 4.15c.211.225.575.245 1.01.026l4.872-2.435.652 1.304-4.798 2.399v2.503l3.034-1.517.654 1.305-3.688 1.844v4.201l3.688 1.844-.654 1.305-3.034-1.517v2.503l-4.798-2.399z"/>
+              </svg>
+              
+            <h1>User Profile</h1>
+          </div>
+          
+
+          <div *ngIf="user.type === 'Doctor'" class="profile-heading">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"viewBox="0 0 48 48"><g data-name="Man Doctor Asian"><path d="M43 35.82c-.14-.79.33-.39-13.62-5.75-.48-.19-.36.35-.36-1.42A10 10 0 0 0 34 20a4 4 0 0 0 0-8v-2a10 10 0 0 0-20 0v2a4 4 0 0 0 0 8 10 10 0 0 0 5 8.65c0 1.76.12 1.24-.36 1.42C4.68 35.44 5.16 35 5 35.82l-2 11a1 1 0 0 0 2 .36l1.9-10.45L11.35 35a8 8 0 0 0-.35 3.14A4 4 0 0 0 8 42v1a1 1 0 0 0 1 1h1a1 1 0 0 0 0-2 2 2 0 0 1 4 0 1 1 0 0 0 0 2h1a1 1 0 0 0 1-1v-1a4 4 0 0 0-3-3.86c0-4 1-4.15 5-5.68V47a1 1 0 0 0 2 0v-6.59l4-4 4 4V47a1 1 0 0 0 2 0V32.46c2.69 1 5 1.43 5 4.72a3 3 0 1 0 2 0 6 6 0 0 0-.35-2.18l4.47 1.72L43 47.18a1 1 0 0 0 2-.36zM16 12c1.83 0 3.55-.07 5-2 2 2.68 4.83 2 11 2v8.49a22.18 22.18 0 0 0-16 0V12zm18 6v-4a2 2 0 0 1 0 4zM24 2a8 8 0 0 1 8 8h-7a3 3 0 0 1-3-3 1 1 0 0 0-2 0 3 3 0 0 1-3 3h-1a8 8 0 0 1 8-8zM14 14v4a2 2 0 0 1 0-4zm2.41 8.51a20.23 20.23 0 0 1 15.18 0 8 8 0 0 1-15.18 0zm10.59 7V31c0 4-6 4-6 0v-1.46a10.06 10.06 0 0 0 6 0zM20 34c1.85 2.48 3.16.46 0 3.62zm8 0v3.62c-3.14-3.18-1.87-1.13 0-3.62zm8 7a1 1 0 0 1 0-2 1 1 0 0 1 0 2z"/><path d="M27 16h2a1 1 0 0 0 0-2h-2a1 1 0 0 0 0 2zM21 14h-2a1 1 0 0 0 0 2h2a1 1 0 0 0 0-2zM24 39a1 1 0 0 0 0 2 1 1 0 0 0 0-2zM24 43a1 1 0 0 0 0 2 1 1 0 0 0 0-2z"/></g></svg>
+            <h1>Doctor Profile</h1>
+            
+          </div>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="firstName">First Name:</label>
+            <input id="firstName" type="text"  value={{user.firstName}} disabled>
+          </div>
+
+          <div>
+            <label for="lastName">Last Name:</label>
+            <input id="lastName" type="text" [value]="user.lastName" disabled>
+          </div>
+
+          <div>
+            <label for="age">Age:</label>
+            <input id="age" type="number" formControlName="age" value={{user.age}}>
+          </div>
+
+          <div>
+            <label for="gender">Gender:</label>
+            <select id="gender" formControlName="gender" >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- <div [ngClass]="{'hidden':user.type!=='Patient'}"> -->
+            <div *ngIf="user.type === 'Patient'">
+              <div>
+                <label for="medications">Medications:</label>
+                <textarea id="medications" formControlName="medications"></textarea>
+              </div>
+
+              <div>
+                <label for="allergies">Allergies:</label>
+                <textarea id="allergies" formControlName="allergies"></textarea>
+              </div>
+
+              <div>
+                <label for="fileUpload">Upload Documents:</label>
+                <input id="fileUpload" type="file" formControlName="fileUpload" (change)="onFileSelected($event)">
+              </div>
+            
+          </div>
+
+          <!-- <div [ngClass]="{'hidden':user.type==='Patient'}"> -->
+            <div *ngIf="user.type === 'Doctor'">
+              <label for="clinic address">Clinic Address</label>
+              <textarea id="clinicAdress" formControlName="clinicAddress" ></textarea>
+            
+
+            <div>
+              <label for="Specialization">Speciality:</label>
+              <input id="Specialization"   disabled>
+            </div>
+
+            <div>
+              <label for="Degree">Qualification</label>
+              <input id="qualification" formControlName="qualification" valuedisabled>
+            </div>
+        </div>
+
+          <button type="submit">Submit</button>
+          <!-- Add a submit button to save changes -->
+          <!-- Optionally add other buttons for actions like updating or saving data -->
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-2 mt-4" style="min-width: 300px;">
+        <h3>Latest Medical News</h3>
+        <ul class="news-feed">
+          <li *ngFor="let article of medicalNews">
+            <a [href]="article.url" target="_blank" rel="noopener">
+                <img [src]="article.image" alt="Article Image" class="article-image">
+                {{ article.title }}
+              </a>
+          </li>
+
+          
+        </ul>
+      </div>
+  </div>
+</body>
+
+</html>

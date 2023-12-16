@@ -97,23 +97,25 @@ public class DoctorController {
     }
 
     // Create Doctor
-    @PostMapping("/doctors")
-    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
-        Doctor doctor = (Doctor) new Doctor()
-                .setSpecialty(doctorRequest.getSpecialty())
-                .setDegree(doctorRequest.getDegree())
-                .setRating(0.0)
-                .setExperience(doctorRequest.getExperience())
-                .setClinicAddr(doctorRequest.getClinicAddr())
-                .setFirstName(doctorRequest.getFirstName())
-                .setLastName(doctorRequest.getLastName())
-                .setAge(doctorRequest.getAge())
-                .setGender(doctorRequest.getGender())
-                .setEmail(doctorRequest.getEmail())
-                .setPhone(doctorRequest.getPhone());
+    // @PostMapping("/doctors")
+    // public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
+    //     Role role
+    //     Doctor doctor = (Doctor) new Doctor(1, "", "", "", 22, "", "",
+    //     "String password", )
+    //             .setSpecialty(doctorRequest.getSpecialty())
+    //             .setDegree(doctorRequest.getDegree())
+    //             .setRating(0.0)
+    //             .setExperience(doctorRequest.getExperience())
+    //             .setClinicAddr(doctorRequest.getClinicAddr())
+    //             .setFirstName(doctorRequest.getFirstName())
+    //             .setLastName(doctorRequest.getLastName())
+    //             .setAge(doctorRequest.getAge())
+    //             .setGender(doctorRequest.getGender())
+    //             .setEmail(doctorRequest.getEmail())
+    //             .setPhone(doctorRequest.getPhone());
 
-        return ResponseEntity.ok(doctorRepository.save(doctor));
-    }
+    //     return ResponseEntity.ok(doctorRepository.save(doctor));
+    // }
 
     // Update Doctor Profile
     @PutMapping("/doctors/{id}")

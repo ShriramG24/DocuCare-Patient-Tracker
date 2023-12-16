@@ -1,0 +1,42 @@
+/* Center the profile form */
+
+  
+  /* Style for the form container */
+  .profile-form {
+    max-width: 400px; /* Adjust based on your preference */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style for form labels */
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  /* Style for form inputs */
+  input[type='text'],
+  input[type='number'],
+  select,
+  textarea,
+  input[type='file'] {
+    width: calc(100% - 12px); /* Adjust width based on your preference */
+    padding: 8px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Style for submit button (if added) */
+  button[type='submit'] {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  

@@ -1,4 +1,4 @@
-package com.project.PatientTracker.model;
+ package com.project.PatientTracker.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
 @Table(name = "Doctors")
 @Accessors(chain = true)
 public class Doctor extends User {
+
     @Column(name="degree", nullable=true)
     @Getter @Setter
     private String degree;

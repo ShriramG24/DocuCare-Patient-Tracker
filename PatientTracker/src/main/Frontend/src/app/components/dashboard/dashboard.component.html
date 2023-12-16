@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <title> Home </title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+      overflow-x: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select:
+        none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select:
+        none;
+      user-select: none;
+    }
+    .mydiv {
+    width: 100vw;
+  }
+
+    .tableFixHead {
+      overflow-y: auto;
+      height: 175px;
+    }
+
+    .tableFixHead thead th {
+      position: sticky;
+      top: 0;
+    }
+
+    table {
+      border-collapse:
+        collapse;
+      width: 100%;
+    }
+
+    .navbar a {
+      color: white;
+    }
+
+    .carousel-inner {
+      margin: auto;
+    }
+
+    .wrapper {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .sidebar p {
+      font-family: "Poppins", sans-serif;
+      font-size: 1.1em;
+      font-weight:
+        300;
+      line-height: 1.7em;
+      color: white;
+    }
+
+    #sidebar {
+      min-width: 250px;
+      max-width:
+        250px;
+      min-height: 100vh;
+    }
+
+    #sidebar.active {
+      margin-left: -250px;
+    }
+
+    a,
+    a:hover,
+    a:focus {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    #sidebar {
+      color: black;
+      transition: all 0.3s;
+    }
+
+    #sidebar .sidebar-header {
+      text-align: start;
+    }
+
+    #sidebar ul li a {
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+    }
+
+    #sidebar ul li a:hover {
+      background: rgb(29, 151, 29);
+      color: #fff;
+    }
+
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+      color:
+        #fff;
+      background: green;
+    }
+
+    thead {
+      color: white;
+    }
+  </style>
+  <body>
+    <div class="mydiv row w-100">
+      <div class="col-lg-2 px-2">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="bg-light" style="margin-right: 20px;">
+          <div class="sidebar-header text-center bg-light">
+            <h6 class="display-4">
+              <b>
+                <span style="color: black"> DocuCare </span>
+                
+              </b>
+            </h6>
+          </div>
+          <br />
+          <ul class="list-unstyled components" style="margin-left: 10px;">
+            <li class="active">
+              <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"> Home </a>
+            </li>
+            <ng-container *ngIf="user.type === 'Patient';else noPatient">
+              <!-- Patient-specific menu items -->
+              <li>
+                <a routerLink="/appointments" routerLinkActive="active"> Book an Appointment </a>
+              </li>
+              <li>
+                <a href="https://www.ultalabtests.com/"> Book Lab tests </a>
+              </li>
+              <li>
+                <a routerLink="https://pharmacy.amazon.com/" routerLinkActive="active"> Buy Medicines </a>
+              </li>
+              <li>
+                <a href="/dashboard"> My Prescriptions </a>
+              </li>
+              <li>
+                <a href="/dashboard"> About Us </a>
+              </li>
+              <li id="logout">
+                <a routerLink="/logout"> Logout </a>
+              </li>
+              <li id="profile">
+                <a routerLink="/profile">Profile</a>
+              </li>
+            </ng-container>
+            <ng-template #noPatient>
+              <!-- Non-patient menu items -->
+              <li>
+                <a href="#"> Book Lab tests </a>
+              </li>
+              <li>
+                <a routerLink="/medicalstores" routerLinkActive="active"> Buy Medicines </a>
+              </li>
+              <li>
+                <a href="#"> About Us </a>
+              </li>
+              <li>
+                <a routerLink="/logout"> Logout </a>
+              </li>
+              <li id="profile">
+                <a routerLink="/profile">Profile</a>
+              </li>
+            </ng-template>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-lg-7" style="margin-top: 20px; margin-left: 20px;">
+        
+        <h2 class="" style="font-family: 'Raleway', sans-serif">
+          <span *ngIf="user.type === 'Doctor'; else elseBlock">
+            <i class="fa fa-user-md" style="font-size:48px"></i> Welcome </span>
+          <ng-template #elseBlock> How are you, {{user.firstName}} {{user.lastName}}
+          </ng-template>
+        </h2>
+        <h6 style="color: rgb(21, 21, 148);"> Upcoming Appointments </h6>
+        <hr />
+        <!--         
+        <%if(user.consultation.length==0){%><%if(user.type=="Doctor"){%><h5 class="text-center" style="color: grey;">You have no Appointments yet!</h5><%}else{%><h5 class="text-center" style="color: green;">Seems you are feeling alright! <svg style="width: 20px; height: 20px;"
+					xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-wink" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm1.757-.437a.5.5 0 0 1 .68.194.934.934 0 0 0 .813.493c.339 0 .645-.19.813-.493a.5.5 0 1 1 .874.486A1.934 1.934 0 0 1 10.25 7.75c-.73 0-1.356-.412-1.687-1.007a.5.5 0 0 1 .194-.68z"/></svg></h5><%}%><%}else{%><div class="tableFixHead"><table class="table"><thead><tr class="" style="background-color: black;"><th scope="col">#</th><th scope="col"><%if(user.type=="doctor"){%>
+        Patient
+        <%}else{%>
+        Doctor
+        <%}%></th><th scope="col">Appt Date</th><th scope="col">Booking Date</th><th scope="col">Time</th><th scope="col">Amount</th><th scope="col">Status</th></tr></thead><tbody><% for(var i=0;i<user.consultation.length;i++) { %><tr><th scope="row"><%=i+1%></th><td><%if(user.type=="doctor"){%><%=user.consultation[i]%><%}else{%>
+        Dr.<%=user.consultation[i]%><%}%></td><td><%=user.appointment_dates[i]%></td><td><%=user.booking_date[i]%></td><td><%=user.time[i]%></td><td>₹600</td><td><%if(currentUser.show_vc[i]==1){%><%if(currentUser.type=="doctor"){%><a href="/vc/<%=currentUser._id%>"><button type="button" class="btn btn-outline-danger">Consult</button></a><%}else{%><a href="/vc/<%=currentUser.patientArray[i]._id%>"><button type="button" class="btn btn-outline-danger">Consult</button></a><%}%><%}else{%><%if(currentUser.type=="doctor"){%><a href="/vc/%=user._id%>"><button type="button" class="btn btn-outline-danger disabled">Consult</button></a><%}else{%><a href="https://api.whatsapp.com/send?phone=91<%=user.patientArray[i].phNumber%>&text=Hello Doctor"><button type="button" class="btn btn-outline-info">Chat</button></a><%}%><%}%></td></tr><%}%></tbody></table></div><%}%>
+        -->
+        <div *ngIf="user.consultation.length === 0;">
+          <h5 class="text-center" [ngStyle]="{'color': user.type === 'Doctor' ? 'grey' : 'green'}">
+            {{ user.type === 'Doctor' ? 'You have no Appointments yet!' : 'Seems you
+            are feeling alright!'}}
+            <ng-container *ngIf="user.type !== 'Doctor'">
+              <svg style="width: 20px; height: 20px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-wink" viewBox="0 0 16 16">
+                <!-- SVG path here -->
+              </svg>
+            </ng-container>
+          </h5>
+        </div>
+        <div *ngIf="user.consultation.length !== 0;">
+          <div class="tableFixHead">
+            <table class="table">
+              <thead>
+                <tr style="background-color: black;">
+                  <th scope="col"> # </th>
+                  <th scope="col">
+                    {{ user.type === 'Doctor' ? 'Patient' : 'Doctor' }}
+                  </th>
+                  <th scope="col"> Appt Time </th>
+                  <th scope="col"> Booking Date </th>
+                  <th scope="col"> Time </th>
+                  <th scope="col"> Amount </th>
+                  <th scope="col"> Status </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr   *ngFor="let appointment of appointments,let i = index">
+                  <th scope="row">
+                    {{i+1}}
+                  </th>
+                  <td>
+                    {{ user.type === 'Doctor' ? appointment.patient.firstName  : 'Dr.' + appointment.doctor.firstName }}
+                  </td>
+                  <td>
+                     {{ appointment.time }} 
+                  </td>
+                  <td>
+                     {{ user.booking_date[i] }} 
+                  </td>
+                  <td>
+                    <!-- {{ user.time[i] }} -->
+                  </td>
+                  <td> ₹600 </td>
+                  <td>
+                    <ng-container>
+                      <ng-container *ngIf="user.type === 'Doctor'; else patientConsult">
+                        <a>
+                          <button type="button" class="btn btn-outline-danger" (click)="go(user.id)"> Prescribe </button>
+                        </a>
+                      </ng-container>
+                      <ng-template #patientConsult>
+                        <a>
+                          <button type="button" class="btn btn-outline-danger"> Chat </button>
+                        </a>
+                      </ng-template>
+                    </ng-container>
+                    <ng-template #disabledConsult>
+                      <ng-container *ngIf="user.type === 'Doctor'; else chatButton">
+                        <a>
+                          <button type="button" class="btn btn-outline-danger disabled"> Consult </button>
+                        </a>
+                      </ng-container>
+                      <ng-template #chatButton>
+                        <!-- <a href="https://api.whatsapp.com/send?phone=91{{ user.patientArray[i].phNumber }}&text=Hello Doctor"> -->
+                        <!-- <button type="button" class="btn btn-outline-info"> -->
+                        <!-- Chat -->
+                        <!-- </button> -->
+                        <!-- </a> -->
+                      </ng-template>
+                    </ng-template>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="row">
+          
+        
+          <div class="col-lg-7 mt-5">
+            <h3>Latest Medical News</h3>
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div *ngFor="let article of medicalNews; let i = index" class="carousel-item" [class.active]="i === activeSlideIndex">
+                  <a [href]="article.url" target="_blank" rel="noopener">
+                    <img [src]="article.image" alt="Article Image" class="d-block w-100">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5>{{ article.title }}</h5>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" (click)="prevSlide()">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" (click)="nextSlide()">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    
+    <div class="col-lg-2" *ngIf="user.type === 'Patient'" style="margin-left: 50px;margin-top: 20px;">
+      <!-- currentUser?.type === 'patient' -->
+      <div class=" px-4">
+        <div class="container text-center py-2" style="margin-right: 30px;background-color: green; color: white; width: 260px; height: 40px;">
+          <b>
+            <h5>OVERVIEW</h5>
+          </b>
+        </div>
+        <div class="">
+          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Medications </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <div *ngFor="let medicine of user.medicine">
+                  <!-- currentUser?.medicines-->
+                  <div class="container text-center" style="border-bottom:1px solid black;">
+                    {{ user.medicine }}
+                    <br>
+                    <!-- currentUser.medicines[i] -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Test to be taken </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <div *ngFor="let medicine of user.tests">
+                  <!-- currentUser?.medicines-->
+                  <div class="container text-center" style="border-bottom:1px solid black;">
+                    {{ medicine }}
+                    <br>
+                    <!-- currentUser.medicines[i] -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="">
+          <div class="card" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Instructions </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <div *ngFor="let medicine of user.instructions">
+                  <!-- currentUser?.medicines-->
+                  <div class="container text-center" style="border-bottom:1px solid black;">
+                    {{ medicine }}
+                    <br>
+                    <!-- currentUser.medicines[i] -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-1" *ngIf="user.type === 'Doctor'" style="margin-left: 10px;margin-top: 20px;">
+      <div class=" px-4">
+        <div class="container text-center py-2" style="margin-right: 30px;background-color: green; color: white; width: 260px; height: 40px;">
+          <b>
+            <h5>OVERVIEW</h5>
+          </b>
+        </div>
+        <div class="">
+          <div class="card mb-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Done </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <h5> You have helped 15 patients so far!</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-5">
+          <div class="card mb-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Missed </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <h5>You have missed 6 appointments until now!</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5">
+          <div class="card mt-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Clinic Address </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <h5>248 Amherst Road, Sunderland Amherst</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+   
+    
+  </body>
+</html>

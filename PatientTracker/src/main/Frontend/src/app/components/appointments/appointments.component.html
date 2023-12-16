@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+    <title>Book Appointment</title>
+  </head>
+  <style>
+   
+   body {
+      overflow-x: hidden;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-family: 'Raleway', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .row {
+      display: flex;
+      margin: 0;
+    }
+
+    #sidebar {
+      min-width: 250px;
+      max-width: 250px;
+      min-height: 100vh;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333; /* Choose your preferred color */
+}
+    .navbar {
+      background-color: #28a745;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .navbar a {
+      color: white;
+    }
+
+    .sidebar-header {
+      text-align: start;
+      padding: 15px;
+    }
+
+    .list-unstyled {
+      padding-left: 15px;
+    }
+
+    .list-unstyled li a {
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    /* CSS for the scrolling news feed */
+.news-feed {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 100vh; /* Set a maximum height for the scrollable area */
+  border: 1px solid #ccc; /* Optional: Add border for clarity */
+}
+.article-image{
+    height: 40px;
+    width:  40px
+}
+
+.news-feed li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee; /* Optional: Add separation between articles */
+}
+
+.news-feed a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 5px;
+}
+
+.news-feed a:hover {
+  background-color: #f4f4f4; /* Optional: Add hover effect */
+}
+
+    .list-unstyled li a:hover {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .col-lg-7 {
+      padding: 20px;
+    }
+
+    .profile-section {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .profile-heading {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.profile-heading h1 {
+  margin-right: 10px; /* Adjust space between icon and text */
+}
+
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .hidden {
+      display: none;
+    }
+    #consult {
+      height: 400px;
+      width: 700px;
+    }
+    
+    .card-img-top {
+    width: 100%;
+    height: 8vw;
+    object-fit: cover;
+}
+
+  </style>
+  <body>
+    <div class="row">
+      <div class="wrapper px-4">
+        <!-- Sidebar -->
+        
+        <nav id="sidebar">
+          <div class="sidebar-header text-center">
+            <h6 class="display-4">
+              <b>
+                <span style="color: black">Doct</span>
+                <span style="color: #28a745">Aid</span>
+              </b>
+            </h6>
+          </div>
+          <br />
+          
+          <ul class="list-unstyled components" >
+            <li class="active">
+              <a routerLink="/home" routerLinkActive="active" >Home</a>
+            </li>
+           
+           
+            <div >
+              <li>
+                <a href="#">Book Lab tests</a>
+              </li>
+              <li>
+                <a routerLink="/medicalstores" routerLinkActive="active">Buy Medicines</a>
+              </li>
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a routerLink="/logout">Logout</a>
+              </li>
+            </div>
+          </ul>
+        </nav>
+
+
+      </div>
+    
+      
+      <div class="col-lg-9  ml-3">
+        <div class="row mb-4 mt-4">
+            <h2 style="color: rgb(21, 21, 148);">
+         Find Doctors of Every Specialization</h2> 
+       
+       </div>
+        <div class="row">
+            <div class="col-md-3" *ngFor="let card of specializations">
+                <div class="card mb-4">
+                <!-- Card content goes here -->
+                <div class="card-body">
+                    <img src="../../../assets/images/Consultant_Physician_v2.jpg" class="card-img-top" alt="Card Image">
+                    <!-- Display dynamic data from the card object -->
+                    <h5 class="card-title">{{ card }}</h5>
+                    <p class="card-text">{{ card.text }}</p>
+                    <button class="btn btn-dark w-100" (click)="navigateToSpecificUrl(card)">Find</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+
+
+      
+        
+
+
+
+    <!-- <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script> -->
+  </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <script src=
+    "https://smtpjs.com/v3/smtp.js">
+  </script>
+  <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Book Appointment</title>
+</head>
+<style>
+  body {
+    overflow-x: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'Raleway', sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .row {
+    display: flex;
+    margin: 0;
+  }
+
+  #sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h3 {
+font-size: 24px;
+margin-bottom: 20px;
+color: #333; /* Choose your preferred color */
+}
+  .navbar {
+    background-color: #28a745;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .navbar a {
+    color: white;
+  }
+
+  .sidebar-header {
+    text-align: start;
+    padding: 15px;
+  }
+
+  .list-unstyled {
+    padding-left: 15px;
+  }
+
+  .list-unstyled li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+  }
+  /* CSS for the scrolling news feed */
+.news-feed {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow-y: auto; /* Enable vertical scrolling */
+max-height: 100vh; /* Set a maximum height for the scrollable area */
+border: 1px solid #ccc; /* Optional: Add border for clarity */
+}
+.article-image{
+  height: 40px;
+  width:  40px
+}
+
+.news-feed li {
+padding: 5px 0;
+border-bottom: 1px solid #eee; /* Optional: Add separation between articles */
+}
+
+.news-feed a {
+text-decoration: none;
+color: #333;
+display: block;
+padding: 5px;
+}
+
+.news-feed a:hover {
+background-color: #f4f4f4; /* Optional: Add hover effect */
+}
+
+  .list-unstyled li a:hover {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .col-lg-7 {
+    padding: 20px;
+  }
+
+  .profile-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .profile-heading {
+display: flex;
+align-items: center; /* Align items vertically */
+}
+
+.profile-heading h1 {
+margin-right: 10px; /* Adjust space between icon and text */
+}
+
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #218838;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+<body>
+ 
+      <div class="row">
+        <div class="wrapper px-2">
+            <!-- Sidebar -->
+            <nav id="sidebar">
+              <div class="sidebar-header text-center">
+                <h6 class="display-4">
+                  <b>
+                    <span style="color: black">Doct</span>
+                    <span style="color: #28a745">Aid</span>
+                  </b>
+                </h6>
+              </div>
+              <br />
+              
+              <ul class="list-unstyled components" >
+                <li class="active">
+                  <a routerLink="/dashboard" routerLinkActive="active" >Home</a>
+                </li>
+               
+                
+                  <li >
+                    <a routerLink="/appointments" routerLinkActive="active">Book an Appointment</a>
+                  </li>
+                  <li>
+                    <a href="https://www.ultalabtests.com/">Book Lab tests</a>
+                  </li>
+                  <li>
+                    <a href="https://pharmacy.amazon.com/" routerLinkActive="active">Buy Medicines</a>
+                  </li>
+                  <li id="profile">
+                    <a routerLink="/profile">Profile</a>
+                  </li>
+                  <li>
+                    <a routerLink="/prescriptions">My Prescriptions</a>
+                  </li>
+                  <li>
+                    <a routerLink="/dashboard">About Us</a>
+                  </li>
+                  <li id="logout">
+                    <a routerLink="/logout">Logout</a>
+                  </li>
+                
+              
+              </ul>
+            </nav>
+        </div>
+<!-- .............................................................................................. -->
+<form  (ngSubmit)="bookAppointment()">
+    <div class="row">
+        <h4 style="color: rgb(21, 21, 148);">Select Date & Time for Your Appointment</h4>
+    </div>
+    <div class="py-2">
+        <div class="alert alert-info" role="alert" style="width:1024px; font-size: 14px;">
+            <h6>General Guidelines</h6>
+            ⓘ Make a List and Prioritize Your Concerns <br>
+            ⓘ Take Information with You to the Doctor.If you’ve had any recent tests at another medical facility that is not connected with your doctor bring those results<br>
+            ⓘ If the visit is drawing to a close and your top items haven’t been reached, a gentle reminder is absolutely in order.  <br>
+        
+            ⓘ If your doctor isn’t really listening, or if you feel that you are not being heard, it’s time to get a new doctor.
+        </div>
+    </div>
+   
+    
+<div class="col-12">
+    <div class="row">
+        <img src="../../../assets/images/doctoravatar.png" alt="">
+        <div class="px-4"></div>
+        <div class="col">
+            <h3>Dr. <span style="color:rgb(21, 21, 148);">{{doctor.firstName }} {{doctor.lastName}}</span></h3>
+            <div> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+              </svg> <b>{{doctor.degree }}</b> </div>
+            <h6>{{doctor.specialty }}</h6>
+            <h6>{{doctor.age }} years of experience</h6>
+
+        </div>
+        <div class="col">
+        <div class="col">
+            <h5><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+              </svg>  {{doctor.phone }}</h5>
+              <h5> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+  <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+</svg> {{doctor.email}}</h5>
+        </div>
+           
+        </div>
+    </div>
+    
+  <hr>
+  <form [formGroup]="appointmentForm" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="reason">Reason:</label>
+      <input type="text" formControlName="reason" class="form-control" required />
+    </div>
+  
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea formControlName="notes" class="form-control" rows="3"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" formControlName="date" class="form-control" required />
+    </div>
+  
+    <div class="form-group">
+      <label for="time">Select Time:</label>
+      <select formControlName="time" class="form-control" style="border-radius: 5px; border: solid 2px grey;">
+        <!-- Add your time options here -->
+        <!-- Example: -->
+        <option value="0:00-1:00">0:00-1:00</option>
+        <option value="9:00-9:30">9:00-9:30</option>
+        <option value="10:00-10:30">10:00-10:30</option>
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+  
+    <div class="text-center">
+      <button class="btn btn-success mb-4" data-toggle="modal" data-target="#exampleModalCenter" type="submit" style="width: 400px;">Confirm Appointment</button>
+  </div>
+  </form>
+ 
+        
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h5 class="modal-title" id="exampleModalLongTitle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+</svg> Your Appointment is Booked!</h5>
+                </div>
+                <div class="modal-body">
+                  You will be receving an Email Notification shortly
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success" >Continue</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+</div>
+</form>
+      </div>
+      
+   
+
+</body>
+</html>
