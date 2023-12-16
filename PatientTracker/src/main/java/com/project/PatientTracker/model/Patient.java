@@ -14,11 +14,7 @@ import lombok.experimental.Accessors;
 @Table(name = "Patients")
 @Accessors(chain = true)
 public class Patient extends User {
-    Patient(Integer id, String firstName, String lastName, String gender, int age, String email, String phone,
-            String password, Role role) {
-        super(id, firstName, lastName, gender, age, email, phone, password, role);
-        //TODO Auto-generated constructor stub
-    }
+
     @Column(name="address", nullable=false, unique=true)
     @Getter @Setter
     private String address;

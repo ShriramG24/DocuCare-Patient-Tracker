@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @MappedSuperclass
 @Accessors(chain = true)
-@Builder
 public class User implements UserDetails{
 
 

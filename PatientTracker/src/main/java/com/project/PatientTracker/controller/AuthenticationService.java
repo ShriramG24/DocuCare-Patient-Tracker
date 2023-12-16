@@ -2,8 +2,14 @@ package com.project.PatientTracker.controller;
 import com.project.PatientTracker.config.JwtService;
 import com.project.PatientTracker.model.Role;
 import com.project.PatientTracker.model.User;
+import com.project.PatientTracker.model.Patient;
+import com.project.PatientTracker.model.Doctor;
 import com.project.PatientTracker.model.Myuser;
 import com.project.PatientTracker.repository.UserRepository;
+import com.project.PatientTracker.repository.PatientRepository;
+import com.project.PatientTracker.repository.DoctorRepository;
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,13 +29,17 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationService {
   private final UserRepository repository;
+  private final PatientRepository patientRepository;
+  private final DoctorRepository doctorRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
+  
   public AuthenticationResponse  register(RegisterRequest request) {
 
-    var user = Myuser.builder()
+    var type = request.getType();
+        var user = Myuser.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
         .email(request.getEmail())
@@ -38,9 +48,46 @@ public class AuthenticationService {
         .build();
     
     var savedUser = repository.save(user);
-    var jwtToken = jwtService.generateToken(savedUser);
 
-    return AuthenticationResponse.builder().token(jwtToken).user(user).build();
+    if (type == "Patient") {
+
+      Doctor doctor = (Doctor) new Doctor().setSpecialty(request.getSpecialty())
+                  .setDegree(request.getDegree())
+                  .setRating(0.0)
+                  .setExperience(request.getExperience())
+                  .setClinicAddr(request.getClinicAddr())
+                  .setFirstName(request.getFirstname())
+                  .setLastName(request.getLastname())
+                  .setAge(request.getAge())
+                  .setGender(request.getGender())
+                  .setEmail(request.getEmail())
+                  .setPhone(request.getPhone());
+
+      var saveddoctorUser = doctorRepository.save(doctor);
+      var jwtToken = jwtService.generateToken(saveddoctorUser);
+      return AuthenticationResponse.builder().token(jwtToken).doctor(saveddoctorUser).build();
+    }else{
+
+      Patient patient = (Patient) new Patient().setAddress(request.getAddress())
+      .setDiagnoses(request.getDiagnoses())
+      .setMedications(request.getMedications())
+      .setAllergies(request.getAllergies())
+      .setFirstName(request.getFirstname())
+      .setLastName(request.getLastname())
+      .setAge(request.getAge())
+      .setGender(request.getGender())
+      .setEmail(request.getEmail())
+      .setPhone(request.getPhone());
+
+      var savedpatientUser = patientRepository.save(patient);
+
+      var jwtToken = jwtService.generateToken(savedpatientUser);
+      return AuthenticationResponse.builder().token(jwtToken).patient(savedpatientUser).build();
+
+    }
+
+
+    
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {

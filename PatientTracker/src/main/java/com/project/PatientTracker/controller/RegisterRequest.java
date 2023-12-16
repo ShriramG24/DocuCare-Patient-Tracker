@@ -17,4 +17,21 @@ public class RegisterRequest {
   private String email;
   private String password;
   private Role role;
+  private String type; 
+  private String specialty; 
+  private String degree; 
+  private Integer experience;
+  private String clinicAddr;  
+  private Integer age; 
+  private String gender; 
+  private String phone; 
+  private String address;
+  private String diagnoses;  
+  private String medications;  
+  private String allergies;  
+  
+
+
+
+
 }
