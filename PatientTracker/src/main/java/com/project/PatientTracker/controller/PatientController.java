@@ -58,21 +58,22 @@ public class PatientController {
     }
 
     // Create Patient
-    // @PostMapping("/patients")
-	// public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest) {
-	// 	Patient patient = (Patient) new Patient()
-    //         .setDiagnoses(patientRequest.getDiagnoses())
-    //         .setMedications(patientRequest.getMedications())
-    //         .setAllergies(patientRequest.getAllergies())
-    //         .setFirstName(patientRequest.getFirstName())
-    //         .setLastName(patientRequest.getLastName())
-    //         .setAge(patientRequest.getAge())
-    //         .setGender(patientRequest.getGender())
-    //         .setEmail(patientRequest.getEmail())
-    //         .setPhone(patientRequest.getPhone());
+    @PostMapping("/patients")
+	public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest) {
+		Patient patient = (Patient) new Patient()
+            .setDiagnoses(patientRequest.getDiagnoses())
+            .setMedications(patientRequest.getMedications())
+            .setAllergies(patientRequest.getAllergies())
+            .setFirstName(patientRequest.getFirstName())
+            .setLastName(patientRequest.getLastName())
+            .setAge(patientRequest.getAge())
+            .setGender(patientRequest.getGender())
+            .setEmail(patientRequest.getEmail())
+            .setPhone(patientRequest.getPhone())
+            .setPassword(patientRequest.getPassword());
         
-    //     return ResponseEntity.ok(patientRepository.save(patient));
-	// }
+        return ResponseEntity.ok(patientRepository.save(patient));
+	}
 
     // Update Patient Profile
     @PutMapping("/patients/{id}")
@@ -88,7 +89,8 @@ public class PatientController {
             .setAge(patientRequest.getAge())
             .setGender(patientRequest.getGender())
             .setEmail(patientRequest.getEmail())
-            .setPhone(patientRequest.getPhone());
+            .setPhone(patientRequest.getPhone())
+            .setPassword(patientRequest.getPassword());
 		
         return ResponseEntity.ok(patientRepository.save(patient));
 	}
