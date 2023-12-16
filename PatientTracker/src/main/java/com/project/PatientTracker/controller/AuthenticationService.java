@@ -39,14 +39,13 @@ public class AuthenticationService {
 
     var type = request.getType();
     var user = Myuser.builder()
-        .firstname(request.getFirstname())
-        .lastname(request.getLastname())
+        .firstName(request.getFirstName())
+        .lastName(request.getLastName())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
+        .phone(request.getPhone())
         .role(request.getRole())
         .build();
-
-    var savedUser = repository.save(user);
 
     if (type.equals("Doctor")) {
 
@@ -55,8 +54,8 @@ public class AuthenticationService {
           .setRating(0.0)
           .setExperience(request.getExperience())
           .setClinicAddr(request.getClinicAddr())
-          .setFirstName(request.getFirstname())
-          .setLastName(request.getLastname())
+          .setFirstName(request.getFirstName())
+          .setLastName(request.getLastName())
 
           .setGender(request.getGender())
           .setEmail(request.getEmail())
@@ -72,16 +71,16 @@ public class AuthenticationService {
       // .setDiagnoses(request.getDiagnoses())
       // .setMedications(request.getMedications())
       // .setAllergies(request.getAllergies())
-      // .setFirstName(request.getFirstname())
-      // .setLastName(request.getLastname())
+      // .setFirstName(request.getFirstName())
+      // .setLastName(request.getLastName())
       // .setAge(request.getAge())
       // .setGender(request.getGender())
       // .setEmail(request.getEmail())
       // .setPhone(request.getPhone());
 
       Patient patient = (Patient) new Patient()
-          .setFirstName(request.getFirstname())
-          .setLastName(request.getLastname())
+          .setFirstName(request.getFirstName())
+          .setLastName(request.getLastName())
           .setGender(request.getGender())
           .setEmail(request.getEmail())
           .setPhone(request.getPhone())

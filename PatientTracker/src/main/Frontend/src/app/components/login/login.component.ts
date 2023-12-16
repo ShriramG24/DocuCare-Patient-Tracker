@@ -60,7 +60,7 @@ export class LoginComponent {
     {
 
       this.user.type = 'Patient';
-      this.user.role = 'Manager';
+      this.user.role = 'MANAGER';
       this.user.age = this.SignUpForm.get('age')?.value;
       const result = this.SignUpForm.get('name')?.value?.split(" ");
       if (result && result.length >= 2) {
@@ -72,7 +72,7 @@ export class LoginComponent {
       if (emailValue !== null && emailValue !== undefined) {
         this.user.email = emailValue;
       }
-      const phone = this.SignUpForm.get('phone')?.value;
+      const phone = this.SignUpForm.get('contact')?.value;
 
       if (phone !== null && phone !== undefined) {
         this.user.phone = phone;
@@ -91,7 +91,7 @@ export class LoginComponent {
     }
     else{
       this.user.type = 'Doctor';
-      this.user.role = 'Admin';
+      this.user.role = 'ADMIN';
       this.user.age = this.SignUpForm.get('age')?.value;
       const result = this.SignUpForm.get('name')?.value?.split(" ");
       if (result && result.length >= 2) {
@@ -103,7 +103,7 @@ export class LoginComponent {
       if (emailValue !== null && emailValue !== undefined) {
         this.user.email = emailValue;
       }
-      const phone = this.SignUpForm.get('phone')?.value;
+      const phone = this.SignUpForm.get('contact')?.value;
 
       if (phone !== null && phone !== undefined) {
         this.user.phone = phone;
