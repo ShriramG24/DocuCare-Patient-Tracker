@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +30,10 @@ import com.project.PatientTracker.repository.FileRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 import com.project.PatientTracker.service.FileServiceImpl;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/")
+@PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_PATIENT')")
 public class FileController {
 
     private FileServiceImpl fileService;
