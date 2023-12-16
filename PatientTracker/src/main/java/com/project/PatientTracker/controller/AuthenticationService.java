@@ -59,7 +59,7 @@ public class AuthenticationService {
                   .setClinicAddr(request.getClinicAddr())
                   .setFirstName(request.getFirstname())
                   .setLastName(request.getLastname())
-                  .setAge(request.getAge())
+               
                   .setGender(request.getGender())
                   .setEmail(request.getEmail())
                   .setPhone(request.getPhone());
