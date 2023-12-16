@@ -1,0 +1,3 @@
+DELETE FROM roles;
+
+INSERT INTO roles(name) VALUES ('ROLE_USER'), ('ROLE_PATIENT'), ('ROLE_DOCTOR');

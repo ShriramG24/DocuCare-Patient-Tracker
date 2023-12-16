@@ -55,11 +55,11 @@ public class FileController {
         List<File> files;
         if (doctorRepository.findById(userId).isEmpty()) {
             Patient patient = patientRepository.findById(userId)
-                    .orElseThrow(() -> new ResourceNotFoundException("User with ID not found: " + userId));
+                    .orElseThrow(() -> new ResourceNotFoundException("Patient with ID not found: " + userId));
             files = fileRepository.findByPatient(patient);
         } else {
             Doctor doctor = doctorRepository.findById(userId)
-                    .orElseThrow(() -> new ResourceNotFoundException("User with ID not found: " + userId));
+                    .orElseThrow(() -> new ResourceNotFoundException("Doctor with ID not found: " + userId));
             files = fileRepository.findByDoctor(doctor);
         }
 

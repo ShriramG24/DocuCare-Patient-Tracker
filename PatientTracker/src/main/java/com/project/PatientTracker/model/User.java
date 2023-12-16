@@ -1,5 +1,8 @@
 package com.project.PatientTracker.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,4 +39,13 @@ public class User {
     @Column(name="phone", nullable=false, unique=true)
     @Getter @Setter
     private String phone;
+
+    @Column(name="password", nullable=false)
+    @Getter @Setter
+    private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Getter @Setter
+    private Set<Role> roles = new HashSet<>();
 }
