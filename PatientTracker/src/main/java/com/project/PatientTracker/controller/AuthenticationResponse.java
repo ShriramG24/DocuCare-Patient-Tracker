@@ -16,8 +16,9 @@ import com.project.PatientTracker.model.Patient;
 public class AuthenticationResponse {
 
   private String token;
-  private Myuser user; 
-  private Doctor doctor; 
-  private Patient patient;
+  private String type; 
+  private Integer userId;
+  // private Doctor doctor; 
+  // private Patient patient;
 
 }

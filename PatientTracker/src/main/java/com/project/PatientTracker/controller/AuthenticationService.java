@@ -1,4 +1,5 @@
 package com.project.PatientTracker.controller;
+
 import com.project.PatientTracker.config.JwtService;
 import com.project.PatientTracker.model.Role;
 import com.project.PatientTracker.model.User;
@@ -8,7 +9,6 @@ import com.project.PatientTracker.model.Myuser;
 import com.project.PatientTracker.repository.UserRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 import com.project.PatientTracker.repository.DoctorRepository;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,39 +35,38 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
-  
-  public AuthenticationResponse  register(RegisterRequest request) {
+  public AuthenticationResponse register(RegisterRequest request) {
 
     var type = request.getType();
-        var user = Myuser.builder()
+    var user = Myuser.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(request.getRole())
         .build();
-    
+
     var savedUser = repository.save(user);
 
-    if (type == "Doctor") {
-
+    if (type.equals("Doctor")) {
 
       Doctor doctor = (Doctor) new Doctor().setSpecialty(request.getSpecialty())
-                  .setDegree(request.getDegree())
-                  .setRating(0.0)
-                  .setExperience(request.getExperience())
-                  .setClinicAddr(request.getClinicAddr())
-                  .setFirstName(request.getFirstname())
-                  .setLastName(request.getLastname())
-               
-                  .setGender(request.getGender())
-                  .setEmail(request.getEmail())
-                  .setPhone(request.getPhone());
+          .setDegree(request.getDegree())
+          .setRating(0.0)
+          .setExperience(request.getExperience())
+          .setClinicAddr(request.getClinicAddr())
+          .setFirstName(request.getFirstname())
+          .setLastName(request.getLastname())
+
+          .setGender(request.getGender())
+          .setEmail(request.getEmail())
+          .setPhone(request.getPhone())
+          .setPassword(request.getPassword());
 
       var saveddoctorUser = doctorRepository.save(doctor);
       var jwtToken = jwtService.generateToken(user);
-      return AuthenticationResponse.builder().token(jwtToken).doctor(saveddoctorUser).build();
-    }else{
+      return AuthenticationResponse.builder().token(jwtToken).userId(saveddoctorUser.getId()).type("doctor").build();
+    } else {
 
       // Patient patient = (Patient) new Patient().setAddress(request.getAddress())
       // .setDiagnoses(request.getDiagnoses())
@@ -80,18 +79,18 @@ public class AuthenticationService {
       // .setEmail(request.getEmail())
       // .setPhone(request.getPhone());
 
-
       Patient patient = (Patient) new Patient()
-      .setFirstName(request.getFirstname())
-      .setLastName(request.getLastname())
-      .setGender(request.getGender())
-      .setEmail(request.getEmail())
-      .setPhone(request.getPhone());
+          .setFirstName(request.getFirstname())
+          .setLastName(request.getLastname())
+          .setGender(request.getGender())
+          .setEmail(request.getEmail())
+          .setPhone(request.getPhone())
+          .setPassword(request.getPassword());
 
       var savedpatientUser = patientRepository.save(patient);
 
       var jwtToken = jwtService.generateToken(user);
-      return AuthenticationResponse.builder().token(jwtToken).patient(savedpatientUser).build();
+      return AuthenticationResponse.builder().token(jwtToken).userId(savedpatientUser.getId()).type("patient").build();
 
     }
   }
@@ -103,9 +102,7 @@ public class AuthenticationService {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             request.getEmail(),
-            request.getPassword()
-        )
-    );
+            request.getPassword()));
     var user = repository.findByEmail(request.getEmail())
         .orElseThrow();
     System.out.println("user");
@@ -113,10 +110,8 @@ public class AuthenticationService {
     var jwtToken = jwtService.generateToken(user);
     System.out.println(jwtToken);
     var refreshToken = jwtService.generateRefreshToken(user);
-   
-    return AuthenticationResponse.builder().token(jwtToken).user(user).build();
-  }
 
- 
+    return AuthenticationResponse.builder().token(jwtToken).userId(user.getId()).build();
+  }
 
 }
