@@ -141,19 +141,19 @@
             <ng-container *ngIf="user.type === 'Patient';else noPatient">
               <!-- Patient-specific menu items -->
               <li>
-                <a routerLink="/bookappointment" routerLinkActive="active"> Book an Appointment </a>
+                <a routerLink="/appointments" routerLinkActive="active"> Book an Appointment </a>
               </li>
               <li>
-                <a href="#"> Book Lab tests </a>
+                <a href="https://www.ultalabtests.com/"> Book Lab tests </a>
               </li>
               <li>
-                <a routerLink="/medicalstores" routerLinkActive="active"> Buy Medicines </a>
+                <a routerLink="https://pharmacy.amazon.com/" routerLinkActive="active"> Buy Medicines </a>
               </li>
               <li>
-                <a href="/tpz"> My Prescriptions </a>
+                <a href="/dashboard"> My Prescriptions </a>
               </li>
               <li>
-                <a href="#"> About Us </a>
+                <a href="/dashboard"> About Us </a>
               </li>
               <li id="logout">
                 <a routerLink="/logout"> Logout </a>
@@ -245,7 +245,7 @@
                     <ng-container>
                       <ng-container *ngIf="user.type === 'Doctor'; else patientConsult">
                         <a>
-                          <button type="button" class="btn btn-outline-danger"> Consult </button>
+                          <button type="button" class="btn btn-outline-danger" (click)="go(user.id)"> Prescribe </button>
                         </a>
                       </ng-container>
                       <ng-template #patientConsult>
@@ -278,7 +278,7 @@
         <div class="row">
           
         
-          <div class="col-lg-7">
+          <div class="col-lg-7 mt-5">
             <h3>Latest Medical News</h3>
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
@@ -365,24 +365,49 @@
           </div>
         </div>
       </div>
-      <div *ngIf="user.type !=='Patient' ">
-        <div class="container alert alert-warning " style="border-radius: 50%;  height: 100px; width: 100px;  font-size: 60px;">3.5</div>
-        <!--<%=currentUser.finalRating%>-->
-        <div>
-          <div class="container py-2" style="border-bottom: solid 1px black;">
-            <h5 class="text-center" style="color: black; height: 25px;">Appointments Done</h5>
+    </div>
+    
+    <div class="col-lg-1" *ngIf="user.type === 'Doctor'" style="margin-left: 10px;margin-top: 20px;">
+      <div class=" px-4">
+        <div class="container text-center py-2" style="margin-right: 30px;background-color: green; color: white; width: 260px; height: 40px;">
+          <b>
+            <h5>OVERVIEW</h5>
+          </b>
+        </div>
+        <div class="">
+          <div class="card mb-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Done </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <h5> You have helped 15 patients so far!</h5>
+              </div>
+            </div>
           </div>
-          <div class="py-2"></div>
-          <div class="container alert alert-info " style="border-radius: 50%;  height: 100px; width: 100px;  font-size: 60px;">5</div>
-          <!--<%=currentUser.numberOfAppointments%>-->
         </div>
-        <div class="container py-2" style="border-bottom: solid 1px black;">
-          <h5 class="text-center" style="color: black; height: 25px;">Appointments Missed</h5>
+        <div class="mb-5">
+          <div class="card mb-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Appointments Missed </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <h5>You have missed 6 appointments until now!</h5>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="py-2"></div>
-        <div class="container alert alert-danger" style="border-radius: 50%;  height: 100px; width: 100px; font-size: 60px;">6</div>
+        <div class="mt-5">
+          <div class="card mt-2" style="width: 260px; height: 150px;border-radius: 10px;border: 3px;">
+            <h5 class="card-top text-center" style="color:black;height: 25px;"> Clinic Address </h5>
+            <div class="card-title px-2">
+              <div class="alert alert-primary" role="alert">
+                <h5>248 Amherst Road, Sunderland Amherst</h5>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     </div>
+   
+    
   </body>
 </html>

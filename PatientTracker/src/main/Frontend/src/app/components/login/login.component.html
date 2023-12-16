@@ -105,37 +105,9 @@
                               </div>
                               <div class="col py-2">
                                 <h6><b>Specialization</b> </h6>
-                                <select name="specialization" class="col-9" formControlName="specialization" id="specialization"style="border: 2px solid rgb(236, 233, 233) ;">
-                                  <option selected class="dropdown-item" href="#">
-                                    Consultant Physician
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Gynecology
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Pediatrics
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Dermatology
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Mental Wellness
-                                  </option>
-                                  <option class="dropdown-item" href="#">ENT</option>
-                                  <option class="dropdown-item" href="#">
-                                    Orthopedics
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Cardiology
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Nutrition Counselling
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Diabetology
-                                  </option>
-                                  <option class="dropdown-item" href="#">
-                                    Gastroenterology
+                                <select name="specialization" class="col-9" formControlName="specialization" id="specialization" style="border: 2px solid rgb(236, 233, 233);">
+                                  <option *ngFor="let specialization of specializations" [value]="specialization">
+                                    {{ specialization }}
                                   </option>
                                 </select>
                               </div>
