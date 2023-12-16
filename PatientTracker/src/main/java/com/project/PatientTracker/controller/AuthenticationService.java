@@ -49,7 +49,7 @@ public class AuthenticationService {
     
     var savedUser = repository.save(user);
 
-    if (type == "Patient") {
+    if (type == "Doctor") {
 
       Doctor doctor = (Doctor) new Doctor().setSpecialty(request.getSpecialty())
                   .setDegree(request.getDegree())
@@ -68,10 +68,7 @@ public class AuthenticationService {
       return AuthenticationResponse.builder().token(jwtToken).doctor(saveddoctorUser).build();
     }else{
 
-      Patient patient = (Patient) new Patient().setAddress(request.getAddress())
-      .setDiagnoses(request.getDiagnoses())
-      .setMedications(request.getMedications())
-      .setAllergies(request.getAllergies())
+      Patient patient = (Patient) new Patient()
       .setFirstName(request.getFirstname())
       .setLastName(request.getLastname())
       .setAge(request.getAge())

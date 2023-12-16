@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppointmentsService } from 'app/controller/appointments.service';
 import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.service';
 import { Doctor } from 'app/models/doctor.model';
@@ -18,7 +18,7 @@ export class PrescriptionsComponent {
   doctor = new Doctor();
   prescription = new Prescription();
   date = new Date().toLocaleDateString();
-  constructor(private fb: FormBuilder,private route: ActivatedRoute, private appointmentService: AppointmentsService, private getPatientDoctor: GetPatientDoctorsService ) {
+  constructor(private router : Router,private fb: FormBuilder,private route: ActivatedRoute, private appointmentService: AppointmentsService, private getPatientDoctor: GetPatientDoctorsService ) {
     this.initializeForm();
   }
   ngOnInit(): void {
@@ -115,7 +115,11 @@ export class PrescriptionsComponent {
     this.prescription.reports = this.combinedForms.get('reports')?.value[0];
     this.appointmentService.prescribe(this.prescription).subscribe();
     
-    console.log('Prescription submitted:', this.combinedForms.value);
+    this.go();
     
+  }
+  go()
+  {
+    this.router.navigateByUrl(`dashboard`)
   }
 }
