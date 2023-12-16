@@ -20,9 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.PatientTracker.PatientTrackerApplication;
-import com.project.PatientTracker.exception.ResourceNotFoundException;
 import com.project.PatientTracker.model.*;
 import com.project.PatientTracker.service.FileService;
 import com.project.PatientTracker.utils.TestUtils;
@@ -31,7 +29,6 @@ import jakarta.servlet.ServletException;
 
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 import org.junit.Assert;
