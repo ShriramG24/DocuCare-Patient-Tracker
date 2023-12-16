@@ -50,7 +50,7 @@ public class AuthenticationService {
     var savedUser = repository.save(user);
 
     if (type == "Doctor") {
-    if (type == "Doctor") {
+    
 
       Doctor doctor = (Doctor) new Doctor().setSpecialty(request.getSpecialty())
                   .setDegree(request.getDegree())
@@ -59,7 +59,7 @@ public class AuthenticationService {
                   .setClinicAddr(request.getClinicAddr())
                   .setFirstName(request.getFirstname())
                   .setLastName(request.getLastname())
-                  .setAge(request.getAge())
+               
                   .setGender(request.getGender())
                   .setEmail(request.getEmail())
                   .setPhone(request.getPhone());
@@ -75,7 +75,7 @@ public class AuthenticationService {
       .setAllergies(request.getAllergies())
       .setFirstName(request.getFirstname())
       .setLastName(request.getLastname())
-      .setAge(request.getAge())
+    
       .setGender(request.getGender())
       .setEmail(request.getEmail())
       .setPhone(request.getPhone());
