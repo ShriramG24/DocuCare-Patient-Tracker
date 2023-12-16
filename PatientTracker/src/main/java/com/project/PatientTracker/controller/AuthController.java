@@ -1,8 +1,6 @@
 package com.project.PatientTracker.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import jakarta.validation.Valid;
@@ -80,18 +78,11 @@ public class AuthController {
 
         Patient patient = registrationRequest.getPatient();
         patient.setPassword(encoder.encode(registrationRequest.getPassword()));
-
-        Set<Role> roles = new HashSet<>();
-
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'User' is not found."));
-        roles.add(userRole);
-
+        
         Role patientRole = roleRepository.findByName(ERole.ROLE_PATIENT)
                 .orElseThrow(() -> new RuntimeException("Error: Role 'Patient' is not found."));
-        roles.add(patientRole);
+        patient.setRole(patientRole);
 
-        patient.setRoles(roles);
         patientRepository.save(patient);
 
         return ResponseEntity.ok(new MessageResponse("Patient registered successfully!"));
@@ -125,17 +116,10 @@ public class AuthController {
         Doctor doctor = registrationRequest.getDoctor();
         doctor.setPassword(encoder.encode(registrationRequest.getPassword()));
 
-        Set<Role> roles = new HashSet<>();
-
-        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'User' is not found."));
-        roles.add(userRole);
-
-        Role doctorRole = roleRepository.findByName(ERole.ROLE_PATIENT)
+        Role doctorRole = roleRepository.findByName(ERole.ROLE_DOCTOR)
                 .orElseThrow(() -> new RuntimeException("Error: Role 'Doctor' is not found."));
-        roles.add(doctorRole);
+        doctor.setRole(doctorRole);
 
-        doctor.setRoles(roles);
         doctorRepository.save(doctor);
 
         return ResponseEntity.ok(new MessageResponse("Doctor registered successfully!"));

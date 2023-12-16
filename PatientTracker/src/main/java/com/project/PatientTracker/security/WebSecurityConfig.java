@@ -84,12 +84,12 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
-        .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> 
-          auth.requestMatchers("/api/register/**").permitAll()
-              .anyRequest().authenticated()
-        );
+    .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+    .authorizeHttpRequests(auth -> 
+      auth.requestMatchers("/api/register/**").permitAll()
+      .requestMatchers("/api/login/**").permitAll()
+      .anyRequest().authenticated()
+    ).exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
     
     http.authenticationProvider(authenticationProvider());
 
