@@ -46,3 +46,11 @@ ng serve
 ```
 
 This will boot up the Angular frontend on `http://localhost:4200/`. The home page is empty, but you can access the application in your browser by navigating to `http://localhost:4200/login`.
+
+### Running Unit and Integration Tests
+
+Switch into the `PatientTracker` directory and run the following command to run tests:
+
+```
+mvn test
+```
