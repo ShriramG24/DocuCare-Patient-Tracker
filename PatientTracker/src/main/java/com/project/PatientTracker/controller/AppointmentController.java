@@ -19,6 +19,10 @@ public class AppointmentController {
     private AppointmentRepository appointmentRepository;
 
     // Get Appointment by ID
+    /**
+     * @param id Appointment ID
+     * @return Appointment object
+     */
     @GetMapping("/appointments/{id}")
     public ResponseEntity<Appointment> getAppointmentById(@PathVariable Long id) {
         Appointment appointment = appointmentRepository.findById(id)
@@ -28,6 +32,10 @@ public class AppointmentController {
     }
 
     // Create Appointment
+    /**
+     * @param appointmentRequest Appointment object
+     * @return Created Appointment object
+     */
     @PostMapping("/appointments")
     public ResponseEntity<Appointment> createAppointment(@RequestBody Appointment appointmentRequest) {
         Appointment appointment = new Appointment().setTime(appointmentRequest.getTime())
@@ -41,6 +49,11 @@ public class AppointmentController {
     }
 
     // Update Appointment
+    /**
+     * @param id Appointment ID
+     * @param appointmentRequest Appointment object
+     * @return Updated Appointment object
+     */
     @PutMapping("/appointments/{id}")
     public ResponseEntity<Appointment> updateAppointment(@PathVariable Long id, @RequestBody Appointment appointmentRequest) {
         Appointment appointment = appointmentRepository.findById(id)
@@ -57,6 +70,10 @@ public class AppointmentController {
     }
 
     // Delete Appointment
+    /**
+     * @param id Appointment ID
+     * @return Deleted Appointment object
+     */
     @DeleteMapping("/appointments/{id}")
     public ResponseEntity<Appointment> deleteAppointment(@PathVariable Long id) {
         Appointment appointment = appointmentRepository.findById(id)

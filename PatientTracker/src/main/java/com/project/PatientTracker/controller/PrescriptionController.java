@@ -19,6 +19,10 @@ public class PrescriptionController {
     private PrescriptionRepository prescriptionRepository;
 
     // Get All Prescriptions by Patient
+    /**
+     * @param patientId Patient ID
+     * @return List of prescriptions by patient
+     */
     @GetMapping("/prescriptions/patients/{patientId}")
     public ResponseEntity<List<Prescription>> getPrescriptionsByPatient(@PathVariable Long patientId) {
         List<Prescription> prescriptions = prescriptionRepository.findByPatientId(patientId);
@@ -27,6 +31,10 @@ public class PrescriptionController {
     }
 
     // Create Prescription
+    /**
+     * @param prescriptionRequest Prescription object
+     * @return Created Prescription object
+     */
     @PostMapping("/prescriptions")
     public ResponseEntity<Prescription> createPrescription(@RequestBody Prescription prescriptionRequest) {
         Prescription prescription = new Prescription()
@@ -40,6 +48,10 @@ public class PrescriptionController {
     }
 
     // Delete Prescription
+    /**
+     * @param patientId Patient ID
+     * @return Deleted Prescription object
+     */
     @DeleteMapping("/prescriptions/patients/{patientId}")
     public ResponseEntity<Prescription> deletePrescription(@PathVariable Long patientId) {
         Prescription prescription = prescriptionRepository.findByPatientId(patientId).get(0);

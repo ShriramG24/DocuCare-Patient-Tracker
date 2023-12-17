@@ -33,95 +33,115 @@ import com.project.PatientTracker.security.services.UserDetailsImpl;
 @RestController
 @RequestMapping("/api/")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
+        @Autowired
+        AuthenticationManager authenticationManager;
 
-    @Autowired
-    DoctorRepository doctorRepository;
+        @Autowired
+        DoctorRepository doctorRepository;
 
-    @Autowired
-    PatientRepository patientRepository;
+        @Autowired
+        PatientRepository patientRepository;
 
-    @Autowired
-    RoleRepository roleRepository;
+        @Autowired
+        RoleRepository roleRepository;
 
-    @Autowired
-    PasswordEncoder encoder;
+        @Autowired
+        PasswordEncoder encoder;
 
-    @Autowired
-    JwtUtils jwtUtils;
+        @Autowired
+        JwtUtils jwtUtils;
 
-    @PostMapping("/login/patient")
-    public ResponseEntity<JwtResponse> authenticatePatient(@Valid @RequestBody LoginRequest loginRequest) {
+        /**
+         * @param loginRequest - request body
+         * @return JWT token
+         */
+        @PostMapping("/login/patient")
+        public ResponseEntity<JwtResponse> authenticatePatient(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager
-                .authenticate(
-                        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+                Authentication authentication = authenticationManager
+                                .authenticate(
+                                                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
+                                                                loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                String jwt = jwtUtils.generateJwtToken(authentication);
 
-        UserDetailsImpl patientDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = patientDetails.getAuthorities().stream().map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+                UserDetailsImpl patientDetails = (UserDetailsImpl) authentication.getPrincipal();
+                List<String> roles = patientDetails.getAuthorities().stream().map(item -> item.getAuthority())
+                                .collect(Collectors.toList());
 
-        return ResponseEntity
-                .ok(new JwtResponse(jwt, patientDetails.getId(), patientDetails.getUsername(),
-                        patientDetails.getEmail(), roles));
-    }
-
-    @PostMapping("/register/patient")
-    public ResponseEntity<MessageResponse> registerPatient(@Valid @RequestBody PatientRegistrationRequest registrationRequest) { 
-        if (patientRepository.existsByEmail(registrationRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+                return ResponseEntity
+                                .ok(new JwtResponse(jwt, patientDetails.getId(), patientDetails.getUsername(),
+                                                patientDetails.getEmail(), roles));
         }
 
-        Patient patient = registrationRequest.getPatient();
-        patient.setPassword(encoder.encode(registrationRequest.getPassword()));
-        
-        Role patientRole = roleRepository.findByName(ERole.ROLE_PATIENT)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'Patient' is not found."));
-        patient.setRole(patientRole);
+        /**
+         * @param registrationRequest - request body
+         * @return message response
+         */
+        @PostMapping("/register/patient")
+        public ResponseEntity<MessageResponse> registerPatient(
+                        @Valid @RequestBody PatientRegistrationRequest registrationRequest) {
+                if (patientRepository.existsByEmail(registrationRequest.getEmail())) {
+                        return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+                }
 
-        patientRepository.save(patient);
+                Patient patient = registrationRequest.getPatient();
+                patient.setPassword(encoder.encode(registrationRequest.getPassword()));
 
-        return ResponseEntity.ok(new MessageResponse("Patient registered successfully!"));
-    }
+                Role patientRole = roleRepository.findByName(ERole.ROLE_PATIENT)
+                                .orElseThrow(() -> new RuntimeException("Error: Role 'Patient' is not found."));
+                patient.setRole(patientRole);
 
-    @PostMapping("/login/doctor")
-    public ResponseEntity<JwtResponse> authenticateDoctor(@Valid @RequestBody LoginRequest loginRequest) {
+                patientRepository.save(patient);
 
-        Authentication authentication = authenticationManager
-                .authenticate(
-                        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetailsImpl doctorDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = doctorDetails.getAuthorities().stream().map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
-        return ResponseEntity
-                .ok(new JwtResponse(jwt, doctorDetails.getId(), doctorDetails.getUsername(),
-                        doctorDetails.getEmail(), roles));
-    }
-
-    @PostMapping("/register/doctor")
-    public ResponseEntity<MessageResponse> registerDoctor(@Valid @RequestBody DoctorRegistrationRequest registrationRequest) { 
-        if (patientRepository.existsByEmail(registrationRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+                return ResponseEntity.ok(new MessageResponse("Patient registered successfully!"));
         }
 
-        Doctor doctor = registrationRequest.getDoctor();
-        doctor.setPassword(encoder.encode(registrationRequest.getPassword()));
+        /**
+         * @param loginRequest - request body
+         * @return JWT token
+         */
+        @PostMapping("/login/doctor")
+        public ResponseEntity<JwtResponse> authenticateDoctor(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Role doctorRole = roleRepository.findByName(ERole.ROLE_DOCTOR)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'Doctor' is not found."));
-        doctor.setRole(doctorRole);
+                Authentication authentication = authenticationManager
+                                .authenticate(
+                                                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
+                                                                loginRequest.getPassword()));
 
-        doctorRepository.save(doctor);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                String jwt = jwtUtils.generateJwtToken(authentication);
 
-        return ResponseEntity.ok(new MessageResponse("Doctor registered successfully!"));
-    }
+                UserDetailsImpl doctorDetails = (UserDetailsImpl) authentication.getPrincipal();
+                List<String> roles = doctorDetails.getAuthorities().stream().map(item -> item.getAuthority())
+                                .collect(Collectors.toList());
+
+                return ResponseEntity
+                                .ok(new JwtResponse(jwt, doctorDetails.getId(), doctorDetails.getUsername(),
+                                                doctorDetails.getEmail(), roles));
+        }
+
+        /**
+         * @param registrationRequest - request body
+         * @return message response
+         */
+        @PostMapping("/register/doctor")
+        public ResponseEntity<MessageResponse> registerDoctor(
+                        @Valid @RequestBody DoctorRegistrationRequest registrationRequest) {
+                if (patientRepository.existsByEmail(registrationRequest.getEmail())) {
+                        return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+                }
+
+                Doctor doctor = registrationRequest.getDoctor();
+                doctor.setPassword(encoder.encode(registrationRequest.getPassword()));
+
+                Role doctorRole = roleRepository.findByName(ERole.ROLE_DOCTOR)
+                                .orElseThrow(() -> new RuntimeException("Error: Role 'Doctor' is not found."));
+                doctor.setRole(doctorRole);
+
+                doctorRepository.save(doctor);
+
+                return ResponseEntity.ok(new MessageResponse("Doctor registered successfully!"));
+        }
 }

@@ -52,6 +52,10 @@ public class FileController {
     }
 
     // Get All Files by User ID
+    /**
+     * @param userId User ID
+     * @return List of files uploaded by user
+     */
     @GetMapping("/files/{userId}")
     public ResponseEntity<List<File>> getFiles(@PathVariable Long userId) {
         List<File> files;
@@ -69,6 +73,12 @@ public class FileController {
     }
 
     // Save File to Database
+    /**
+     * @param userId User ID
+     * @param multipartFile File object to be saved
+     * @return File object that was saved
+     * @throws Exception
+     */
     @PostMapping("/files/{userId}")
     public ResponseEntity<File> saveFile(@PathVariable Long userId, @RequestParam("file") MultipartFile multipartFile) throws Exception {
         File file = new File();
@@ -101,6 +111,11 @@ public class FileController {
     }
 
     // Remove File from Database
+    /**
+     * @param id File ID to be removed
+     * @return File object that was removed
+     * @throws Exception
+     */
     @DeleteMapping("/files/{id}")
     public ResponseEntity<File> removeFile(@PathVariable Long id) throws Exception {
         File file = fileRepository.findById(id)
@@ -114,6 +129,10 @@ public class FileController {
         return ResponseEntity.ok(file);
     }
 
+    /**
+     * @param multipartFile File object
+     * @return true if file is valid, false otherwise
+     */
     private boolean isValidFile(MultipartFile multipartFile) {
         if (Objects.isNull(multipartFile.getOriginalFilename())) {
             return false;

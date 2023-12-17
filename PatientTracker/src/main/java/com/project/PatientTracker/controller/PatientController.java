@@ -21,6 +21,9 @@ public class PatientController {
     private PatientRepository patientRepository;
 
     // Get All Patients
+    /**
+     * @return List of patients
+     */
     @GetMapping("/patients")
     public ResponseEntity<List<Patient>> getPatients() {
         List<Patient> patients = patientRepository.findAll();
@@ -29,6 +32,10 @@ public class PatientController {
     }
 
     // Get Patient by ID
+    /**
+     * @param id Patient ID
+     * @return Patient object 
+     */
     @GetMapping("/patients/{id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
         Patient patient = patientRepository.findById(id)
@@ -38,6 +45,10 @@ public class PatientController {
     }
 
     // Get All Appointments by Patient
+    /**
+     * @param id Patient ID
+     * @return List of appointments by patient
+     */
     @GetMapping("/patients/{id}/appointments")
     public ResponseEntity<List<Appointment>> getAppointmentsByDoctor(@PathVariable Long id) {
         Set<Appointment> appointments = patientRepository.findById(id)
@@ -48,6 +59,10 @@ public class PatientController {
     }
 
     // Get All Files by Patient
+    /**
+     * @param id Patient ID
+     * @return List of files uploaded by patient
+     */
     @GetMapping("/patients/{id}/files")
     public ResponseEntity<List<File>> getRecordsByDoctor(@PathVariable Long id) {
         Set<File> files = patientRepository.findById(id)
@@ -58,6 +73,10 @@ public class PatientController {
     }
 
     // Create Patient
+    /**
+     * @param patientRequest Patient object
+     * @return Created Patient object
+     */
     @PostMapping("/patients")
 	public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest) {
 		Patient patient = (Patient) new Patient()
@@ -76,6 +95,11 @@ public class PatientController {
 	}
 
     // Update Patient Profile
+    /**
+     * @param id Patient ID
+     * @param patientRequest Patient object
+     * @return Updated Patient object
+     */
     @PutMapping("/patients/{id}")
 	public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientRequest){
 		Patient patient = patientRepository.findById(id)
@@ -96,6 +120,10 @@ public class PatientController {
 	}
 
     // Delete Patient
+	/**
+	 * @param id Patient ID
+	 * @return Deleted Patient object
+	 */
 	@DeleteMapping("/patients/{id}")
 	public ResponseEntity<Patient> deletePatient(@PathVariable Long id){
 		Patient patient = patientRepository.findById(id)
