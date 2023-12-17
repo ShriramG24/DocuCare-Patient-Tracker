@@ -104,6 +104,9 @@ nextSlide() {
 prevSlide() {
   this.activeSlideIndex = (this.activeSlideIndex - 1 + this.medicalNews.length) % this.medicalNews.length;
 }
+onLogout() {
+  localStorage.removeItem('jwtToken');
+}
 
 news={
 

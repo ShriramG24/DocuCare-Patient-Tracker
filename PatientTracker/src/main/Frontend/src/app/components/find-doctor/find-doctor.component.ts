@@ -49,6 +49,9 @@ navigateToSpecificUrl(id:any) {
   const specificUrl = `/book-appointment/${id}`; // Replace this with your actual URL
   this.router.navigateByUrl(specificUrl);
 }
+onLogout() {
+  localStorage.removeItem('jwtToken');
+}
 // allDoctors = [
 //   { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },
 //   { username: 'Dr. John Doe', field: 'Cardiology', finalRating: 4.5 },

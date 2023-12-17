@@ -9,8 +9,11 @@ export class Doctor  {
     age!: number;
     email!: string;
     phone!: string;
+    password!: string;
     degree?: string;
     specialty?: string;
+    clinicAddr?: string;
+    experience?: number;
     rating?: number;
     patients?: Patient[];
     appointments?: Appointment[];

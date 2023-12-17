@@ -160,6 +160,17 @@
                       <input name="password" formControlName="password" type="password"class="form-control"id="exampleInputPassword1"placeholder="Password"/>
                     </div>
                     <br />
+                    <div class="py-2 form-group text-center">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"type="radio"name="type"id="doctor" formControlName="type" value="doctor"onclick="document.getElementById('show').style.display='block'"/>
+                      <label class="form-check-label" for="doctor">Doctor</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"type="radio"name="type"id="patient" formControlName="type" value="patient"onclick="document.getElementById('show').style.display='none'"/>
+                      <label class="form-check-label" for="patient">Patient</label>
+                    </div>
+                    </div>
+                    <br />
                     <div class="text-center">
                       <button action="/home" type="submit" class="btn btn-dark">Login</button>
                     </div>

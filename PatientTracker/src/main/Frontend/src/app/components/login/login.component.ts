@@ -4,6 +4,10 @@ import { Route, Router } from '@angular/router';
 import { AppointmentsService } from 'app/controller/appointments.service';
 import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.service';
 import { SignupLoginService } from 'app/controller/signup-login.service';
+import { DoctorRegistration } from 'app/models/doctor-registration.model';
+import { Doctor } from 'app/models/doctor.model';
+import { PatientRegistration } from 'app/models/patient-registration.model';
+import { Patient } from 'app/models/patient.model';
 import { User } from 'app/models/user.model';
 @Component({
   selector: 'app-login',
@@ -14,7 +18,8 @@ export class LoginComponent {
   specializations = ["Cardiologist", "Dermatologist", "Endocrinologist", "Gastroenterologist",
   "Gynecologist", "Hematologist", "Neurologist", "Oncologist", "Ophthalmologist", "Pediatrician",
   "Psychiatrist", "Pulmonologist", "Radiologist", "Rheumatologist", "Urologist"];
-  user = new User();
+  patientReg = new PatientRegistration();
+  doctorReg = new DoctorRegistration();
   constructor(private signup:SignupLoginService,private userDoctor:GetPatientDoctorsService,private route:Router,private signupLoginService: SignupLoginService,private appointmentService: AppointmentsService) { 
 
   }
@@ -48,101 +53,107 @@ export class LoginComponent {
     clinicAddress: new FormControl(''),
     specialization: new FormControl(''),
     experience: new FormControl()
-
-
   });
   LoginForm = new FormGroup({
     email: new FormControl(''),
+    type:new FormControl(''),
     password: new FormControl(''),
   });
   onSignup() {
+    this.patientReg.patient = new Patient();
     if(this.SignUpForm.get('type')?.value=='patient')
     {
-
-      this.user.type = 'Patient';
-      this.user.role = 'Manager';
-      this.user.age = this.SignUpForm.get('age')?.value;
+      this.patientReg.patient.age = this.SignUpForm.get('age')?.value;
       const result = this.SignUpForm.get('name')?.value?.split(" ");
       if (result && result.length >= 2) {
-        this.user.firstName = result[0];
-        this.user.lastName = result[1];
+        this.patientReg.patient.firstName = result[0];
+        this.patientReg.patient.lastName = result[1];
       }
       const emailValue = this.SignUpForm.get('email')?.value;
 
       if (emailValue !== null && emailValue !== undefined) {
-        this.user.email = emailValue;
+        this.patientReg.patient.email = emailValue;
+        this.patientReg.email = emailValue;
       }
-      const phone = this.SignUpForm.get('phone')?.value;
+      const phone = this.SignUpForm.get('contact')?.value;
 
       if (phone !== null && phone !== undefined) {
-        this.user.phone = phone;
+        this.patientReg.patient.phone = phone;
       }
       const gender = this.SignUpForm.get('gender')?.value;
 
       if (gender !== null && gender !== undefined) {
-        this.user.gender = gender;
+        this.patientReg.patient.gender = gender;
       }
       const password = this.SignUpForm.get('password')?.value;
       if (password !== null && password !== undefined) {
-        this.user.password = password;
+        this.patientReg.patient.password = password;
+        this.patientReg.password = password;
       }
-     
-      //this.user.firstName = this.SignUpForm.get('name')?.value;
+      this.signup.signupPatient(this.patientReg).subscribe((response) => {
+        alert(response.message);
+        if (!response.message.includes("successfully")) {
+          this.SignUpForm.reset();
+        }
+      });
     }
     else{
-      this.user.type = 'Doctor';
-      this.user.role = 'Admin';
-      this.user.age = this.SignUpForm.get('age')?.value;
+      this.doctorReg.doctor = new Doctor();
+      this.doctorReg.doctor.age = this.SignUpForm.get('age')?.value;
       const result = this.SignUpForm.get('name')?.value?.split(" ");
       if (result && result.length >= 2) {
-        this.user.firstName = result[0];
-        this.user.lastName = result[1];
+        this.doctorReg.doctor.firstName = result[0];
+        this.doctorReg.doctor.lastName = result[1];
       }
       const emailValue = this.SignUpForm.get('email')?.value;
 
       if (emailValue !== null && emailValue !== undefined) {
-        this.user.email = emailValue;
+        this.doctorReg.doctor.email = emailValue;
+        this.doctorReg.email = emailValue;
       }
-      const phone = this.SignUpForm.get('phone')?.value;
+      const phone = this.SignUpForm.get('contact')?.value;
 
       if (phone !== null && phone !== undefined) {
-        this.user.phone = phone;
+        this.doctorReg.doctor.phone = phone;
       }
       const gender = this.SignUpForm.get('gender')?.value;
 
       if (gender !== null && gender !== undefined) {
-        this.user.gender = gender;
+        this.doctorReg.doctor.gender = gender;
       }
       const specialty = this.SignUpForm.get('specialization')?.value;
 
       if (specialty !== null && specialty !== undefined) {
-        this.user.specialty = specialty;
+        this.doctorReg.doctor.specialty = specialty;
       }
       const address = this.SignUpForm.get('clinicAddress')?.value;
 
       if (address !== null && address !== undefined) {
-        this.user.address = address;
+        this.doctorReg.doctor.clinicAddr = address;
       }
       const experience = this.SignUpForm.get('experience')?.value;
 
       if (experience !== null && experience !== undefined) {
-        this.user.experience = experience;
+        this.doctorReg.doctor.experience = experience;
       }
       const degree = this.SignUpForm.get('degree')?.value;
 
       if (degree !== null && degree !== undefined) {
-        this.user.degree = degree;
+        this.doctorReg.doctor.degree = degree;
       }
       const password = this.SignUpForm.get('password')?.value;
 
       if (password !== null && password !== undefined) {
-        this.user.password = password;
+        this.doctorReg.doctor.password = password;
+        this.doctorReg.password = password;
       }
+      this.signup.signupDoctor(this.doctorReg).subscribe((response) => {
+        alert(response.message);
+        if (!response.message.includes("successfully")) {
+          this.SignUpForm.reset();
+        }
+      });
     }
-    console.log(this.user);
-    this.signup.singup(this.user).subscribe((response) => {
-      console.log(response)
-    });
     
    // this.go();
   }
@@ -153,7 +164,33 @@ export class LoginComponent {
 
   onLogin() {
     // TODO: Use EventEmitter with form value
-    console.log(this.LoginForm.value);
-    this.go();
+    const email = this.LoginForm.get('email')?.value;
+    const password = this.LoginForm.get('password')?.value;
+    const type = this.LoginForm.get('type')?.value;
+    if (type == 'doctor') {
+      this.signupLoginService.loginDoctor({email, password}).subscribe((response) => {
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('jwtToken', token);
+          localStorage.setItem('doctorId', response.id);
+          this.go();
+        } else {
+          alert(response.message);
+          this.LoginForm.reset();
+        }
+      });
+    } else {
+      this.signupLoginService.loginPatient({email, password}).subscribe((response) => {
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('jwtToken', token);
+          localStorage.setItem('patientId', response.id);
+          this.go();
+        } else {
+          alert(response.message);
+          this.LoginForm.reset();
+        }
+      });
+    }
   }
 }
