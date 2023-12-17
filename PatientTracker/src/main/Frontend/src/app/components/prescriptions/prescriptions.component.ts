@@ -32,7 +32,7 @@ export class PrescriptionsComponent {
 
     this.getPatientDoctor.getDoctors(1).subscribe((data) => {
       console.log(data);
-      this.patient = data;
+      this.doctor = data;
     }, (error) => {
       console.error('Error fetching patient data', error);
     });
@@ -120,6 +120,9 @@ export class PrescriptionsComponent {
   }
   go()
   {
-    this.router.navigateByUrl(`dashboard`)
+    this.router.navigateByUrl(`/dashboard`)
+  }
+  onLogout() {
+    localStorage.removeItem('jwtToken');
   }
 }

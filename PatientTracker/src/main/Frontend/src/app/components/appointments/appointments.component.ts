@@ -41,4 +41,7 @@ export class AppointmentsComponent {
     { title: 'Card 3', text: 'Some text for Card 3.' },
 
   ];
+  onLogout() {
+    localStorage.removeItem('jwtToken');
+  }
 }

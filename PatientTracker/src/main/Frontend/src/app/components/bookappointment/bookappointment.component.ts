@@ -90,5 +90,9 @@ bookAppointment()
   
     
 }
+
+onLogout() {
+  localStorage.removeItem('jwtToken');
+}
   
 }

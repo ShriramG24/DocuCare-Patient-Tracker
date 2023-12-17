@@ -8,11 +8,13 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
+@PreAuthorize("hasRole('ROLE_PATIENT')")
 public class PatientController {
 
     @Autowired
@@ -56,21 +58,22 @@ public class PatientController {
     }
 
     // Create Patient
-    // @PostMapping("/patients")
-	// public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest) {
-	// 	Patient patient = (Patient) new Patient()
-    //         .setDiagnoses(patientRequest.getDiagnoses())
-    //         .setMedications(patientRequest.getMedications())
-    //         .setAllergies(patientRequest.getAllergies())
-    //         .setFirstName(patientRequest.getFirstName())
-    //         .setLastName(patientRequest.getLastName())
-    //         .setAge(patientRequest.getAge())
-    //         .setGender(patientRequest.getGender())
-    //         .setEmail(patientRequest.getEmail())
-    //         .setPhone(patientRequest.getPhone());
+    @PostMapping("/patients")
+	public ResponseEntity<Patient> createPatient(@RequestBody Patient patientRequest) {
+		Patient patient = (Patient) new Patient()
+            .setDiagnoses(patientRequest.getDiagnoses())
+            .setMedications(patientRequest.getMedications())
+            .setAllergies(patientRequest.getAllergies())
+            .setFirstName(patientRequest.getFirstName())
+            .setLastName(patientRequest.getLastName())
+            .setAge(patientRequest.getAge())
+            .setGender(patientRequest.getGender())
+            .setEmail(patientRequest.getEmail())
+            .setPhone(patientRequest.getPhone())
+            .setPassword(patientRequest.getPassword());
         
-    //     return ResponseEntity.ok(patientRepository.save(patient));
-	// }
+        return ResponseEntity.ok(patientRepository.save(patient));
+	}
 
     // Update Patient Profile
     @PutMapping("/patients/{id}")
@@ -86,7 +89,8 @@ public class PatientController {
             .setAge(patientRequest.getAge())
             .setGender(patientRequest.getGender())
             .setEmail(patientRequest.getEmail())
-            .setPhone(patientRequest.getPhone());
+            .setPhone(patientRequest.getPhone())
+            .setPassword(patientRequest.getPassword());
 		
         return ResponseEntity.ok(patientRepository.save(patient));
 	}

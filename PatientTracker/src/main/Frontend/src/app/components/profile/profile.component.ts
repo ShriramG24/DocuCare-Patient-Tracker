@@ -11,7 +11,7 @@ import { GetPatientDoctorsService } from 'app/controller/get-patient-doctors.ser
 })
 export class ProfileComponent {
   user = {
-    type: 'Patient', // Or 'Doctor' based on your user type
+    type: 'Patient',
     username: 'Allah',
     firstName:'hello',
     lastName:'check',
@@ -19,11 +19,8 @@ export class ProfileComponent {
     gender:0,
     medications:"tf",
     allergies:'f',
-    address:"raand",
-    Specialization:"raandAgain",
+    Specialization:"randAgain",
     qualification:"land"
-     // Username or name of the user
-    // Other properties...
   };
   medicalNews: any[] = [];
   userForm: FormGroup;
@@ -53,7 +50,7 @@ export class ProfileComponent {
       var fd = new FormData();
       fd.append('file', file);
       const headers = new HttpHeaders();
-    headers.append('Content-Type', 'undefined');
+    headers.append('Content-Type', 'undefined').append('Authorization', 'Bearer ' + localStorage.getItem('jwtToken'));
       this.http.post(`http://localhost:8080/api/files/1`, fd, 
       { headers }
       )
@@ -70,6 +67,10 @@ export class ProfileComponent {
     const file: File = event.target.files[0];
     console.log('File selected:', file);
     // You can add logic here to process the selected file
+  }
+
+  onLogout() {
+    localStorage.removeItem('jwtToken');
   }
 
 

@@ -4,14 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.PatientTracker.model.Prescription;
 import com.project.PatientTracker.repository.PrescriptionRepository;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
+@PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_PATIENT')")
 public class PrescriptionController {
     @Autowired
     private PrescriptionRepository prescriptionRepository;

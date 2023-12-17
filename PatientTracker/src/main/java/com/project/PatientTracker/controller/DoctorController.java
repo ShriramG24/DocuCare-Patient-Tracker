@@ -8,11 +8,13 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
+@PreAuthorize("hasRole('ROLE_DOCTOR')")
 public class DoctorController {
 
     @Autowired
@@ -95,25 +97,24 @@ public class DoctorController {
     }
 
     // Create Doctor
-    // @PostMapping("/doctors")
-    // public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
-    //     Role role
-    //     Doctor doctor = (Doctor) new Doctor(1, "", "", "", 22, "", "",
-    //     "String password", )
-    //             .setSpecialty(doctorRequest.getSpecialty())
-    //             .setDegree(doctorRequest.getDegree())
-    //             .setRating(0.0)
-    //             .setExperience(doctorRequest.getExperience())
-    //             .setClinicAddr(doctorRequest.getClinicAddr())
-    //             .setFirstName(doctorRequest.getFirstName())
-    //             .setLastName(doctorRequest.getLastName())
-    //             .setAge(doctorRequest.getAge())
-    //             .setGender(doctorRequest.getGender())
-    //             .setEmail(doctorRequest.getEmail())
-    //             .setPhone(doctorRequest.getPhone());
+    @PostMapping("/doctors")
+    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctorRequest) {
+        Doctor doctor = (Doctor) new Doctor()
+                .setSpecialty(doctorRequest.getSpecialty())
+                .setDegree(doctorRequest.getDegree())
+                .setRating(0.0)
+                .setExperience(doctorRequest.getExperience())
+                .setClinicAddr(doctorRequest.getClinicAddr())
+                .setFirstName(doctorRequest.getFirstName())
+                .setLastName(doctorRequest.getLastName())
+                .setAge(doctorRequest.getAge())
+                .setGender(doctorRequest.getGender())
+                .setEmail(doctorRequest.getEmail())
+                .setPhone(doctorRequest.getPhone())
+                .setPassword(doctorRequest.getPassword());
 
-    //     return ResponseEntity.ok(doctorRepository.save(doctor));
-    // }
+        return ResponseEntity.ok(doctorRepository.save(doctor));
+    }
 
     // Update Doctor Profile
     @PutMapping("/doctors/{id}")
@@ -131,7 +132,8 @@ public class DoctorController {
             .setAge(doctorRequest.getAge())
             .setGender(doctorRequest.getGender())
             .setEmail(doctorRequest.getEmail())
-            .setPhone(doctorRequest.getPhone());
+            .setPhone(doctorRequest.getPhone())
+            .setPassword(doctorRequest.getPassword());
 
         return ResponseEntity.ok(doctorRepository.save(doctor));
     }

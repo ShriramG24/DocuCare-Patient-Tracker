@@ -8,11 +8,11 @@ export class Patient{
     age!: number;
     email!: string;
     phone!: string;
-  address!: string;
-  allergies?: string;
-  medications?: string;
-  diagnoses?: string;
-  doctors?: Doctor[];
-  appointments?: Appointment[];
-  files?: File[];
+    password!: string;
+    allergies?: string;
+    medications?: string;
+    diagnoses?: string;
+    doctors?: Doctor[];
+    appointments?: Appointment[];
+    files?: File[];
 }
