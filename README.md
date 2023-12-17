@@ -20,7 +20,7 @@ Once developed, this patient-tracking application aims to alleviate these issues
 
 ### Prerequisites
 
-Make sure you have [Java](https://www.java.com/download/ie_manual.jsp) and [Postgres](https://www.postgresql.org/download/) installed on your machine. Clone the repository by running this command:
+Make sure you have [Java](https://www.java.com/download/ie_manual.jsp), [Maven](https://maven.apache.org/install.html), [Postgres](https://www.postgresql.org/download/), and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed on your machine. Clone the repository by running this command:
 
 ```
 git clone https://github.com/ShriramG24/patient-tracker-app-520.git
@@ -28,8 +28,7 @@ git clone https://github.com/ShriramG24/patient-tracker-app-520.git
 
 Before running the application, ensure that your Postgres installation has a database named `postgres` (should exist by default; if not, create it). Also check that you have a user named `postgres` (with access to the `postgres` database) and set the user's password to `postgres`. This must be done in order for Spring Boot to create the necessary tables on application startup.
 
-
-### Running the Server
+### Running the Application
 
 Switch into the `PatientTracker` directory and run the following command:
 
@@ -37,4 +36,13 @@ Switch into the `PatientTracker` directory and run the following command:
 ./mvnw spring-boot:run
 ```
 
-This will start up the server on `http://localhost:8080/`.
+This will start up the Spring Boot server on `http://localhost:8080/`.
+
+In another terminal, switch to the `Frontend` directory and run the following commands in this order:
+
+```
+npm install
+ng serve
+```
+
+This will boot up the Angular frontend on `http://localhost:4200/`. The home page is empty, but you can access the application in your browser by navigating to `http://localhost:4200/login`.
