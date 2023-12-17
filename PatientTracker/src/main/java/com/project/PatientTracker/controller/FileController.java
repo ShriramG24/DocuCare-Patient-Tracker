@@ -30,7 +30,7 @@ import com.project.PatientTracker.repository.FileRepository;
 import com.project.PatientTracker.repository.PatientRepository;
 import com.project.PatientTracker.service.FileServiceImpl;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/")
 @PreAuthorize("hasRole('ROLE_DOCTOR') or hasRole('ROLE_PATIENT')")

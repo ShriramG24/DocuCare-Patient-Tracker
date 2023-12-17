@@ -27,7 +27,7 @@ public class Doctor extends User {
     @Getter @Setter
     private Integer experience;
 
-    @Column(name="clinic_addr", nullable=true)
+    @Column(name="clinicAddr", nullable=true)
     @Getter @Setter
     private String clinicAddr;
 
