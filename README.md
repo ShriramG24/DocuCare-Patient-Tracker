@@ -1,4 +1,4 @@
-# DOCuCARE: Patient Tracking System (CS 520)
+# DOCuCARE: Patient Tracking System
 
 ### Overview
 Given the sheer scale of the current healthcare ecosystem, it is crucial that the process of tracking patient data is automated. Manual tasks such as doing paperwork, registering new patients, and mailing reports are not at all cost-effective or valuable uses of employees’ work hours. Challenges in this regard include, but are not limited to:
@@ -14,7 +14,7 @@ Once developed, this patient-tracking application aims to alleviate these issues
 ### Tech Stack
 
 - Java SpringBoot (Backend)
-- React (Frontend)
+- Angular (Frontend)
 - Postgres RDMS (Data Storage)
 - Amazon S3 (Cloud File Storage)
 
